@@ -7,13 +7,13 @@ export default {
         mytheme: {
           primary: "#fdd619",
 
-          secondary: "#5A5AF4",
+          secondary: "#00FED7",
 
-          accent: "#ec4899",
+          accent: "#B2AB99",
 
-          neutral: "#ffffff",
+          neutral: "#F5F5F5",
 
-          "base-100": "#111827",
+          "base-100": "#1e1e1e",
 
           info: "#fde047",
 
@@ -27,7 +27,11 @@ export default {
     ],
   },
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Main: 'HK Grotesk, sans-serif',
+      },
+    },
   },
   plugins: [require("daisyui")],
 };
