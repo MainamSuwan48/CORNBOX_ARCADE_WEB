@@ -1,8 +1,8 @@
 import React from "react";
 
-function logo() {
+function logo({scale = "100"}) {
   return (
-    <div className="flex">
+    <div className={`flex scale-${scale}`}>
       <span className="select-none transition-all bg-primary -tracking-widest hover:tracking-widest font-black text-base-100 text-4xl py-2 border-solid border-2 border-primary">
         CORNBOX
       </span>
