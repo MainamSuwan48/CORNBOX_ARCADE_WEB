@@ -31,6 +31,9 @@ export default {
       fontFamily: {
         Main: 'HK Grotesk, sans-serif',
       },
+      height: {
+        with_header: "calc(100vh - 100px)",
+      },
     },
   },
   plugins: [require("daisyui")],
