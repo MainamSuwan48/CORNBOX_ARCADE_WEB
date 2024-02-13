@@ -5,7 +5,7 @@ import Link from "../../components/ui/Link";
 
 function Header() {
   return (
-    <div className="drop-shadow-lg backdrop-blur-sm flex justify-between items-center px-4 py-2 bg-base-200">
+    <div className="fixed w-full top-0 z-50 drop-shadow-lg backdrop-blur-sm flex justify-between items-center px-4 py-2">
       <LogoCornbox />
       <div className="flex gap-6">
         <Link>HOME</Link>

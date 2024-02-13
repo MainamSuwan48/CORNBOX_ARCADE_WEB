@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import Header from "./layouts/Header";
+import ProfileContainer from "./layouts/ProfileContainer";
 
 function UserPage() {
   return (
-    <div>UserPage</div>
-  )
+    <>
+      <div className="relative">
+        <Header />
+        <ProfileContainer />
+      </div>
+    </>
+  );
 }
 
-export default UserPage
+export default UserPage;

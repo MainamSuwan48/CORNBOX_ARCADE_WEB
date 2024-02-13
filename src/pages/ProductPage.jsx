@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Header from "./layouts/Header";
 
 function ProductPage() {
   return (
-    <div>ProductPage</div>
-  )
+    <div>
+      <Header />
+    </div>
+  );
 }
 
-export default ProductPage
+export default ProductPage;
