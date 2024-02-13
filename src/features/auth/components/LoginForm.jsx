@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../../../components/ui/Input";
 import Header from "../../../components/ui/Header";
+import Button from "../../../components/ui/Button";
 
 function LoginForm() {
   return (
@@ -9,12 +10,7 @@ function LoginForm() {
         <Header>SIGN IN</Header>
         <Input type="text" placeholder="Email Or Username please" />
         <Input type="password" placeholder="Password please" />
-        <button
-          type="submit"
-          className="p-2 bg-primary text-neutral rounded-md"
-        >
-          Login
-        </button>
+        <Button>LOGIN</Button>
       </form>
     </div>
   );

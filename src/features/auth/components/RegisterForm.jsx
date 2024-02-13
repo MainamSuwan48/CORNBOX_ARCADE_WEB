@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../../../components/ui/Input";
 import Header from "../../../components/ui/Header";
+import Button from "../../../components/ui/Button";
 function RegisterForm() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -10,12 +11,7 @@ function RegisterForm() {
         <Input type="text" placeholder="Username please" />
         <Input type="password" placeholder="Password please" />
         <Input type="password" placeholder="Confirm Password please" />
-        <button
-          type="submit"
-          className="p-2 bg-primary text-neutral rounded-md"
-        >
-          Login
-        </button>
+        <Button>REGISTER</Button>
       </form>
     </div>
   );

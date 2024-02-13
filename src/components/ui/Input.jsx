@@ -19,7 +19,7 @@ function Input({
         className="transition-all p-2 border-2 border-primary  bg-transparent focus:outline-none focus:border-2 focus:box-border"
       />
       {errorMessage ? (
-        <small className="text-red-500">{errorMessage}</small>
+        <small className="text-red-500 -my-4">{errorMessage}</small>
       ) : null}
     </>
   );
