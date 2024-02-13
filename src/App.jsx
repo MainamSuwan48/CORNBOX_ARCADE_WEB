@@ -4,5 +4,5 @@ import TestPage from "./pages/TestPage";
 import UserPage from "./pages/UserPage";
 
 export default function App() {
-  return <RegisterPage />;
+  return <LoginPage />;
 }

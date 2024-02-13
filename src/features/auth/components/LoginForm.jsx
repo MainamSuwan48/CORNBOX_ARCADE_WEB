@@ -2,6 +2,7 @@ import React from "react";
 import Input from "../../../components/ui/Input";
 import Header from "../../../components/ui/Header";
 import Button from "../../../components/ui/Button";
+import Link from "../../../components/ui/Link";
 
 function LoginForm() {
   return (
@@ -10,7 +11,8 @@ function LoginForm() {
         <Header>SIGN IN</Header>
         <Input type="text" placeholder="Email Or Username please" />
         <Input type="password" placeholder="Password please" />
-        <Button>LOGIN</Button>
+        <Link size={"base"}>How about signing up?</Link>
+        <Button >LOGIN</Button>
       </form>
     </div>
   );
