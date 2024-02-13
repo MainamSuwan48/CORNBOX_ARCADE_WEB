@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../../../components/ui/Input";
-import Header from "../../../components/ui/Header";
+import Header from "../../../components/ui/Title";
 import Button from "../../../components/ui/Button";
 import Link from "../../../components/ui/Link";
 
