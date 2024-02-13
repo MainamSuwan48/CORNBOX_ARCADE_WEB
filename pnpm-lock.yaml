@@ -17,6 +17,9 @@ dependencies:
   autoprefixer:
     specifier: ^10.4.17
     version: 10.4.17(postcss@8.4.35)
+  cornbox_web:
+    specifier: 'link:'
+    version: 'link:'
   postcss:
     specifier: ^8.4.35
     version: 8.4.35
