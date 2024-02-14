@@ -6,10 +6,12 @@ import Link from "../../../components/ui/Link";
 import { useAuth } from "../contexts/AuthContext";
 
 function LoginForm() {
+  const test = import.meta.env.VITE_API_URL;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const handleSubmit = (e) => {
+    console.log(test)
     e.preventDefault();
     console.log("submitted");
   };
