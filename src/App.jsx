@@ -11,7 +11,8 @@ export default function App() {
   return (
     <>
       <Header />      
-      <CheckOutPage />      
+      <CheckOutPage />  
+      <UserPage />       
       <Footer />
     </>
   );
