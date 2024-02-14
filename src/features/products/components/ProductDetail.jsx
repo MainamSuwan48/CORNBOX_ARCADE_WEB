@@ -35,6 +35,7 @@ function ProductDetail() {
       </div>
       <div className="flex items-baseline gap-8 align-bottom">
         <ProductCounter />
+        <ActionButton>ADD TO CART</ActionButton>
         <ActionButton>BUYNOW</ActionButton>
       </div>
     </div>

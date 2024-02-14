@@ -4,11 +4,11 @@ import ActionButton from "../../../components/ui/ActionButton";
 
 function ShoppingCart() {
   return (
-    <div className="bg-gray-500 w-80 max-w-screen-sm flex-1 p-8 rounded-lg">
+    <div className="bg-gray-500 max-w-screen-sm flex-1 p-8 rounded-lg min-w-full">
       <div className="text-2xl border-b-2 border-base-100 text-base-100 font-bold">
         Your cart
       </div>
-      <CartItem />      
+      <CartItem />
       <div className="flex justify-between items-center mt-4">
         <div className="text-base-100 font-bold">Total</div>
         <div className="text-base-100 font-bold">16800 THB</div>
