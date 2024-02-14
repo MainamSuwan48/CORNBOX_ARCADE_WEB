@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileMenu from "./ProfileMenu";
 import UserProfile from "../../features/user/components/UserProfile";
-import Adresses from "../../features/user/components/Adresses";
+;
 import UserOrderSection from "../../features/user/components/UserOrderSection";
 
 function ProfileContainer() {

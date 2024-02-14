@@ -1,7 +1,7 @@
 import React from "react";
 import { EditIcon, EditUserIcon } from "../../../components/icons";
 
-function Adresses() {
+function Addresses() {
   return (
     <div className="relative bg-neutral rounded min-w-80 scroll-mt-4 p-5">
     <div className="absolute -right-2 -top-2 flex justify-center items-center h-8 w-8 bg-red-600 text-neutral rounded-full active:scale-90">X</div>
@@ -21,4 +21,4 @@ function Adresses() {
   );
 }
 
-export default Adresses;
+export default Addresses;
