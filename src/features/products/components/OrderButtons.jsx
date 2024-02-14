@@ -1,69 +1,28 @@
 import { useState } from "react";
+import OrderButton from "./OrderButton";
 
 function OrderButtons() {
   const [active, setActive] = useState("ALL");
   return (
     <div className="flex justify-start gap-4 py-3">
-      <div
-        onClick={() => setActive("ALL")}
-        className={`transition-all duration-300 px-4 py-1 text-2xl text-primary border-2 ${
-          active === "ALL"
-            ? "border-secondary"
-            : "border-t-transparent border-l-transparent border-r-transparent"
-        }    hover:border-primary hover:scale-95`}
-      >
+      <OrderButton onClick={() => setActive("ALL")} active={active}>
         ALL
-      </div>
-      <div
-        onClick={() => setActive("DEPOSITED")}
-        className={`transition-all duration-300 px-4 py-1 text-2xl text-primary border-2 ${
-          active === "DEPOSITED"
-            ? "border-secondary"
-            : "border-t-transparent border-l-transparent border-r-transparent"
-        }    hover:border-primary hover:scale-95`}
-      >
+      </OrderButton>
+      <OrderButton onClick={() => setActive("DEPOSITED")} active={active}>
         DEPOSITED
-      </div>
-      <div
-        onClick={() => setActive("PROCESSING")}
-        className={`transition-all duration-300 px-4 py-1 text-2xl text-primary border-2 ${
-          active === "PROCESSING"
-            ? "border-secondary"
-            : "border-t-transparent border-l-transparent border-r-transparent"
-        }    hover:border-primary hover:scale-95`}
-      >
+      </OrderButton>
+      <OrderButton onClick={() => setActive("PROCESSING")} active={active}>
         PROCESSING
-      </div>
-      <div
-        onClick={() => setActive("SHIPPED")}
-        className={`transition-all duration-300 px-4 py-1 text-2xl text-primary border-2 ${
-          active === "SHIPPED"
-            ? "border-secondary"
-            : "border-t-transparent border-l-transparent border-r-transparent"
-        }    hover:border-primary hover:scale-95`}
-      >
+      </OrderButton>
+      <OrderButton onClick={() => setActive("SHIPPED")} active={active}>
         SHIPPED
-      </div>
-      <div
-        onClick={() => setActive("COMPLETED")}
-        className={`transition-all duration-300 px-4 py-1 text-2xl text-primary border-2 ${
-          active === "COMPLETED"
-            ? "border-secondary"
-            : "border-t-transparent border-l-transparent border-r-transparent"
-        }    hover:border-primary hover:scale-95`}
-      >
+      </OrderButton>
+      <OrderButton onClick={() => setActive("COMPLETED")} active={active}>
         COMPLETED
-      </div>
-      <div
-        onClick={() => setActive("CANCELED")}
-        className={`transition-all duration-300 px-4 py-1 text-2xl text-primary border-2 ${
-          active === "CANCELED"
-            ? "border-secondary"
-            : "border-t-transparent border-l-transparent border-r-transparent"
-        }    hover:border-primary hover:scale-95`}
-      >
+      </OrderButton>
+      <OrderButton onClick={() => setActive("CANCELED")} active={active}>
         CANCELED
-      </div>
+      </OrderButton>
     </div>
   );
 }
