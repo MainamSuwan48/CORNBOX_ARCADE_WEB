@@ -10,9 +10,10 @@ import Header from "./pages/layouts/Header";
 export default function App() {
   return (
     <>
-      <Header />      
-      <CheckOutPage />  
-      <UserPage />       
+      <Header />
+      <UserPage />
+      <CheckOutPage />
+
       <Footer />
     </>
   );
