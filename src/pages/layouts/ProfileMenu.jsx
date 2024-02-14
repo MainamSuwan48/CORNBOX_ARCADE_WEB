@@ -14,7 +14,7 @@ function ProfileMenu() {
           Addresses
         </p>
       </div>
-      <button className="btn btn-primary text-base font-bold active:btn-secondary">
+      <button className="btn btn-primary text-base font-bold active:btn-secondary mb-20">
         LOG OUT
       </button>
     </div>
