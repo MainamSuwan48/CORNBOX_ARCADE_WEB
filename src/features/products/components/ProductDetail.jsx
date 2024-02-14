@@ -24,14 +24,14 @@ function ProductDetail() {
         <div className="text-xl text-primary font-bold mr-4">
           Buttons Colors :
         </div>
-        <ColorPellet color="white" />
-        <ColorPellet color="slate-800" />
-        <ColorPellet color="blue-500" />
-        <ColorPellet color="green-500" />
-        <ColorPellet color="red-500" />
-        <ColorPellet color="purple-500" />
-        <ColorPellet color="red-700" />
-        <ColorPellet color="yellow-400" />
+        <ColorPellet color="clear" />
+        <ColorPellet color="black" />
+        <ColorPellet color="blue" />
+        <ColorPellet color="green" />
+        <ColorPellet color="pink" />
+        <ColorPellet color="purple" />
+        <ColorPellet color="red" />
+        <ColorPellet color="yellow" />
       </div>
       <div className="flex items-baseline gap-8 align-bottom">
         <ProductCounter />
