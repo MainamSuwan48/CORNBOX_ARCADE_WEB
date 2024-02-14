@@ -1,8 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faUserNinja } from "@fortawesome/free-solid-svg-icons";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { faUserPen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenToSquare,
+  faTrashCan,
+  faUserNinja,
+  faShoppingCart,
+  faUserPen,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function UserIcon({ size }) {
   return (
@@ -45,6 +49,17 @@ export function EditIcon({ size }) {
     <div className="transition-all hover:scale-110 active:scale-75">
       <FontAwesomeIcon
         icon={faPenToSquare}
+        style={{ color: "#FFD43B" }}
+        size={size}
+      />
+    </div>
+  );
+}
+export function TrashIcon({ size }) {
+  return (
+    <div className="transition-all hover:scale-110 active:scale-75">
+      <FontAwesomeIcon
+        icon={faTrashCan}
         style={{ color: "#FFD43B" }}
         size={size}
       />

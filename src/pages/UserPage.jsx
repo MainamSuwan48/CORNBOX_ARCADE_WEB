@@ -6,8 +6,7 @@ import Adresses from "../features/user/components/Adresses";
 function UserPage() {
   return (
     <>
-      <div className="relative">
-        <Header />
+      <div className="relative">       
         <ProfileContainer />        
       </div>
     </>

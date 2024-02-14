@@ -4,8 +4,7 @@ import ProductLayout from "./layouts/ProductLayout";
 
 function ProductPage() {
   return (
-    <div>
-      <Header />
+    <div>      
       <ProductLayout />
     </div>
   );

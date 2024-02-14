@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-function ProductCounter() {
+const CounterTypeClasses = {
+  normal: "",
+  cart: "scale-75",
+};
+
+function ProductCounter({type = "normal"}) {
   const [count, setCount] = useState(1);
 
   const decreaseCount = () => {
@@ -14,7 +19,7 @@ function ProductCounter() {
   };
 
   return (
-    <div className="flex items-center py-2">
+    <div className={`flex items-center py-2 ${CounterTypeClasses[type]}`}>
       <div
         className="flex justify-center items-baseline h-10 w-10 border-2 border-primary text-neutral text-2xl active:bg-primary select-none active:text-base-100"
         onClick={decreaseCount}

@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import CheckOutLayout from "./layouts/CheckOutLayout";
 
-function OrderSummaryPage() {
-  return (
-    <div>OrderSummaryPage</div>
-  )
+function CheckOutPage() {
+  return <CheckOutLayout />;
 }
 
-export default OrderSummaryPage
+export default CheckOutPage;

@@ -21,11 +21,3 @@ function ColorPellet({ color }) {
 
 export default ColorPellet;
 
-{/* <ColorPellet color="white" />
-<ColorPellet color="slate-800" />
-<ColorPellet color="blue-500" />
-<ColorPellet color="green-500" />
-<ColorPellet color="red-500" />
-<ColorPellet color="purple-500" />
-<ColorPellet color="red-700" />
-<ColorPellet color="yellow-400" /> */}
