@@ -7,10 +7,10 @@ function UserOrderSection() {
     <div className="w-full bg-base-300 h-with_header px-8">
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-bold">My Orders</h1>
-        <UserOrder />
-        <UserOrder />
-        <UserOrder />
-        <UserOrder />
+        <UserOrder status="DEPOSITED"/>
+        <UserOrder status="COMPLETED"/>
+        <UserOrder status="COMPLETED"/>
+        <UserOrder status="CANCELED"/>
       </div>
     </div> 
   );
