@@ -38,14 +38,27 @@ export const AuthProvider = ({ children }) => {
     console.log(response.data);
     storeToken(response.data.token);
   };
+const register = async (email, username, password) => {
+  const data = {
+    username: username,
+    email: email,
+    password: password,
+    confirmPassword: password
+  };
+  console.log(data);
+  const response = await authApi.register(data);
+  console.log(response.data);
+  storeToken(response.data.token);
+  
 
+}
   const logout = () => {
     setAuthUser(null);
     deleteToken();
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout }}>
+    <AuthContext.Provider value={{ login, logout,register }}>
       {children}
     </AuthContext.Provider>
   );

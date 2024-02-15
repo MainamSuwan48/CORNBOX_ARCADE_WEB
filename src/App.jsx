@@ -13,6 +13,7 @@ export default function App() {
     <>
       <AuthProvider>
         <Header />
+        <RegisterPage />
         <LoginPage />
         <Footer />
       </AuthProvider>

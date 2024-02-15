@@ -2,7 +2,7 @@ import Joi from "joi";
 import validate from "../../../utils/validator";
 
 const loginSchema = Joi.object({
-  usernameOrEmail: Joi.string().email().required().messages({
+  usernameOrEmail: Joi.string().email({ tlds: { allow: false } }).required().messages({
     "string.empty": "Please enter your username or email",
     "any.required": "Please enter your username or email",
   }),

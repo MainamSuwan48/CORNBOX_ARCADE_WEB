@@ -6,7 +6,7 @@ function Input({
   value,
   onChange,
   name,
-  errorMessage,
+  errorMessage = null,
 }) {
   return (
     <>

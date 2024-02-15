@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../../components/ui/Input";
 import Header from "../../../components/ui/Title";
 import Button from "../../../components/ui/Button";
 import Link from "../../../components/ui/Link";
 import { useAuth } from "../contexts/AuthContext";
+import validateLogin from "../validations/validate-login";
 
 function LoginForm() {
-  const test = import.meta.env.VITE_API_URL;
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [input, setInput] = useState({ usernameOrEmail: "", password: "" });
+  const [errors, setErrors] = useState({});
   const { login } = useAuth();
-  const handleSubmit = (e) => {
-    console.log(test)
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
+    const validationErrors = validateLogin(input);
+  
+    if (validationErrors) {
+      // If there are validation errors, update the state and stop the function
+      setErrors(validationErrors);
+      return;
+    }
+  
+    const { usernameOrEmail, password } = input;
+    try {
+      await login(usernameOrEmail, password);
+      setErrors({});
+    } catch (err) {
+      console.log(err);
+    }
+   
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === "username") {
-      setUsername(e.target.value);
-    } else if (e.target.name === "password") {
-      setPassword(e.target.value);
-    }
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    console.log('Component has re-rendered');
+  }, [errors]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -30,20 +45,22 @@ function LoginForm() {
         <Header>SIGN IN</Header>
         <Input
           onChange={handleInputChange}
-          name="username"
-          value={username}
+          name="usernameOrEmail"
+          value={input.usernameOrEmail}
           type="text"
           placeholder="Email Or Username please"
+          errorMessage={errors.usernameOrEmail}
         />
         <Input
           onChange={handleInputChange}
           name="password"
-          value={password}
+          value={input.password}
           type="password"
           placeholder="Password please"
+          errorMessage={errors.password}
         />
         <Link size={"base"}>How about signing up?</Link>
-        <Button onClick={() => login(username, password)}>LOGIN</Button>
+        <Button>LOGIN</Button>
       </form>
     </div>
   );
