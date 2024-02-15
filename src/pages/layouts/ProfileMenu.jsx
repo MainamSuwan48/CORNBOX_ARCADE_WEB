@@ -13,17 +13,21 @@ function ProfileMenu() {
     navigate("/login");
   };
 
-  const setUserData = async () => {
-    const response = await fetchMe();
-    setUser(response);
-  };
-
   const test = () => {
     console.log(user);
   };
 
   useEffect(() => {
-    setUserData();
+    const fetchUser = async () => {
+      try {
+        const response = await fetchMe();
+        console.log(response);
+        setUser(response.user);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUser();
   }, []);
 
   return (

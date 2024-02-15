@@ -39,12 +39,12 @@ const router = createBrowserRouter([
           <ProtectedRoutes>
             <UserPage />
           </ProtectedRoutes>
-        ),
-        // children: [
-        //   { path: "", element: <UserProfile /> },
-        //   { path: "address", element: <Addresses /> },
-        //   { path: "order", element: <UserOrderSection /> },
-        // ],
+        ),  
+        children: [
+          { path: "", element: <UserProfile />},
+          { path: "address", element: <Addresses /> },
+          { path: "order", element: <UserOrderSection /> },
+        ],
       },
     ],
   },
