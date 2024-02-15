@@ -20,7 +20,7 @@ function Header() {
         <Link to="/product/1">
           <LinkWeb>PRODUCTS</LinkWeb>
         </Link>
-        <Link to={`/user/${authUser ? "" : ""}`}>
+        <Link to={`/user/${authUser ? authUser.id : ""}`}>
           <UserIcon size={"2x"} />
         </Link>       
         <CartIcon size={"2x"} />

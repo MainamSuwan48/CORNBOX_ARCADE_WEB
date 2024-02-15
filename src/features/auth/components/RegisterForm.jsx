@@ -4,8 +4,11 @@ import Header from "../../../components/ui/Title";
 import Button from "../../../components/ui/Button";
 import { useAuth } from "../contexts/AuthContext";
 import validateRegister from "../validations/validate-register";
+import LinkWeb from "../../../components/ui/LinkWeb";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     username: "",
@@ -29,9 +32,10 @@ function RegisterForm() {
     }
     const { email, username, password, confirmPassword } = input;
     try {
-      await register(email, username, password, confirmPassword);
-      console.log("Registered")
+      const res = await register(email, username, password, confirmPassword);
+      console.log(res.user.id);
       setErrors({});
+      navigate(`/user/${res.user.id}`); 
     } catch (err) {
       console.log(err);
     }
@@ -72,6 +76,11 @@ function RegisterForm() {
           placeholder="Confirm Password please"
           errorMessage={errors.confirmPassword}
         />
+        <Link to="/login">
+          <LinkWeb size="base" to="/login">
+            Already have an account? Sign in
+          </LinkWeb>
+        </Link>
         <Button>REGISTER</Button>
       </form>
     </div>

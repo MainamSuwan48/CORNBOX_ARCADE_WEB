@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     const response = await authApi.register(data);
     console.log(response.data);
     storeToken(response.data.token);
+    return response.data;
   };
   const logout = () => {
     setAuthUser(null);

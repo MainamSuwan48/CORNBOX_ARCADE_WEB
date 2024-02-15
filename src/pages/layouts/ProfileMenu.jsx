@@ -24,7 +24,7 @@ function ProfileMenu() {
       </div>
       <button
         onClick={handleLogout}
-        className="btn btn-primary text-base font-bold active:btn-secondary mb-20"
+        className="transition-all px-4 py-2 border-2 border-primary text-primary font-bold active:btn-secondary mb-20 hover:bg-primary hover:text-base-100 hover:shadow-lg active:translate-x-2 active:translate-y-2 active:shadow-none"
       >
         LOG OUT
       </button>
