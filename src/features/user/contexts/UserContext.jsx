@@ -1,9 +1,28 @@
-import React from 'react'
+import { createContext, useContext, useEffect, useState } from "react";
+import * as UserApi from "../../../api/user";
 
-function UserContext() {
+export const UserContext = createContext();
+
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const upDateUserById = async (id, data) => {
+    const response = await UserApi.upDateUserById(id, data);
+    return response.data;
+  };
+
+  const test = () => {
+    console.log("I'm from user context");
+  };
   return (
-    <div>UserContext</div>
-  )
-}
-
-export default UserContext
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        upDateUserById,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
