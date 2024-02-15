@@ -7,6 +7,7 @@ function UserInput({ type = "text", placeholder, value, onChange, name }) {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      name={name}
       className="bg-none text-white font-medium bg-transparent border-2 border-white my-1"
     />
   );
