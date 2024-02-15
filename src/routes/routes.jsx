@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       { path: "/register", element: <RegisterPage /> },
       { path: "/checkout", element: <CheckOutPage /> },
       {
-        path: "/user/" || "/user/undefined ||",
+        path: "/user/:userId",
         element: (
           <ProtectedRoutes>
             <UserPage />

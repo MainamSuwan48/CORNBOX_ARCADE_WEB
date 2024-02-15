@@ -1,11 +1,13 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 
 function ProfileMenu() {
+  const navigate = useNavigate();
   const { logout } = useAuth();
   const handleLogout = async () => {
     await logout();
+    navigate("/login");
   };
   return (
     <div className="flex flex-col px-4 w-60 justify-between h-with_header mt-20">

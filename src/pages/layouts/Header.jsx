@@ -22,10 +22,7 @@ function Header() {
         </Link>
         <Link to={`/user/${authUser ? "" : ""}`}>
           <UserIcon size={"2x"} />
-        </Link>
-        <div className="text-small align-baseline my-1">
-          Hi, {authUser ? authUser.username : "Guest"}
-        </div>
+        </Link>       
         <CartIcon size={"2x"} />
       </div>
     </div>

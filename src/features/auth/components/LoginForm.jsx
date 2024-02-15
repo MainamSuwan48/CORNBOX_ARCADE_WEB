@@ -5,12 +5,14 @@ import Button from "../../../components/ui/Button";
 import LinkWeb from "../../../components/ui/LinkWeb";
 import { useAuth } from "../contexts/AuthContext";
 import validateLogin from "../validations/validate-login";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [input, setInput] = useState({ usernameOrEmail: "", password: "" });
   const [errors, setErrors] = useState({});
   const { login ,test } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +26,10 @@ function LoginForm() {
 
     const { usernameOrEmail, password } = input;
     try {
-      await login(usernameOrEmail, password);
-      setErrors({});
+      const res = await login(usernameOrEmail, password);
+      console.log(res.user.id)
+      setErrors({})
+      navigate(`/user/${res.user.id}`);
     } catch (err) {
       console.log(err);
     }

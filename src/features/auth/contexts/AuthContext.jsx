@@ -16,6 +16,7 @@ export const AuthContext = createContext();
 // Create the AuthContext
 
 export const AuthProvider = ({ children }) => {
+  const [authUser, setAuthUser] = useState(null);
   const fetchMe = async () => {
     const token = getToken();
     if (!token) {
@@ -32,7 +33,6 @@ export const AuthProvider = ({ children }) => {
       });
     }
   }, []);
-  const [authUser, setAuthUser] = useState(null);
 
   const login = async (usernameOrEmail, password) => {
     const data = {
@@ -41,9 +41,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     console.log(data);
-    const response = await authApi.login(data);
-    console.log(response.data);
+    const response = await authApi.login(data);    
     storeToken(response.data.token);
+    return response.data;
   };
   const register = async (email, username, password) => {
     const data = {
