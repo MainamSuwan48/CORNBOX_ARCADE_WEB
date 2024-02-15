@@ -10,7 +10,8 @@ import {
 
 export function UserIcon({ size }) {
   return (
-    <div className="transition-all hover:scale-110 active:scale-75 ">
+    <div  
+    className="transition-all hover:scale-110 active:scale-75 ">
       <FontAwesomeIcon
         icon={faUserNinja}
         style={{ color: "#FFD43B" }}

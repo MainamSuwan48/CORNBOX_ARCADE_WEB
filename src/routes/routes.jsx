@@ -1,4 +1,8 @@
-import { createBrowserRouter, Navigate, RouterProvider, } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import ProductPage from "../pages/ProductPage";
 import LoginPage from "../pages/LoginPage";
@@ -28,14 +32,6 @@ const router = createBrowserRouter([
       { path: "/checkout", element: <CheckOutPage /> },
       {
         path: "/user/:userId",
-        element: (
-          <ProtectedRoutes>
-            <UserPage />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/user/",
         element: (
           <ProtectedRoutes>
             <UserPage />
