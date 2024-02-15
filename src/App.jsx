@@ -8,18 +8,12 @@ import TestPage from "./pages/TestPage";
 import UserPage from "./pages/UserPage";
 import Footer from "./pages/layouts/Footer";
 import Header from "./pages/layouts/Header";
-
+import Router from "./routes/routes";
 
 export default function App() {
   return (
     <>
-      <AuthProvider>
-        <Header />
-        <HomePage />
-        <RegisterPage />
-        <LoginPage />
-        <Footer />
-      </AuthProvider>
+      <Router />
     </>
   );
 }

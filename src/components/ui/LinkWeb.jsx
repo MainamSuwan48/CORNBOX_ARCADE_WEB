@@ -1,6 +1,6 @@
 import React from "react";
 
-function Link({ children, size = "2xl", color = "neutral" }) {
+function LinkWeb({ children, size = "2xl", color = "neutral" }) {
   return (
     <p
       className={`select-none transition-all text-${size} font-bold hover:text-primary hover:text-${color} active:scale-90 ac active:text-secondary cursor-pointer`}
@@ -10,4 +10,4 @@ function Link({ children, size = "2xl", color = "neutral" }) {
   );
 }
 
-export default Link;
+export default LinkWeb;

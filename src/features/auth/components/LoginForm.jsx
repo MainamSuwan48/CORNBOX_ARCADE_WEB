@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../../components/ui/Input";
 import Header from "../../../components/ui/Title";
 import Button from "../../../components/ui/Button";
-import Link from "../../../components/ui/Link";
+import Link from "../../../components/ui/LinkWeb";
 import { useAuth } from "../contexts/AuthContext";
 import validateLogin from "../validations/validate-login";
 

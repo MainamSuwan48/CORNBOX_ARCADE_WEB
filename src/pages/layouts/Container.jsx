@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Router from "../../routes/routes";
+import { Outlet } from "react-router-dom";
 
 function Container() {
   return (
     <>
       <Header />
-      <Router />    
+      <Outlet />
       <Footer />
     </>
   );
