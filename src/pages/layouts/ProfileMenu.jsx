@@ -1,6 +1,12 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../features/auth/contexts/AuthContext";
 
 function ProfileMenu() {
+  const { logout } = useAuth();
+  const handleLogout = async () => {
+    await logout();
+  };
   return (
     <div className="flex flex-col px-4 w-60 justify-between h-with_header mt-20">
       <div>
@@ -14,7 +20,10 @@ function ProfileMenu() {
           Addresses
         </p>
       </div>
-      <button className="btn btn-primary text-base font-bold active:btn-secondary mb-20">
+      <button
+        onClick={handleLogout}
+        className="btn btn-primary text-base font-bold active:btn-secondary mb-20"
+      >
         LOG OUT
       </button>
     </div>

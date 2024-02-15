@@ -16,17 +16,24 @@ export const AuthContext = createContext();
 // Create the AuthContext
 
 export const AuthProvider = ({ children }) => {
-  const [authUser, setAuthUser] = useState(null);
-
+  const fetchMe = async () => {
+    const token = getToken();
+    if (!token) {
+      return null;
+    }
+    const response = await authApi.getMe(token);
+    return response.data;
+  };
   useEffect(() => {
     const token = getToken();
     if (token) {
-      authApi.getMe().then((res) => {
-        console.log(res.data.user);
-        setAuthUser(res.data.user);
+      fetchMe().then((user) => {
+        setAuthUser(user);
       });
     }
   }, []);
+  const [authUser, setAuthUser] = useState(null);
+
   const login = async (usernameOrEmail, password) => {
     const data = {
       usernameOrEmail: usernameOrEmail,
@@ -38,27 +45,31 @@ export const AuthProvider = ({ children }) => {
     console.log(response.data);
     storeToken(response.data.token);
   };
-const register = async (email, username, password) => {
-  const data = {
-    username: username,
-    email: email,
-    password: password,
-    confirmPassword: password
+  const register = async (email, username, password) => {
+    const data = {
+      username: username,
+      email: email,
+      password: password,
+      confirmPassword: password,
+    };
+    console.log(data);
+    const response = await authApi.register(data);
+    console.log(response.data);
+    storeToken(response.data.token);
   };
-  console.log(data);
-  const response = await authApi.register(data);
-  console.log(response.data);
-  storeToken(response.data.token);
-  
-
-}
   const logout = () => {
     setAuthUser(null);
     deleteToken();
   };
 
+  const test = () => {
+    console.log(authUser);
+  };
+
   return (
-    <AuthContext.Provider value={{ login, logout,register }}>
+    <AuthContext.Provider
+      value={{ login, logout, register, test, authUser, setAuthUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
