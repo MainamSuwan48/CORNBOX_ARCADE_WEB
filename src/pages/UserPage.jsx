@@ -9,7 +9,7 @@ function UserPage() {
     <>
       <div className="relative">
         <ProfileContainer>
-          <UserProfile />
+          <Outlet />
         </ProfileContainer>
       </div>
     </>
