@@ -11,6 +11,9 @@ import CheckOutPage from "../pages/CheckOutPage";
 import UserPage from "../pages/UserPage";
 import Container from "../pages/layouts/Container";
 import { getToken } from "../utils/local-storage";
+import UserProfile from "../features/user/components/UserProfile";
+import Addresses from "../features/user/components/Addresses";
+import UserOrderSection from "../features/user/components/UserOrderSection";
 
 const ProtectedRoutes = ({ children }) => {
   const token = getToken();
@@ -37,6 +40,11 @@ const router = createBrowserRouter([
             <UserPage />
           </ProtectedRoutes>
         ),
+        // children: [
+        //   { path: "", element: <UserProfile /> },
+        //   { path: "address", element: <Addresses /> },
+        //   { path: "order", element: <UserOrderSection /> },
+        // ],
       },
     ],
   },

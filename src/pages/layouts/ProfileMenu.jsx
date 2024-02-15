@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
+import ProfileMenuLink from "../../features/user/components/ProfileMenuLink";
 
 function ProfileMenu() {
   const navigate = useNavigate();
@@ -12,22 +13,18 @@ function ProfileMenu() {
     navigate("/login");
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetchMe();
-        console.log(response);
-        setUser(response.user);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchUser();
-  }, []);
+  const setUserData = async () => {
+    const response = await fetchMe();
+    setUser(response);
+  };
 
   const test = () => {
     console.log(user);
   };
+
+  useEffect(() => {
+    setUserData();
+  }, []);
 
   return (
     <div className="flex flex-col px-4 w-60 justify-between h-with_header mt-20">
@@ -38,15 +35,9 @@ function ProfileMenu() {
         >
           Hi, {user.username}
         </p>
-        <p className="transition-all text-xl font-medium hover:text-primary  active:translate-x-2">
-          Profile
-        </p>
-        <p className="transition-all text-xl font-medium hover:text-primary  active:translate-x-2">
-          Orders
-        </p>
-        <p className="transition-all text-xl font-medium hover:text-primary  active:translate-x-2">
-          Addresses
-        </p>
+        <ProfileMenuLink>Order</ProfileMenuLink>
+        <ProfileMenuLink>Profile</ProfileMenuLink>
+        <ProfileMenuLink>Addresses</ProfileMenuLink>
       </div>
       <button
         onClick={handleLogout}

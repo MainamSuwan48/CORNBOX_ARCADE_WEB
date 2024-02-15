@@ -1,13 +1,16 @@
 import React from "react";
-import Header from "./layouts/Header";
 import ProfileContainer from "./layouts/ProfileContainer";
-import Adresses from "../features/user/components/Addresses";
+
+import { Outlet } from "react-router-dom";
+import UserProfile from "../features/user/components/UserProfile";
 
 function UserPage() {
   return (
     <>
-      <div className="relative">       
-        <ProfileContainer />        
+      <div className="relative">
+        <ProfileContainer>
+          <UserProfile />
+        </ProfileContainer>
       </div>
     </>
   );
