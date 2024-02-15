@@ -5,9 +5,10 @@ function UserProfile() {
   return (
     <div className="bg-neutral p-5 rounded">
       <div className="flex justify-between border-b-2 mx-2 border-accent py-2">
-        <p className="text-2xl font-bold text-primary drop-shadow-sm ">
+        <p className="text-2xl font-bold text-slate-700 drop-shadow-sm ">
           Profile
         </p>
+
         <EditUserIcon size={"2x"} />
       </div>
       <div className="flex justify-between gap-2">

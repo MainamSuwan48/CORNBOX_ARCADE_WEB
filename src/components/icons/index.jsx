@@ -38,7 +38,7 @@ export function EditUserIcon({ size }) {
     <div className="transition-all hover:scale-110 active:scale-75">
       <FontAwesomeIcon
         icon={faUserPen}
-        style={{ color: "#FFD43B" }}
+        style={{ color: "black" }}
         size={size}
       />
     </div>

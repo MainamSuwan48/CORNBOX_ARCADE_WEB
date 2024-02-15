@@ -34,9 +34,9 @@ function ProfileMenu() {
       <div>
         <p
           onClick={test}
-          className="transition-all text-xl font-medium hover:text-primary "
+          className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary     "
         >
-          Welcome,{user.username}
+          Hi, {user.username}
         </p>
         <p className="transition-all text-xl font-medium hover:text-primary  active:translate-x-2">
           Profile
