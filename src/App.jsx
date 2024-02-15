@@ -1,5 +1,6 @@
 import { AuthProvider } from "./features/auth/contexts/AuthContext";
 import CheckOutPage from "./pages/CheckOutPage";
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProductPage from "./pages/ProductPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -13,6 +14,7 @@ export default function App() {
     <>
       <AuthProvider>
         <Header />
+        <HomePage />
         <RegisterPage />
         <LoginPage />
         <Footer />
