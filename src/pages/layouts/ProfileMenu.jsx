@@ -1,17 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 
 function ProfileMenu() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const [user, setUser] = useState({}); // [1
+  const { logout, fetchMe } = useAuth();
+
   const handleLogout = async () => {
     await logout();
     navigate("/login");
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetchMe();
+        console.log(response);
+        setUser(response.user);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  const test = () => {
+    console.log(user);
+  };
+
   return (
     <div className="flex flex-col px-4 w-60 justify-between h-with_header mt-20">
       <div>
+        <p
+          onClick={test}
+          className="transition-all text-xl font-medium hover:text-primary "
+        >
+          Welcome,{user.username}
+        </p>
         <p className="transition-all text-xl font-medium hover:text-primary  active:translate-x-2">
           Profile
         </p>
