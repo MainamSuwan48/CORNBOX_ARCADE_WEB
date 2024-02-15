@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditUserIcon } from "../../../components/icons";
+import { useAuth } from "../../../features/auth/contexts/AuthContext";
 
 import UserEditor from "./UserEditor";
 
 function UserProfile() {
+  const { authUser, fetchMe } = useAuth();
+  const [userProfile, setUserProfile] = useState({});
   const [edit, setEdit] = useState(false);
   const editProfile = () => {
     setEdit(!edit);
     console.log(edit);
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetchMe();
+        console.log(response);
+        setUserProfile(response.user);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUser();
+  }, [authUser]);
+
+  const { username, email, fullName, mobilePhone } = userProfile;
   return (
     <>
       <div className="bg-neutral p-5 rounded border-2">
@@ -29,10 +47,10 @@ function UserProfile() {
             <p className="text-base-100 font-medium">Mobile Phone</p>
           </div>
           <div className="px-2 flex flex-col">
-            <p className="text-base-100 font-medium">usernameman</p>
-            <p className="text-base-100 font-medium">Email</p>
-            <p className="text-base-100 font-medium">Grownman Fullmanboy</p>
-            <p className="text-base-100 font-medium">08123456789</p>
+            <p className="text-base-100 font-medium">{username}</p>
+            <p className="text-base-100 font-medium">{email}</p>
+            <p className="text-base-100 font-medium">{fullName}</p>
+            <p className="text-base-100 font-medium">{mobilePhone}</p>
           </div>
         </div>
       </div>

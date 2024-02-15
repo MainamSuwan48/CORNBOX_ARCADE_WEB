@@ -9,7 +9,7 @@ function UserEditor() {
         <p className="text-2xl font-bold text-Neutral drop-shadow-sm ">
           Edit Your Profile
         </p>
-        <ProfileEditButton onClick={() => setEdit(!edit)} />
+        <ProfileEditButton/>
       </div>
       <form className="flex justify-between gap-2">
         <div className="px-2 flex flex-col">
