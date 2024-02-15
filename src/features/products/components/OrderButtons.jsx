@@ -4,7 +4,7 @@ import OrderButton from "./OrderButton";
 function OrderButtons() {
   const [active, setActive] = useState("ALL");
   return (
-    <div className="flex justify-start gap-4 py-3">
+    <div className="flex justify-start gap-4 py-3 flex-1">
       <OrderButton onClick={() => setActive("ALL")} active={active}>
         ALL
       </OrderButton>

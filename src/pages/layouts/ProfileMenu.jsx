@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link, useParams } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 import ProfileMenuLink from "../../features/user/components/ProfileMenuLink";
+import {toast} from 'sonner'
 
 function ProfileMenu() {
   const navigate = useNavigate();
@@ -12,9 +13,10 @@ function ProfileMenu() {
     await logout();
     navigate("/login");
   };
-
+  const param = useParams();
   const test = () => {
-    console.log(user);
+    toast.success('test')
+    console.log(user, param);
   };
 
   useEffect(() => {

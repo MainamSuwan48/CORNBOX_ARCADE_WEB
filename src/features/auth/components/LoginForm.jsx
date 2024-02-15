@@ -6,11 +6,12 @@ import LinkWeb from "../../../components/ui/LinkWeb";
 import { useAuth } from "../contexts/AuthContext";
 import validateLogin from "../validations/validate-login";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 function LoginForm() {
   const [input, setInput] = useState({ usernameOrEmail: "", password: "" });
   const [errors, setErrors] = useState({});
-  const { login ,test } = useAuth();
+  const { login, test } = useAuth();
 
   const navigate = useNavigate();
 
@@ -27,11 +28,12 @@ function LoginForm() {
     const { usernameOrEmail, password } = input;
     try {
       const res = await login(usernameOrEmail, password);
-      console.log(res.user.id)
-      setErrors({})
+      console.log(res.user.id);
+      setErrors({});
       navigate(`/user/${res.user.id}`);
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.error);
+      toast.error(err.response.data.error);
     }
   };
 
@@ -39,8 +41,7 @@ function LoginForm() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {  
-  }, [errors]);
+  useEffect(() => {}, [errors]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import validateRegister from "../validations/validate-register";
 import LinkWeb from "../../../components/ui/LinkWeb";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ function RegisterForm() {
       navigate(`/user/${res.user.id}`); 
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.error);
     }
   };
   return (
