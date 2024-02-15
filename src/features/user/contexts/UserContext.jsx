@@ -6,7 +6,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const upDateUserById = async (id, data) => {
+  const updateUserById = async (id, data) => {
     const response = await UserApi.upDateUserById(id, data);
     return response.data;
   };
@@ -19,10 +19,15 @@ export const UserProvider = ({ children }) => {
       value={{
         user,
         setUser,
-        upDateUserById,
+        updateUserById,
+        test,
       }}
     >
       {children}
     </UserContext.Provider>
   );
+};
+
+export const useUser = () => {
+  return useContext(UserContext);
 };
