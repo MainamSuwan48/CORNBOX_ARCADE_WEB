@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 import ProfileMenuLink from "../../features/user/components/ProfileMenuLink";
 
@@ -30,22 +30,24 @@ function ProfileMenu() {
     fetchUser();
   }, []);
 
-
-
-
-
   return (
-    <div className="flex flex-col px-4 w-60 justify-between h-with_header mt-20">
+    <div className="shrink-0 flex flex-col px-4 w-60 justify-between h-with_header mt-20">
       <div>
         <p
           onClick={test}
-          className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary     "
+          className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary shrink-0"
         >
           Hi, {user.username}
         </p>
-        <ProfileMenuLink>Order</ProfileMenuLink>
-        <ProfileMenuLink>Profile</ProfileMenuLink>
-        <ProfileMenuLink>Addresses</ProfileMenuLink>
+        <Link to={`/user/${user.id}/Order`}>
+          <ProfileMenuLink>Order</ProfileMenuLink>
+        </Link>
+        <Link to={`/user/${user.id}`}>
+          <ProfileMenuLink>Profile</ProfileMenuLink>
+        </Link>
+        <Link to={`/user/${user.id}/address`}>
+          <ProfileMenuLink>Addresses</ProfileMenuLink>
+        </Link>
       </div>
       <button
         onClick={handleLogout}
