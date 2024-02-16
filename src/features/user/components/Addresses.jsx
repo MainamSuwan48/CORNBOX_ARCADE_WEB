@@ -3,6 +3,7 @@ import { EditIcon, EditUserIcon } from "../../../components/icons";
 import { useUser } from "../contexts/UserContext";
 import { useParams } from "react-router-dom";
 import AddressSingular from "./AddressSingular";
+import AddressCreator from "./AddressCreator";
 
 function Addresses() {
   const [frontAddress, setFrontAddress] = useState({});
@@ -15,10 +16,15 @@ function Addresses() {
     console.log(param);
     try {
       const response = await getAddressesByUserId(param.userId);
+      console.log(response);
       setFrontAddress(response);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const onClose = () => {
+    setIsCreating(false);
   };
 
   useEffect(() => {
@@ -46,7 +52,9 @@ function Addresses() {
       </div>
 
       <div className="flex gap-2 flex-wrap">
-        {isCreating ? "edit form" : null}
+        {isCreating ? (
+          <AddressCreator onClose={onClose} watch={watch} setWatch={setWatch} />
+        ) : null}
         {frontAddress && frontAddress.length > 0 ? (
           frontAddress
             .sort((a, b) => b.id - a.id)

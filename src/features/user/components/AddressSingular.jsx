@@ -2,16 +2,28 @@ import { useState } from "react";
 import { EditIcon } from "../../../components/icons";
 import UserInput from "./UserInput";
 import AddressEditor from "./AddressEditor";
+import { useUser } from "../contexts/UserContext";
 
-function AddressSingular({ address, onDelete ,setWatch,watch}) {
+function AddressSingular({ address, setWatch, watch }) {
   const [isEdit, setIsEdit] = useState();
+  const { deleteAddressById } = useUser();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
-  const [thisAddress, setThisAddress] = useState(address);
+
+  const handleDelete = async () => {
+    try {
+      console.log(id)
+      const response = await deleteAddressById(id);
+      console.log(response);
+      setWatch(!watch);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="relative bg-transparent border-2 rounded min-w-80 scroll-mt-4 p-5 min-h-60">
       <div
-        onClick={onDelete}
+        onClick={handleDelete}  
         className="transition-all absolute -right-2 -top-2 flex justify-center items-center h-8 w-8 bg-red-600 text-neutral rounded-full active:scale-50 hover:scale-125"
       >
         X
@@ -34,11 +46,12 @@ function AddressSingular({ address, onDelete ,setWatch,watch}) {
         </div>
       </div>
       {isEdit ? (
-        <AddressEditor address={address} setIsEdit={setIsEdit}
-        setWatch={setWatch}
-        watch={watch}
-
-         />
+        <AddressEditor
+          address={address}
+          setIsEdit={setIsEdit}
+          setWatch={setWatch}
+          watch={watch}
+        />
       ) : (
         <div className="flex flex-col px-2">
           <p className="text-neutral text-lg">Line 1: {addressLine1}</p>

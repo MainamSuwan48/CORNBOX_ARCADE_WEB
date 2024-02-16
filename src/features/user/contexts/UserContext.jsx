@@ -17,8 +17,8 @@ export const UserProvider = ({ children }) => {
     return response.data;
   };
 
-  const createAddress = async (data) => {
-    const response = await UserApi.createAddress(data);
+  const createAddressByUserId = async (id, data) => {
+    const response = await UserApi.createAddressByUserId(id, data);
     return response.data;
   };
 
@@ -50,10 +50,12 @@ export const UserProvider = ({ children }) => {
         setUser,
         updateUserById,
         test,
+        createAddressByUserId,
         getAddressesByUserId,
         addresses,
         setAddresses,
         updateAddressById,
+        deleteAddressById,
       }}
     >
       {children}
