@@ -1,23 +1,30 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { EditIcon, EditUserIcon } from "../../../components/icons";
+import { useUser } from "../contexts/UserContext";
+import { useParams } from "react-router-dom";
+import AddressSingular from "./AddressSingular";
 
 function Addresses() {
+  const [frontAddress, setFrontAddress] = useState({});
+  const { getAddressesByUserId ,addresses } = useUser();
+  const param = useParams();
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      console.log(param);
+      try {
+        const response = await getAddressesByUserId(param.userId);
+        console.log(response);
+        
+        setFrontAddress(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAddresses();
+  }, []);
   return (
-    <div className="relative bg-neutral rounded min-w-80 scroll-mt-4 p-5">
-    <div className="absolute -right-2 -top-2 flex justify-center items-center h-8 w-8 bg-red-600 text-neutral rounded-full active:scale-90">X</div>
-      <div className="flex justify-between border-b-2 mx-2 border-accent py-2">
-        <p className="text-2xl font-bold text-primary drop-shadow-sm ">
-          Adresses 1
-        </p>
-        <EditIcon size={"2x"} />
-      </div>
-      <div className="flex flex-col px-2">
-        <p className="text-base-300 text-lg">This is Address line 1</p>
-        <p className="text-base-300 text-lg">This is Address line 2</p>
-        <p className="text-base-300 text-lg">This is City</p>
-        <p className="text-base-300 text-lg">This is Postalcode</p>        
-      </div>
-    </div>
+   <AddressSingular address={frontAddress[2]} />
   );
 }
 
