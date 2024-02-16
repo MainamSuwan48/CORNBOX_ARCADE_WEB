@@ -13,8 +13,7 @@ function Addresses() {
     const fetchAddresses = async () => {
       console.log(param);
       try {
-        const response = await getAddressesByUserId(param.userId);
-        console.log(response);
+        const response = await getAddressesByUserId(param.userId);        
         setFrontAddress(response);
       } catch (err) {
         console.log(err);
