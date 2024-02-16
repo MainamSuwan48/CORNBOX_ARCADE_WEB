@@ -13,9 +13,16 @@ export const UserProvider = ({ children }) => {
   };
 
   const getAddressesByUserId = async (id) => {
-    const response = await UserApi.getAddressesByUserId(id);    
+    const response = await UserApi.getAddressesByUserId(id);
     return response.data;
   };
+
+  useEffect(() => {
+    const getAddressData = async () => {
+      const response = await getAddressesByUserId(user.id);
+      setAddresses(response);
+    };
+  }, []);
 
   const test = () => {
     console.log("I'm from user context");

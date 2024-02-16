@@ -6,7 +6,7 @@ import AddressSingular from "./AddressSingular";
 
 function Addresses() {
   const [frontAddress, setFrontAddress] = useState({});
-  const { getAddressesByUserId ,addresses } = useUser();
+  const { getAddressesByUserId, addresses } = useUser();
   const param = useParams();
 
   useEffect(() => {
@@ -15,16 +15,23 @@ function Addresses() {
       try {
         const response = await getAddressesByUserId(param.userId);
         console.log(response);
-        
         setFrontAddress(response);
       } catch (err) {
         console.log(err);
       }
     };
     fetchAddresses();
-  }, []);
+  }, [addresses]);
   return (
-   <AddressSingular address={frontAddress[2]} />
+    <div className="flex gap-2 flex-wrap">
+      {frontAddress && frontAddress.length > 0 ? (
+        frontAddress.map((address, index) => (
+          <AddressSingular key={index} address={address} />
+        ))
+      ) : (
+        <p>loading...</p>
+      )}
+    </div>
   );
 }
 
