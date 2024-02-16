@@ -8,24 +8,31 @@ function Addresses() {
   const [frontAddress, setFrontAddress] = useState({});
   const { getAddressesByUserId, addresses } = useUser();
   const param = useParams();
+  const [watch, setWatch] = useState(false);
+
+  const fetchAddresses = async () => {
+    console.log(param);
+    try {
+      const response = await getAddressesByUserId(param.userId);
+      setFrontAddress(response);      
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    const fetchAddresses = async () => {
-      console.log(param);
-      try {
-        const response = await getAddressesByUserId(param.userId);        
-        setFrontAddress(response);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchAddresses();
-  }, [addresses]);
+  }, [addresses, watch]);
   return (
     <div className="flex gap-2 flex-wrap">
       {frontAddress && frontAddress.length > 0 ? (
         frontAddress.map((address, index) => (
-          <AddressSingular key={index} address={address} />
+          <AddressSingular
+            key={index}
+            address={address}
+            setWatch={setWatch}
+            watch={watch}
+          />
         ))
       ) : (
         <p>loading...</p>

@@ -3,18 +3,22 @@ import { EditIcon } from "../../../components/icons";
 import UserInput from "./UserInput";
 import AddressEditor from "./AddressEditor";
 
-function AddressSingular({ address }) {
+function AddressSingular({ address, onDelete ,setWatch,watch}) {
   const [isEdit, setIsEdit] = useState();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
+  const [thisAddress, setThisAddress] = useState(address);
 
   return (
     <div className="relative bg-transparent border-2 rounded min-w-80 scroll-mt-4 p-5 min-h-60">
-      <div className="transition-all absolute -right-2 -top-2 flex justify-center items-center h-8 w-8 bg-red-600 text-neutral rounded-full active:scale-50 hover:scale-125">
+      <div
+        onClick={onDelete}
+        className="transition-all absolute -right-2 -top-2 flex justify-center items-center h-8 w-8 bg-red-600 text-neutral rounded-full active:scale-50 hover:scale-125"
+      >
         X
       </div>
       <div className="flex justify-between border-b-2 mx-2 border-accent py-2">
         <p className="text-2xl font-bold text-primary drop-shadow-sm ">
-          Adresses {id}
+          Adresses ID :{id}
         </p>
         <div onClick={() => setIsEdit(!isEdit)} className="cursor-pointer">
           {isEdit ? (
@@ -30,7 +34,11 @@ function AddressSingular({ address }) {
         </div>
       </div>
       {isEdit ? (
-        <AddressEditor address={address} setIsEdit={setIsEdit} />
+        <AddressEditor address={address} setIsEdit={setIsEdit}
+        setWatch={setWatch}
+        watch={watch}
+
+         />
       ) : (
         <div className="flex flex-col px-2">
           <p className="text-neutral text-lg">Line 1: {addressLine1}</p>

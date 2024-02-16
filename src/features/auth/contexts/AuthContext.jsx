@@ -8,12 +8,7 @@ import {
 
 export const AuthContext = createContext();
 
-// {
-//   "usernameOrEmail": "test5@test.com",
-//   "password": "123456Aa!"
-// }
 
-// Create the AuthContext
 
 export const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);

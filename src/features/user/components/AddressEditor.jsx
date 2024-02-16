@@ -4,7 +4,7 @@ import { useUser } from "../contexts/UserContext";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
 
-function AddressEditor({ address, setIsEdit }) {
+function AddressEditor({ address, setIsEdit ,setWatch,watch}) {
   const param = useParams();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
   const { updateAddressById } = useUser();
@@ -22,11 +22,13 @@ function AddressEditor({ address, setIsEdit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {       
-      const response = await updateAddressById(param.userId,input);
+    try {
+      const response = await updateAddressById(param.userId, input);
       console.log(response);
       setIsEdit(false);
       toast.success("Address Updated");
+      setWatch(!watch);
+
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.error);
@@ -34,9 +36,6 @@ function AddressEditor({ address, setIsEdit }) {
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col px-2">
-      <p className="text-2xl font-bold text-primary drop-shadow-sm ">
-        Adresses {id}
-      </p>
       <UserInput
         name="addressLine1"
         value={input.addressLine1}
