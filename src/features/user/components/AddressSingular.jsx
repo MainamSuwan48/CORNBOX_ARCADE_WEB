@@ -3,27 +3,34 @@ import { EditIcon } from "../../../components/icons";
 import UserInput from "./UserInput";
 import AddressEditor from "./AddressEditor";
 import { useUser } from "../contexts/UserContext";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 function AddressSingular({ address, setWatch, watch }) {
+  const param = useParams();
   const [isEdit, setIsEdit] = useState();
   const { deleteAddressById } = useUser();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
 
   const handleDelete = async () => {
     try {
-      console.log(id)
-      const response = await deleteAddressById(id);
+      console.log(id);
+      console.log(param.id);
+      const response = await deleteAddressById(param.userId, id);
       console.log(response);
       setWatch(!watch);
+      toast.success("Address Deleted");
+      
     } catch (err) {
       console.log(err);
+      toast.error("Address Not Deleted");
     }
   };
 
   return (
     <div className="relative bg-transparent border-2 rounded min-w-80 scroll-mt-4 p-5 min-h-60">
       <div
-        onClick={handleDelete}  
+        onClick={handleDelete}
         className="transition-all absolute -right-2 -top-2 flex justify-center items-center h-8 w-8 bg-red-600 text-neutral rounded-full active:scale-50 hover:scale-125"
       >
         X

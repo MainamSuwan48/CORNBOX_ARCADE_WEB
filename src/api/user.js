@@ -6,4 +6,5 @@ export const createAddressByUserId = (id, data) =>
 export const getAddressesByUserId = (id) => axios.get(`/user/${id}/address`);
 export const updateAddressById = (id, data) =>
   axios.patch(`/user/${id}/address`, data);
-export const deleteAddressById = (data) => axios.delete(`/user/${id}/address`,data);
+export const deleteAddressById = (id, data) =>
+  axios.delete(`/user/${id}/address`, { data });

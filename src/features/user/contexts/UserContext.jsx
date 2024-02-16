@@ -28,9 +28,10 @@ export const UserProvider = ({ children }) => {
     return response.data;
   };
 
-  const deleteAddressById = async (id) => {
-    const response = await UserApi.deleteAddressById(id);
-    return response.data;
+  const deleteAddressById = async (userId, id) => {
+    const idData = { id: id };
+    const response = await UserApi.deleteAddressById(userId, idData);
+    return response;
   };
 
   useEffect(() => {
