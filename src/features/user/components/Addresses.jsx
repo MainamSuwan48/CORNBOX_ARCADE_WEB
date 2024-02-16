@@ -48,14 +48,16 @@ function Addresses() {
       <div className="flex gap-2 flex-wrap">
         {isCreating ? "edit form" : null}
         {frontAddress && frontAddress.length > 0 ? (
-          frontAddress.map((address, index) => (
-            <AddressSingular
-              key={index}
-              address={address}
-              setWatch={setWatch}
-              watch={watch}
-            />
-          ))
+          frontAddress
+            .sort((a, b) => b.id - a.id)
+            .map((address, index) => (
+              <AddressSingular
+                key={index}
+                address={address}
+                setWatch={setWatch}
+                watch={watch}
+              />
+            ))
         ) : (
           <p>loading...</p>
         )}
