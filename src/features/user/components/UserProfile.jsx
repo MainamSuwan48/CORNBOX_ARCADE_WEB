@@ -54,7 +54,13 @@ function UserProfile() {
           </div>
         </div>
       </div>
-      {edit && <UserEditor />}
+      {edit && (
+        <UserEditor
+          setEdit={setEdit}
+          fullName={fullName}
+          mobilePhone={mobilePhone}
+        />
+      )}
     </>
   );
 }

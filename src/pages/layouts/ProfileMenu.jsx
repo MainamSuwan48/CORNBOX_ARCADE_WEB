@@ -7,7 +7,7 @@ import {toast} from 'sonner'
 function ProfileMenu() {
   const navigate = useNavigate();
   const [user, setUser] = useState({}); // [1
-  const { logout, fetchMe } = useAuth();
+  const { logout, fetchMe ,authUser } = useAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -15,22 +15,21 @@ function ProfileMenu() {
   };
   const param = useParams();
   const test = () => {
-    toast.success('test')
+    toast.success(`Hi, ${user.username} Clicking this is fun?!`);
     console.log(user, param);
   };
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetchMe();
-        console.log(response);
+        const response = await fetchMe();     
         setUser(response.user);
       } catch (err) {
         console.log(err);
       }
     };
     fetchUser();
-  }, []);
+  }, [authUser]);
 
   return (
     <div className="shrink-0 flex flex-col px-4 w-60 justify-between h-with_header mt-20">
