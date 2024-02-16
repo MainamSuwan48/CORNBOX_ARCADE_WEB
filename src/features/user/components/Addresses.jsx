@@ -31,8 +31,9 @@ function Addresses() {
     fetchAddresses();
   }, [addresses, watch]);
   return (
-    <>
-      <div className="flex justify-between gap-10">
+    <div className="flex flex-col gap-4">
+    
+      <div className="flex justify-start gap-10">
         <div className="text-3xl">Create Address</div>
         {isCreating ? (
           <button
@@ -51,7 +52,7 @@ function Addresses() {
         )}
       </div>
 
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap justify-start">
         {isCreating ? (
           <AddressCreator onClose={onClose} watch={watch} setWatch={setWatch} />
         ) : null}
@@ -70,7 +71,7 @@ function Addresses() {
           <p>loading...</p>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

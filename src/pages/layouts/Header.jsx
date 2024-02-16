@@ -25,7 +25,7 @@ function Header() {
         <Link to="/">
           <LinkWeb>HOME</LinkWeb>
         </Link>
-        <Link to="/product/1">
+        <Link to="/product/">
           <LinkWeb>PRODUCTS</LinkWeb>
         </Link>
         <div onClick={navigateToUser}>
