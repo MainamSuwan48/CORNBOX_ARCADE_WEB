@@ -17,11 +17,19 @@ export const UserProvider = ({ children }) => {
     return response.data;
   };
 
-
+  const createAddress = async (data) => {
+    const response = await UserApi.createAddress(data);
+    return response.data;
+  };
 
   const updateAddressById = async (id, data) => {
     console.log(data, "************HEEEEEEEEEEEE");
-    const response = await UserApi.updateAddressById(id, data);  
+    const response = await UserApi.updateAddressById(id, data);
+    return response.data;
+  };
+
+  const deleteAddressById = async (id) => {
+    const response = await UserApi.deleteAddressById(id);
     return response.data;
   };
 
