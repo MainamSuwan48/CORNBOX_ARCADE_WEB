@@ -44,8 +44,9 @@ function ProductPage() {
     >
       {frontProducts && frontProducts.length > 0
         ? frontProducts.map((product) => (
-            <Link to={`/product/${product.id}`}>
+            <Link key={product.id} to={`/product/${product.id}`}>
               <ProductPreview
+                key={product.id}
                 img={product.mainImage}
                 name={product.name}
                 price={product.price}

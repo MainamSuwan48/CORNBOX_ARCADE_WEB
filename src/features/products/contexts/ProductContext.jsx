@@ -14,6 +14,11 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
+  const getProductById = async (id) => {
+    const response = await productApi.getProductById(id);
+    return response;
+  };
+
   useEffect(() => {
     const getProductsData = async () => {
       try {
@@ -33,6 +38,7 @@ function ProductContextProvider({ children }) {
         products,
         setProducts,
         fetchProducts,
+        getProductById,
       }}
     >
       {children}
