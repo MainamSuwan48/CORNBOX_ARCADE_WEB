@@ -9,12 +9,14 @@ function HomePage() {
       className="flex h-screen items-center justify-center w-full"
       style={{
         backgroundImage: `url(${EVO})`,
-        backgroundSize: "fixed",
+        backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className=" select-none flex h-with_header items-center justify-center w-full backdrop-blur-sm">
-        <LogoCornBox size="big" />        
+        <LogoCornBox size="big" />
       </div>
     </div>
   );

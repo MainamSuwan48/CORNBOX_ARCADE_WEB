@@ -23,19 +23,25 @@ function Header() {
   const [user, setUser] = useState({
     username: "Guest",
   });
+  const [cart, setCart] = useState([]);
 
   const openCartHandler = async () => {
-    try {
-      const response = await fetchMe();
-      if (!response) {
-        navigate("/login");
-        return;
-      }
-      console.log(response);
-      setUser(response.user);
+    if (openCart) {
       setOpenCart(!openCart);
-    } catch (err) {
-      console.log(err);
+      return;
+    } else {
+      try {
+        const response = await fetchMe();
+        if (!response) {
+          navigate("/login");
+          return;
+        }
+        console.log(response);
+        setUser(response.user);
+        setOpenCart(!openCart);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -58,7 +64,9 @@ function Header() {
           </div>
         </div>
       </div>
-      {openCart ? <ShoppingCart userData={user} /> : null}
+      {openCart ? <ShoppingCart 
+      cartData={cart}
+      userData={user} /> : null}
     </>
   );
 }
