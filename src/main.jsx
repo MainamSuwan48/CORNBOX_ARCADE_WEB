@@ -5,11 +5,14 @@ import "./index.css";
 import Router from "./routes/routes.jsx";
 import Container from "./pages/layouts/Container.jsx";
 import { AuthProvider } from "./features/auth/contexts/AuthContext.jsx";
+import { ProductContextProvider } from "./features/products/contexts/ProductContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <ProductContextProvider>
+        <App />
+      </ProductContextProvider>
     </AuthProvider>
   </React.StrictMode>
 );

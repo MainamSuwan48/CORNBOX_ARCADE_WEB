@@ -5,14 +5,15 @@ import ProductCounter from "./ProductCounter";
 import ActionButton from "../../../components/ui/ActionButton";
 
 function ProductDetail({ productData }) {
-  const { id, name, price, description } = productData;
+  const { id, name, price, description, status, stock } = productData;
 
   return (
     <div className="my-8 flex flex-col min-h-screen">
       <Title>{name}</Title>
       <div className="mt-8">
-        <p className="text-2xl font-bold">{price}</p>
-        <p className="text-lg">In stock</p>
+        <p className="text-2xl font-bold">{price} THB</p>
+        <p className="text-lg text-primary">{status}</p>
+        <p className="text-lg">{stock} in stock</p>
       </div>
       <div className="mt-8">
         <p className="text-lg max-w-screen-sm pr-12">{description}</p>
