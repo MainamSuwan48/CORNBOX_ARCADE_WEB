@@ -7,6 +7,7 @@ import validateRegister from "../validations/validate-register";
 import LinkWeb from "../../../components/ui/LinkWeb";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useProduct } from "../../products/contexts/ProductContext";
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function RegisterForm() {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
-
+  const { createCart } = useProduct();
   const { register } = useAuth();
 
   const handleInputChange = (e) => {
@@ -35,8 +36,12 @@ function RegisterForm() {
     try {
       const res = await register(email, username, password, confirmPassword);
       console.log(res.user.id);
+      const cartData = {
+        userId: res.user.id,
+      };
+      await createCart(cartData);
       setErrors({});
-      navigate(`/user/${res.user.id}`); 
+      navigate(`/user/${res.user.id}`);
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.error);

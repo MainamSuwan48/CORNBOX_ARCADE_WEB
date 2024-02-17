@@ -5,6 +5,7 @@ import LinkWeb from "../../components/ui/LinkWeb";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 import ShoppingCart from "../../features/products/components/ShoppingCart";
+import { useProduct } from "../../features/products/contexts/ProductContext";
 
 function Header() {
   const { authUser, fetchMe } = useAuth();
@@ -64,9 +65,7 @@ function Header() {
           </div>
         </div>
       </div>
-      {openCart ? <ShoppingCart 
-      cartData={cart}
-      userData={user} /> : null}
+      {openCart ? <ShoppingCart cartData={cart} userData={user} /> : null}
     </>
   );
 }
