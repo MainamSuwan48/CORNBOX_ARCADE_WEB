@@ -5,7 +5,7 @@ import { TrashIcon } from "../../../components/icons";
 
 function CartItem() {
   return (
-    <div className="flex justify-between items-center mt-4 bg-base-100 p-2 min-w-full">
+    <div className="flex justify-between items-center mt-4 p-2 min-w-full">
       <div className="max-w-40 flex-1">
         <img src={stickPic}></img>
       </div>

@@ -6,7 +6,7 @@ import {toast} from 'sonner'
 
 function ProfileMenu() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({}); // [1
+  const [user, setUser] = useState({}); // 
   const { logout, fetchMe ,authUser } = useAuth();
 
   const handleLogout = async () => {
