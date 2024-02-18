@@ -6,6 +6,7 @@ import ActionButton from "../../../components/ui/ActionButton";
 import { useProduct } from "../contexts/ProductContext";
 import { useAuth } from "../../auth/contexts/AuthContext";
 import { useState } from "react";
+import ColorDisplay from "./ColorDisplay";
 
 function ProductDetail({ productData }) {
   const { id, name, price, description, status } = productData;
@@ -16,6 +17,7 @@ function ProductDetail({ productData }) {
     attribute: "CLEAR",
     class: "border-white",
   });
+  const [quantity, setQuantity] = useState(1);
   const test = {
     cartId: 1,
     productItemId: 1,
@@ -30,13 +32,14 @@ function ProductDetail({ productData }) {
     const data = {
       cartId: cartId,
       productItemId: id,
-      quantity: 1,
-      attribute: "GREEN",
+      quantity: quantity,
+      attribute: color.attribute,
     };
+    console.log(data);
     const response = await addItemToCart(data);
+    setQuantity(1);
     console.log(response);
   };
- 
 
   return (
     <div className="my-8 flex flex-col min-h-screen">
@@ -50,9 +53,7 @@ function ProductDetail({ productData }) {
       </div>
       <div className="flex items-center gap-2 mt-4">
         <div className={`text-xl text-primary font-bold mr-4`}>Buttons</div>
-        <div className={`border-4 p-1 -ml-4 ${color.class} `}>
-          {color.attribute}
-        </div>
+        <ColorDisplay color={color} />
         <ColorPellet
           color="clear"
           onClick={() =>
@@ -103,7 +104,11 @@ function ProductDetail({ productData }) {
         />
       </div>
       <div className="flex items-baseline gap-8 align-bottom">
-        <ProductCounter />
+        <ProductCounter
+          type="normal"
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
         <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
         <ActionButton>BUYNOW</ActionButton>
       </div>

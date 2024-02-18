@@ -4,12 +4,12 @@ import ActionButton from "../../../components/ui/ActionButton";
 import { useState, useEffect } from "react";
 import { useProduct } from "../contexts/ProductContext";
 
-
 function ShoppingCart({ userData }) {
   const [productsData, setProductsData] = useState([]);
   const { fetchProducts, getCartByUserId, cart } = useProduct();
   const { username, id } = userData;
   const [cartData, setCartData] = useState([]);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     console.log(id);
@@ -32,15 +32,17 @@ function ShoppingCart({ userData }) {
       <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
         {username}'s Shopping Cart
       </div>
-      {cartData.map((cartItem) => {
-        return (
-          <CartItem
-            key={cartItem.id}
-            cartItemData={cartItem}
-            productsData={productsData}
-          />
-        );
-      })}
+      {cartData
+        .sort((a, b) => b.id - a.id)
+        .map((cartItem) => {
+          return (
+            <CartItem
+              key={cartItem.id}
+              cartItemData={cartItem}
+              productsData={productsData}
+            />
+          );
+        })}
 
       <div className="flex justify-between items-center mt-4">
         <div className="text-primary font-bold">Total</div>

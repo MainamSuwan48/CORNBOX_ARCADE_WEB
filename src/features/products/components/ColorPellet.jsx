@@ -11,9 +11,10 @@ const colorClasses = {
   yellow: "bg-yellow-400"
 }
 
-function ColorPellet({ color }) {
+function ColorPellet({ color, onClick}) {
   return (
     <div
+      onClick={onClick}
       className={`transition-transform w-5 h-5 ${colorClasses[color]} my-2 rounded-full border-2 hover:border-black hover:scale-110 active:scale-150`}
     ></div>
   );
