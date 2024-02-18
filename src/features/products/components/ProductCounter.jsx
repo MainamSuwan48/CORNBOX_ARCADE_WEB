@@ -29,25 +29,24 @@ function ProductCounter({
 
   const decreaseCount = () => {
     if (count > 1) {
+      upDateQuantity(count - 1);
       setCount(count - 1);
-      setQuantity(count - 1);
 
       if (type === "cart") {
         return;
       }
-
-      upDateQuantity(count - 1);
+      setQuantity(count - 1);
     }
   };
 
   const increaseCount = () => {
+    upDateQuantity(count + 1);
     setCount(count + 1);
-    setQuantity(count + 1);
+
     if (type === "cart") {
       return;
     }
-
-    upDateQuantity(count + 1);
+    setQuantity(count + 1);
   };
 
   return (
