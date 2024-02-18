@@ -28,7 +28,7 @@ function ShoppingCart({ userData }) {
     getProductsData();
   }, [cart]);
   return (
-    <div className="absolute top-0 right-4 w-screen-sm flex-1 p-8 rounded-lg mt-20 z-50 border-2 border-black bg-opacity-95 bg-base-100 overflow-y-scroll overflow-x-hidden max-h-96">
+    <div className="absolute top-0 right-4 w-screen-sm flex-1 p-8 rounded-lg mt-20 z-50 border-2 border-black backdrop-blur-lg overflow-y-scroll overflow-x-hidden max-h-96">
       <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
         {username}'s Shopping Cart
       </div>
@@ -45,8 +45,8 @@ function ShoppingCart({ userData }) {
         })}
 
       <div className="flex justify-between items-center mt-4">
-        <div className="text-primary font-bold">Total</div>
-        <div className="text-primary font-bold">
+        <div className="text-black font-bold">Total</div>
+        <div className="text-black font-bold">
           {cartData.reduce((acc, cartItem) => {
             const product = productsData.find(
               (product) => product.id === cartItem.productItemId
