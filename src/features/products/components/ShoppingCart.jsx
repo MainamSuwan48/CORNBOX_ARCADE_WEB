@@ -9,7 +9,6 @@ function ShoppingCart({ userData }) {
   const { fetchProducts, getCartByUserId } = useProduct();
   const { username, id } = userData;
   const [cartData, setCartData] = useState([]);
- 
 
   useEffect(() => {
     console.log(id);
@@ -28,14 +27,14 @@ function ShoppingCart({ userData }) {
     getProductsData();
   }, []);
   return (
-    <div className="absolute top-0 right-0 w-screen-sm flex-1 p-8 rounded-lg mt-20 z-50 border-2 border-black bg-opacity-95 bg-base-100">
+    <div className="absolute top-0 right-4 w-screen-sm flex-1 p-8 rounded-lg mt-20 z-50 border-2 border-black bg-opacity-95 bg-base-100 overflow-y-scroll overflow-x-hidden max-h-96">
       <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
         {username}'s Shopping Cart
       </div>
-      <CartItem 
-        cartItemData={cartData[0]} 
-        productsData={productsData}
-      />
+      {cartData.map((cartItem) => {
+        return <CartItem cartItemData={cartItem} productsData={productsData} />;
+      })}
+
       <div className="flex justify-between items-center mt-4">
         <div className="text-primary font-bold">Total</div>
         <div className="text-primary font-bold">16800 THB</div>
