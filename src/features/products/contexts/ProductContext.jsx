@@ -41,7 +41,7 @@ function ProductContextProvider({ children }) {
   };
 
   const addItemToCart = async (data) => {
-    const response = await productApi.addItemToCart(data);
+    const response = await productApi.addItemToCart(data);    
     return response;
   };
 

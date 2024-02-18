@@ -48,6 +48,16 @@ function ShoppingCart({ userData }) {
             const product = productsData.find(
               (product) => product.id === cartItem.productItemId
             );
+            return acc + cartItem.quantity;
+          }, 0)}{" "}
+          Items
+        </div>
+
+        <div className="text-black font-bold">
+          {cartData.reduce((acc, cartItem) => {
+            const product = productsData.find(
+              (product) => product.id === cartItem.productItemId
+            );
             return acc + product.price * cartItem.quantity;
           }, 0)}{" "}
           THB
