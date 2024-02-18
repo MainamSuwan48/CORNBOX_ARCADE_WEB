@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useProduct } from "../contexts/ProductContext";
 
 const CounterTypeClasses = {
   normal: "",
@@ -7,14 +8,24 @@ const CounterTypeClasses = {
 
 function ProductCounter({ type = "normal", quantity = 1, cartItemId }) {
   const [count, setCount] = useState(quantity);
+  const { updateCartItem } = useProduct();
+  const upDateQuantity = async (quantity) => {
+    try {
+      await updateCartItem(cartItemId, quantity); 
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const decreaseCount = () => {
     if (count > 1) {
+      upDateQuantity(count - 1);
       setCount(count - 1);
     }
   };
 
-  const increaseCount = () => {
+  const increaseCount = () => { 
+    upDateQuantity(count + 1);  
     setCount(count + 1);
   };
 

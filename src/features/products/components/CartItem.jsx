@@ -38,7 +38,7 @@ function CartItem({ cartItemData, productsData }) {
       <div className="flex items-center justify-center text-xl text-primary">
         ID:{id}
       </div>
-      <ProductCounter quantity={quantity} type="cart" />
+      <ProductCounter cartItemId={id} quantity={quantity} type="cart" />
       <div className="text-neutral font-bold pr-4">{price}</div>
       <>
         <div
