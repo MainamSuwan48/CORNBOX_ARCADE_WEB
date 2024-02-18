@@ -29,10 +29,10 @@ function ProductCounter({
 
   const decreaseCount = () => {
     if (count > 1) {
-      upDateQuantity(count - 1);
       setCount(count - 1);
 
-      if (type === "cart") {
+      if (type == "cart") {
+        upDateQuantity(count - 1);
         return;
       }
       setQuantity(count - 1);
@@ -40,10 +40,10 @@ function ProductCounter({
   };
 
   const increaseCount = () => {
-    upDateQuantity(count + 1);
     setCount(count + 1);
 
-    if (type === "cart") {
+    if (type == "cart") {
+      upDateQuantity(count + 1);
       return;
     }
     setQuantity(count + 1);
