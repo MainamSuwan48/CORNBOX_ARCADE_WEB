@@ -7,6 +7,7 @@ import { useProduct } from "../contexts/ProductContext";
 import { useAuth } from "../../auth/contexts/AuthContext";
 import { useState } from "react";
 import ColorDisplay from "./ColorDisplay";
+import {toast} from "sonner";
 
 function ProductDetail({ productData }) {
   const { id, name, price, description, status } = productData;
@@ -26,7 +27,7 @@ function ProductDetail({ productData }) {
   };
 
   const addToCart = async () => {
-    const res = await fetchMe();
+  try{  const res = await fetchMe();
     const cartData = await getCartByUserId(res.user.id);
     const cartId = cartData.data.id;
     const data = {
@@ -39,6 +40,12 @@ function ProductDetail({ productData }) {
     const response = await addItemToCart(data);
     setQuantity(1);
     console.log(response);
+    toast.success(`You have added ${quantity} ${name} to your cart`);
+  }
+    catch (error){
+      console.log(error);
+      toast.error("Failed to add item to cart");
+    }
   };
 
   return (

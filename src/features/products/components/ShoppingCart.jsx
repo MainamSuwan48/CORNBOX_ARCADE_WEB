@@ -12,13 +12,10 @@ function ShoppingCart({ userData }) {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    console.log(id);
     const getProductsData = async () => {
       try {
         const products = await fetchProducts();
-        console.log(products.data);
         const cart = await getCartByUserId(id);
-        console.log(cart.data.shoppingCartItem);
         setProductsData(products.data);
         setCartData(cart.data.shoppingCartItem);
       } catch (error) {

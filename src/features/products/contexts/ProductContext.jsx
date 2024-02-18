@@ -8,6 +8,7 @@ const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [cartItemQuantity, setCartItemQuantity] = useState(0);
   // product handler
   const fetchProducts = async () => {
     const response = await productApi.getAllProducts();
@@ -29,6 +30,14 @@ function ProductContextProvider({ children }) {
   const getCartByUserId = async (id) => {
     const response = await productApi.getCartByUserId(id);
     return response;
+  };
+
+  const getCartItemQuantity = async (id) => {
+    const cart = await getCartByUserId(id);
+    const quantity = cart.data.shoppingCartItem.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0);
+    return quantity
   };
 
   const addItemToCart = async (data) => {
@@ -74,6 +83,7 @@ function ProductContextProvider({ children }) {
         addItemToCart,
         cart,
         setCart,
+        getCartItemQuantity,
       }}
     >
       {children}
