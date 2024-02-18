@@ -6,15 +6,17 @@ import { useProduct } from "../contexts/ProductContext";
 
 function ShoppingCart({ userData }, cartData) {
   const [productsData, setProductsData] = useState([]);
-  const { fetchProducts } = useProduct();
-  const { username } = userData;
+  const { fetchProducts, getCartByUserId } = useProduct();
+  const { username, id } = userData;
 
   useEffect(() => {
+    console.log(id);
     const getProductsData = async () => {
       try {
-        const response = await fetchProducts();
-        console.log(response.data);
-        // setProducts(response.data);
+        const products = await fetchProducts();
+        console.log(products.data);
+        const cart = await getCartByUserId(id);
+        console.log(cart.data);
       } catch (error) {
         console.log(error);
       }
