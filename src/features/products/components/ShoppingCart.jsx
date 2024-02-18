@@ -4,10 +4,12 @@ import ActionButton from "../../../components/ui/ActionButton";
 import { useState, useEffect } from "react";
 import { useProduct } from "../contexts/ProductContext";
 
-function ShoppingCart({ userData }, cartData) {
+function ShoppingCart({ userData }) {
   const [productsData, setProductsData] = useState([]);
   const { fetchProducts, getCartByUserId } = useProduct();
   const { username, id } = userData;
+  const [cartData, setCartData] = useState([]);
+ 
 
   useEffect(() => {
     console.log(id);
@@ -16,7 +18,9 @@ function ShoppingCart({ userData }, cartData) {
         const products = await fetchProducts();
         console.log(products.data);
         const cart = await getCartByUserId(id);
-        console.log(cart.data);
+        console.log(cart.data.shoppingCartItem);
+        setProductsData(products.data);
+        setCartData(cart.data.shoppingCartItem);
       } catch (error) {
         console.log(error);
       }
@@ -28,7 +32,10 @@ function ShoppingCart({ userData }, cartData) {
       <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
         {username}'s Shopping Cart
       </div>
-      <CartItem />
+      <CartItem 
+        cartItemData={cartData[0]} 
+        productsData={productsData}
+      />
       <div className="flex justify-between items-center mt-4">
         <div className="text-primary font-bold">Total</div>
         <div className="text-primary font-bold">16800 THB</div>
