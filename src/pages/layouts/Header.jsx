@@ -49,7 +49,9 @@ function Header() {
   return (
     <>
       <div className="fixed w-full top-0 z-50 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
-        <LogoCornbox />
+        <Link to="/">
+          <LogoCornbox />
+        </Link>
         <div className="flex gap-6">
           <Link to="/">
             <LinkWeb>HOME</LinkWeb>

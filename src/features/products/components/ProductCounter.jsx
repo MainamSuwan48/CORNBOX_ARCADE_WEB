@@ -5,7 +5,7 @@ const CounterTypeClasses = {
   cart: "scale-75",
 };
 
-function ProductCounter({ type = "normal", quantity = 1 }) {
+function ProductCounter({ type = "normal", quantity = 1, cartItemId }) {
   const [count, setCount] = useState(quantity);
 
   const decreaseCount = () => {
