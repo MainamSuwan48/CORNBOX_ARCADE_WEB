@@ -7,7 +7,7 @@ export default function App() {
       <Router />
       <Toaster
       closeButton
-      position="top-right"
+      position="top-left"
       richColors
        />
     </>

@@ -31,6 +31,11 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
+  const addItemToCart = async (data) => {
+    const response = await productApi.addItemToCart(data);
+    return response;
+  };
+
   const updateCartItem = async (id, quantity) => {
     const data = { quantity };
     const response = await productApi.updateCartItem(id, data);
@@ -38,7 +43,7 @@ function ProductContextProvider({ children }) {
   };
 
   const deleteCartItem = async (id) => {
-    const response = await productApi.deleteCartItem(id);    
+    const response = await productApi.deleteCartItem(id);
     return response;
   };
 
@@ -66,6 +71,7 @@ function ProductContextProvider({ children }) {
         getCartByUserId,
         updateCartItem,
         deleteCartItem,
+        addItemToCart,
         cart,
         setCart,
       }}

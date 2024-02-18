@@ -62,7 +62,7 @@ function Header() {
           <div onClick={navigateToUser}>
             <UserIcon size={"2x"} />
           </div>
-          <div onClick={openCartHandler}>
+          <div className="relative" onClick={openCartHandler}>
             <CartIcon size={"2x"} />
           </div>
         </div>
