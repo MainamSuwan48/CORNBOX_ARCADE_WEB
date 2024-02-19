@@ -6,7 +6,6 @@ import { useProduct } from "../contexts/ProductContext";
 function ShoppingCart({ userData , cartData, productsData}) {
   const { cart , stocks} = useProduct();
   const { username, id } = userData;
-  console.log(stocks,"stock")
 
 
   return (
@@ -22,7 +21,7 @@ function ShoppingCart({ userData , cartData, productsData}) {
               key={cartItem.id}
               cartItemData={cartItem}
               productsData={productsData}
-              stock={stocks}           
+              stocks={stocks}           
             />
           );
         })}

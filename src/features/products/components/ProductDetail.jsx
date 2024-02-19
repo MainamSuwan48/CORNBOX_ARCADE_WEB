@@ -10,7 +10,7 @@ import ColorDisplay from "./ColorDisplay";
 import { toast } from "sonner";
 
 function ProductDetail({ productData }) {
-  const { id, name, price, description, status } = productData;
+  const { id, name, price, description, status ,stock} = productData;
   const { fetchMe } = useAuth();
   const { addItemToCart, getCartByUserId, setCart } = useProduct();
   const [color, setColor] = useState({
@@ -117,6 +117,7 @@ function ProductDetail({ productData }) {
           type="normal"
           quantity={quantity}
           setQuantity={setQuantity}
+          stock={stock}
         />
         <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
         <ActionButton>BUYNOW</ActionButton>

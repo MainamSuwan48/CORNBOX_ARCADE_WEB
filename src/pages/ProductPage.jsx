@@ -33,6 +33,7 @@ function ProductPage() {
                 img={product.mainImage}
                 name={product.name}
                 price={product.price}
+                stock={product.stock}
               />
             </Link>
           ))

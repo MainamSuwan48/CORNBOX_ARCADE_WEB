@@ -31,7 +31,9 @@ function ProductCounter({ type = "normal", quantity = 1, setQuantity, stock }) {
   // For Cart Item
 
   return (
-    <div className={`flex items-center py-2 ${CounterTypeClasses[type]}`}>
+    <div
+      className={`relative flex items-center py-2 ${CounterTypeClasses[type]}`}
+    >
       <div
         className="flex justify-center items-baseline h-10 w-10 border-2 border-primary text-neutral text-2xl active:bg-primary select-none active:text-base-100"
         onClick={decreaseProductCount}
@@ -47,9 +49,18 @@ function ProductCounter({ type = "normal", quantity = 1, setQuantity, stock }) {
       >
         +
       </div>
-      <div>
-        <p className="text-neutral font-bold">Stock: {stock}</p>
-      </div>
+      {
+      type === "cart" ?
+        (<div>
+        <p
+          className="text-nowrap
+        absolute -top-4 right-11
+        text-neutral font-bold
+        "
+        >
+          Stock: {stock}
+        </p>
+      </div>):null}
     </div>
   );
 }

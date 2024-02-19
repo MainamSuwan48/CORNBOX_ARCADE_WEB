@@ -12,10 +12,14 @@ function CartItem({ cartItemData, productsData,stocks }) {
   const product = productsData.find(
     (product) => product.id === cartItemData.productItemId
   );
-  const { mainImage, name, price ,productId } = product;
-  const { id, attribute, quantity } = cartItemData;
+  const { mainImage, name, price  } = product;  
+  const { id, attribute, quantity, productItemId } = cartItemData;
   const { updateCartItem, setCart, deleteCartItem } = useProduct();
   const [cartItemQuantity, setCartItemQuantity] = useState(quantity);
+
+  console.log(productItemId,"productId from cartItem")
+  const thisStock = stocks.find((stock) => stock.id === productItemId);
+  console.log(thisStock,"stock from cartItem")
   
 
   const test = () => {
@@ -64,7 +68,7 @@ function CartItem({ cartItemData, productsData,stocks }) {
         setQuantity={setCartItemQuantity}
         quantity={quantity}
         type="cart"
-        stock={stocks.find((stock) => stock.id === productId).stock}
+        stock={thisStock.stock}
       />
       <div className="text-neutral font-bold pr-4">{price}</div>
       <>

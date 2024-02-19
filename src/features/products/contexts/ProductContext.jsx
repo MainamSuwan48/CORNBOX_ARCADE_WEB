@@ -70,13 +70,11 @@ function ProductContextProvider({ children }) {
     }
   };
   const getStocks = (productData) => {
-   
     const stocks = productData.map((product) => {
       return { id: product.id, stock: product.stock };
     });
-    console.log(stocks,"stock ********************");
+    console.log(stocks, "stock ********************");
     return stocks;
-    
   };
 
   useEffect(() => {
@@ -94,9 +92,10 @@ function ProductContextProvider({ children }) {
   useEffect(() => {
     const fetchProductsAndStocks = async () => {
       try {
-       const productsData = await getProductsData();
-       const stocksData = getStocks(productsData)
-       setStocks(stocksData);
+        const productsData = await getProductsData();
+        const stocksData = getStocks(productsData);
+        console.log(stocksData, "stocksData");
+        setStocks(stocksData);
       } catch (error) {
         console.log(error);
       }
@@ -119,6 +118,9 @@ function ProductContextProvider({ children }) {
         cart,
         setCart,
         getCartItemQuantity,
+        getStocks,
+        stocks,
+        setStocks,
       }}
     >
       {children}
