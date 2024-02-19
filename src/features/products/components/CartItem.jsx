@@ -25,9 +25,15 @@ function CartItem({ cartItemData, productsData }) {
       toast.error("Failed to delete item");
     }
   };
+
+  const test = () => {
+    console.log(id);
+  };
   return (
     <div className="flex justify-between items-center mt-4 p-2 min-w-full relative">
-      <div className="max-w-40 flex-1">
+      <div 
+      onClick={test}
+      className="max-w-40 flex-1">
         <img src={mainImage}></img>
       </div>
       <div className="flex-1">

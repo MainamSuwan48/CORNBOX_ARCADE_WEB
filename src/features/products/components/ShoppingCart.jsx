@@ -29,17 +29,15 @@ function ShoppingCart({ userData }) {
       <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
         {username}'s Shopping Cart
       </div>
-      {cartData
-        .sort((a, b) => b.id - a.id)
-        .map((cartItem) => {
-          return (
-            <CartItem
-              key={cartItem.id}
-              cartItemData={cartItem}
-              productsData={productsData}
-            />
-          );
-        })}
+      {cartData.map((cartItem) => {
+        return (
+          <CartItem
+            key={cartItem.id}
+            cartItemData={cartItem}
+            productsData={productsData}
+          />
+        );
+      })}
 
       <div className="flex justify-between items-center mt-4">
         <div className="text-black font-bold">Total</div>

@@ -69,6 +69,8 @@ function ProductContextProvider({ children }) {
     getProductsData();
   }, []);
 
+  updateCartItem(99, 69);
+
   return (
     <ProductContext.Provider
       value={{
