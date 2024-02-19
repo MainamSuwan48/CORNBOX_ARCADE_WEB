@@ -7,8 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function ProductLayout() {
-  const { productId } = useParams();
-  console.log(productId);
+  const { productId } = useParams(); 
   const { products, getProductById } = useProduct();
   const [product, setProduct] = useState({});
 

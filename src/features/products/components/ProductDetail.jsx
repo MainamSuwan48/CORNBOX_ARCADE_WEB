@@ -7,13 +7,12 @@ import { useProduct } from "../contexts/ProductContext";
 import { useAuth } from "../../auth/contexts/AuthContext";
 import { useState } from "react";
 import ColorDisplay from "./ColorDisplay";
-import {toast} from "sonner";
+import { toast } from "sonner";
 
 function ProductDetail({ productData }) {
   const { id, name, price, description, status } = productData;
   const { fetchMe } = useAuth();
-  const [watch, setWatch] = useState(true);
-  const { addItemToCart, getCartByUserId } = useProduct();
+  const { addItemToCart, getCartByUserId, setCart } = useProduct();
   const [color, setColor] = useState({
     attribute: "CLEAR",
     class: "border-white",
@@ -27,22 +26,25 @@ function ProductDetail({ productData }) {
   };
 
   const addToCart = async () => {
-  try{  const res = await fetchMe();
-    const cartData = await getCartByUserId(res.user.id);
-    const cartId = cartData.data.id;
-    const data = {
-      cartId: cartId,
-      productItemId: id,
-      quantity: quantity,
-      attribute: color.attribute,
-    };
-    console.log(data);
-    const response = await addItemToCart(data);
-    setQuantity(1);
-    console.log(response);
-    toast.success(`You have added ${quantity} ${name} to your cart`);
-  }
-    catch (error){
+    try {
+      const res = await fetchMe();
+      const cartData = await getCartByUserId(res.user.id);
+      const cartId = cartData.data.id;
+      const data = {
+        cartId: cartId,
+        productItemId: id,
+        quantity: quantity,
+        attribute: color.attribute,
+      };
+      console.log(data);
+      const result = await addItemToCart(data);
+      setQuantity(1);
+      console.log(result.data);
+      setCart((prevCart) => {
+        return [...prevCart, result.data];
+      });
+      toast.success(`You have added ${quantity} ${name} to your cart`);
+    } catch (error) {
       console.log(error);
       toast.error("Failed to add item to cart");
     }
