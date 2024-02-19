@@ -1,7 +1,6 @@
 import React from "react";
 import CartItem from "./CartItem";
 import ActionButton from "../../../components/ui/ActionButton";
-import { useState, useEffect } from "react";
 import { useProduct } from "../contexts/ProductContext";
 
 function ShoppingCart({ userData , cartData, productsData}) {
@@ -27,15 +26,15 @@ function ShoppingCart({ userData , cartData, productsData}) {
         })}
 
       <div className="flex justify-between items-center mt-4">
-        <div className="text-black font-bold">Total</div>
-        <div className="text-black font-bold">
+        <div className="text-neutral font-bold">Total</div>
+        <div className="text-neutral font-bold">
           {cartData.reduce((acc, cartItem) => {          
             return acc + cartItem.quantity;
           }, 0)}{" "}
           Items
         </div>
 
-        <div className="text-black font-bold">
+        <div className="text-neutral font-bold">
           {cartData.reduce((acc, cartItem) => {
             const product = productsData.find(
               (product) => product.id === cartItem.productItemId
@@ -46,7 +45,10 @@ function ShoppingCart({ userData , cartData, productsData}) {
         </div>
       </div>
       <div className="flex justify-end">
-        <ActionButton>CHECKOUT</ActionButton>
+        <ActionButton
+          onClick={()=> 
+          console.log(cart)}
+        >CHECKOUT</ActionButton>
       </div>
     </div>
   );
