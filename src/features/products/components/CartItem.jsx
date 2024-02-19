@@ -55,7 +55,7 @@ function CartItem({ cartItemData, productsData }) {
         </div>
         {deleted ? (
           <div
-            className={`backdrop-blur-md absolute text-red-600 text-3xl border-2 border-red-600 font-black w-full p-1`}
+            className={`backdrop-blur-lg absolute text-red-600 text-3xl border-2 border-red-600 font-black w-full p-1`}
           >
             DELETED
           </div>

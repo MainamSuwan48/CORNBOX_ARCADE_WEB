@@ -5,10 +5,13 @@ import LinkWeb from "../../components/ui/LinkWeb";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 import ShoppingCart from "../../features/products/components/ShoppingCart";
+import { useProduct } from "../../features/products/contexts/ProductContext";
 
 function Header() {
-  const { authUser, fetchMe } = useAuth();
+  const { fetchMe } = useAuth();
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const { products, cart } = useProduct();
 
   const navigateToUser = async () => {
     const response = await fetchMe();
@@ -20,10 +23,6 @@ function Header() {
   };
 
   const [openCart, setOpenCart] = useState(false);
-  const [user, setUser] = useState({
-    username: "Guest",
-  });
-  const [cart, setCart] = useState([]);
 
   const openCartHandler = async () => {
     if (openCart) {
@@ -37,13 +36,24 @@ function Header() {
           return;
         }
         console.log(response);
-        setUser(response.user);
         setOpenCart(!openCart);
       } catch (err) {
         console.log(err);
       }
     }
   };
+
+  const fetchUserData = async () => {
+    const response = await fetchMe();
+    console.log(response.user);
+    setUser(response.user);
+  };
+
+  useEffect(() => {
+    if (!user) {
+      fetchUserData();
+    }
+  }, [cart]);
 
   return (
     <>

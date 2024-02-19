@@ -8,7 +8,7 @@ const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [products, setProducts] = useState([]);
-  const [cartItemQuantity, setCartItemQuantity] = useState(0);
+
   // product handler
   const fetchProducts = async () => {
     const response = await productApi.getAllProducts();
@@ -21,7 +21,7 @@ function ProductContextProvider({ children }) {
   };
 
   //cart handler
-  const [cart, setCart] = useState([]); // [{}]
+  const [cart, setCart] = useState([]); 
   const createCart = async (data) => {
     const response = await productApi.createCart(data);
     return response;
@@ -37,11 +37,11 @@ function ProductContextProvider({ children }) {
     const quantity = cart.data.shoppingCartItem.reduce((acc, item) => {
       return acc + item.quantity;
     }, 0);
-    return quantity
+    return quantity;
   };
 
   const addItemToCart = async (data) => {
-    const response = await productApi.addItemToCart(data);    
+    const response = await productApi.addItemToCart(data);
     return response;
   };
 
@@ -56,20 +56,20 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
-  useEffect(() => {
-    const getProductsData = async () => {
-      try {
-        const response = await fetchProducts();
-        console.log(response.data);
-        setProducts(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const getProductsData = async () => {
+    try {
+      const response = await fetchProducts();
+      console.log(response.data);
+      setProducts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {  
+
     getProductsData();
   }, []);
-
-  updateCartItem(99, 69);
 
   return (
     <ProductContext.Provider
