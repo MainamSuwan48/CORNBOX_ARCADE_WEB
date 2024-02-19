@@ -34,12 +34,6 @@ export const UserProvider = ({ children }) => {
     return response;
   };
 
-  useEffect(() => {
-    const getAddressData = async () => {
-      const response = await getAddressesByUserId(user.id);
-      setAddresses(response);
-    };
-  }, []);
 
   const test = () => {
     console.log("I'm from user context");

@@ -15,7 +15,7 @@ function ShoppingCart({ userData , cartData, productsData}) {
     }
   }, [cart]);
   return (
-    <div className="absolute top-0 right-4 w-screen-sm flex-1 p-8 rounded-lg mt-20 z-50 border-2 border-black backdrop-blur-lg overflow-y-scroll overflow-x-hidden max-h-96">
+    <div className="absolute top-0 right-4 w-screen-sm flex-1 p-8 rounded-lg mt-20 z-50 border-2 border-black bg-base-200 bg-opacity-75 overflow-y-scroll overflow-x-hidden max-h-96">
       <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
         {username}'s Shopping Cart
       </div>
@@ -26,8 +26,7 @@ function ShoppingCart({ userData , cartData, productsData}) {
             <CartItem
               key={cartItem.id}
               cartItemData={cartItem}
-              productsData={productsData}
-              deleteCartItem={deleteCartItem}
+              productsData={productsData}           
             />
           );
         })}

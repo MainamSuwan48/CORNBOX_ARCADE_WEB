@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useProduct } from "../contexts/ProductContext";
 import { useEffect } from "react";
 
 const CounterTypeClasses = {
