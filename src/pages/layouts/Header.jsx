@@ -11,7 +11,7 @@ function Header() {
   const { fetchMe } = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const { products, cart } = useProduct();
+  const { products, cart, getCartByUserId } = useProduct();
 
   const navigateToUser = async () => {
     const response = await fetchMe();
@@ -22,6 +22,7 @@ function Header() {
     navigate(`/user/${response.user.id}`);
   };
 
+  const [cartData, setCartData] = useState([]); // [1]
   const [openCart, setOpenCart] = useState(false);
 
   const openCartHandler = async () => {
@@ -53,6 +54,13 @@ function Header() {
     if (!user) {
       fetchUserData();
     }
+    const getCartData = async () => {
+      const user = await fetchMe();
+      const res = await getCartByUserId(user.user.id);
+      console.log(res.data.shoppingCartItem);
+      setCartData(res.data.shoppingCartItem);
+    };
+    getCartData();
   }, [cart]);
 
   return (
@@ -74,9 +82,19 @@ function Header() {
           <div className="relative" onClick={openCartHandler}>
             <CartIcon size={"2x"} />
           </div>
+          total:{" "}
+          {cartData.reduce((acc, cartItem) => {
+            return acc + cartItem.quantity;
+          },0)}
         </div>
       </div>
-      {openCart ? <ShoppingCart cartData={cart} userData={user} /> : null}
+      {openCart ? (
+        <ShoppingCart
+          cartData={cartData}
+          userData={user}
+          productsData={products}
+        />
+      ) : null}
     </>
   );
 }
