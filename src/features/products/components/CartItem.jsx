@@ -5,6 +5,7 @@ import { TrashIcon } from "../../../components/icons";
 import { useState } from "react";
 import { useProduct } from "../contexts/ProductContext";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 function CartItem({ cartItemData, productsData, deleteCartItem }) {
   const [deleted, setDeleted] = useState(false);
@@ -13,10 +14,21 @@ function CartItem({ cartItemData, productsData, deleteCartItem }) {
   );
   const { mainImage, name, price } = product;
   const { id, attribute, quantity } = cartItemData;
+  const { updateCartItem } = useProduct();
+  const [cartItemQuantity, setCartItemQuantity] = useState(quantity);
 
   const test = () => {
     console.log(id);
   };
+
+  useEffect(() => {
+    return async () => {
+      console.log(id, cartItemQuantity);
+      const res = await updateCartItem(id, cartItemQuantity);
+      console.log(res)
+      console.log("clean up");
+    };
+  }, [cartItemQuantity]);
   return (
     <div className="flex justify-between items-center mt-4 p-2 min-w-full relative">
       <div onClick={test} className="max-w-40 flex-1">
@@ -30,7 +42,11 @@ function CartItem({ cartItemData, productsData, deleteCartItem }) {
       <div className="flex items-center justify-center text-xl text-primary">
         ID:{id}
       </div>
-      <ProductCounter cartItemId={id} quantity={quantity} type="cart" />
+      <ProductCounter
+        setQuantity={setCartItemQuantity}
+        quantity={quantity}
+        type="cart"
+      />
       <div className="text-neutral font-bold pr-4">{price}</div>
       <>
         <div
