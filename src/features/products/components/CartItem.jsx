@@ -31,22 +31,12 @@ function CartItem({ cartItemData, productsData }) {
       });
     });
     const updateCartItemQuantity = async () => {
-      const response = await updateCartItem(id, cartItemQuantity);
-      console.log(response);
+      const response = await updateCartItem(id, cartItemQuantity);     
     };
     updateCartItemQuantity();
  
   }, [cartItemQuantity]);
 
-  const onDelete = async () => {
-    await deleteCartItem(id);
-    setDeleted(true);
-    setTimeout(() => {
-      setCart((prevCart) => {
-        return prevCart.filter((item) => item.id !== id);
-      });
-    }, 2000);
-  };
 
   return (
     <div className="flex justify-between items-center mt-4 p-2 min-w-full relative">
@@ -68,8 +58,7 @@ function CartItem({ cartItemData, productsData }) {
       />
       <div className="text-neutral font-bold pr-4">{price}</div>
       <>
-        <div
-          onClick={onDelete}
+        <div       
           className={`flex items-center justify-center w-8 h-8 border-2 rounded-full border-red-600 text-red-600 hover:bg-red-600 hover:scale-125 hover:text-white transition-all duration-300 ease-in-out active:scale-75`}
         >
           <TrashIcon />

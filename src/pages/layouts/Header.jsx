@@ -8,13 +8,12 @@ import ShoppingCart from "../../features/products/components/ShoppingCart";
 import { useProduct } from "../../features/products/contexts/ProductContext";
 
 function Header() {
-  const { authUser} = useAuth();
+  const { authUser } = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const { products, cart, getCartByUserId, setCart } = useProduct();
+  const { products, cart, } = useProduct();
 
   const navigateToUser = async () => {
-   
     if (!authUser) {
       navigate("/login");
       return;
@@ -26,20 +25,22 @@ function Header() {
   const [openCart, setOpenCart] = useState(false);
 
   const openCartHandler = async () => {
-    if (openCart) {
+    if (!openCart) {
       setOpenCart(!openCart);
       return;
     } else if (!authUser) {
-          navigate("/login");
-          return;
-        }            
+      navigate("/login");
+      return;
+    } else {
+      setOpenCart(!openCart);
+    }
   };
-
-
+  useEffect(() => {  
+    setCartData(cart);
+  }, [cart]);
 
   return (
-
-    <>    
+    <>
       <div className="fixed w-full top-0 z-50 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
         <Link to="/">
           <LogoCornbox />
@@ -67,7 +68,7 @@ function Header() {
       {openCart ? (
         <ShoppingCart
           cartData={cartData}
-          userData={user}
+          userData={authUser}
           productsData={products}
         />
       ) : null}
