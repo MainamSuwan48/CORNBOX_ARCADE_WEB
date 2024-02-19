@@ -1,4 +1,4 @@
-import  { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import * as authApi from "../../../api/auth";
 import {
   storeToken,
@@ -7,8 +7,6 @@ import {
 } from "../../../utils/local-storage";
 
 export const AuthContext = createContext();
-
-
 
 export const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
@@ -20,13 +18,15 @@ export const AuthProvider = ({ children }) => {
     const response = await authApi.getMe(token);
     return response.data;
   };
+
   useEffect(() => {
-    const token = getToken();
-    if (token) {
-      fetchMe().then((user) => {
-        setAuthUser(user);
-      });
-    }
+    const fetchData = async () => {
+      const response = await fetchMe();
+      console.log(response.user);
+      setAuthUser(response.user);
+    };
+
+    fetchData();
   }, []);
 
   const login = async (usernameOrEmail, password) => {
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     console.log(data);
-    const response = await authApi.login(data);    
+    const response = await authApi.login(data);
     storeToken(response.data.token);
     return response.data;
   };
@@ -62,9 +62,10 @@ export const AuthProvider = ({ children }) => {
     console.log(authUser);
   };
 
+
   return (
     <AuthContext.Provider
-      value={{ login, logout, register, test, authUser, setAuthUser,fetchMe }}
+      value={{ login, logout, register, test, authUser, setAuthUser, fetchMe }}
     >
       {children}
     </AuthContext.Provider>

@@ -8,18 +8,18 @@ import ShoppingCart from "../../features/products/components/ShoppingCart";
 import { useProduct } from "../../features/products/contexts/ProductContext";
 
 function Header() {
-  const { fetchMe ,authUser} = useAuth();
+  const { authUser} = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const { products, cart, getCartByUserId, setCart } = useProduct();
 
   const navigateToUser = async () => {
-    const response = await fetchMe();
-    if (!response) {
+   
+    if (!authUser) {
       navigate("/login");
       return;
     }
-    navigate(`/user/${response.user.id}`);
+    navigate(`/user/${authUser.id}`);
   };
 
   const [cartData, setCartData] = useState(cart); // [1]
@@ -29,42 +29,16 @@ function Header() {
     if (openCart) {
       setOpenCart(!openCart);
       return;
-    } else {
-      try {
-        const response = await fetchMe();
-        if (!response) {
+    } else if (!authUser) {
           navigate("/login");
           return;
-        }
-        console.log(response);
-        setOpenCart(!openCart);
-      } catch (err) {
-        console.log(err);
-      }
-    }
+        }            
   };
 
-  const fetchUserData = async () => {
-    const response = await fetchMe();
-    console.log(response.user);
-    setUser(response.user);
-  };
-  const getCartData = async () => {
-    const res = await getCartByUserId(user.id);
-    console.log(res.data.shoppingCartItem);
-    setCartData(res.data.shoppingCartItem);
-  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchUserData();
-      await getCartData();
-    };
-    fetchData();
-  }, [cart,authUser]);
 
   return (
-    
+
     <>    
       <div className="fixed w-full top-0 z-50 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
         <Link to="/">

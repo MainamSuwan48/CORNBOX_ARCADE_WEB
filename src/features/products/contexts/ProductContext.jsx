@@ -2,12 +2,14 @@ import React, { createContext, useContext } from "react";
 import * as productApi from "../../../api/product";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useAuth } from "../../auth/contexts/AuthContext";
 
 // Create an empty context
 const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const { authUser } = useAuth();
 
   // product handler
   const fetchProducts = async () => {
@@ -21,7 +23,7 @@ function ProductContextProvider({ children }) {
   };
 
   //cart handler
-  const [cart, setCart] = useState([]); 
+  const [cart, setCart] = useState([]);
   const createCart = async (data) => {
     const response = await productApi.createCart(data);
     return response;
@@ -66,10 +68,18 @@ function ProductContextProvider({ children }) {
     }
   };
 
-  useEffect(() => {  
-
+  useEffect(() => {
     getProductsData();
-  }, []);
+    const getCartData = async () => {
+      if (authUser) {
+        const res = await getCartByUserId(authUser.id);
+        console.log(res.data);
+        console.log(res.data.shoppingCartItem);
+        setCart(res.data.shoppingCartItem);
+      }
+    };
+    getCartData();
+  }, [authUser]);
 
   return (
     <ProductContext.Provider
