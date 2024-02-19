@@ -8,9 +8,10 @@ import { useAuth } from "../../auth/contexts/AuthContext";
 import { useState } from "react";
 import ColorDisplay from "./ColorDisplay";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 function ProductDetail({ productData }) {
-  const { id, name, price, description, status ,stock} = productData;
+  const { id, name, price, description, status, stock } = productData;
   const { fetchMe } = useAuth();
   const { addItemToCart, getCartByUserId, setCart } = useProduct();
   const [color, setColor] = useState({
@@ -55,7 +56,9 @@ function ProductDetail({ productData }) {
       <Title>{name}</Title>
       <div className="mt-8">
         <p className="text-2xl font-bold">{price} THB</p>
-        <p className="text-lg text-primary">{status}</p>
+        <p className="text-lg text-primary">
+          {status} {stock} in Stock
+        </p>
       </div>
       <div className="mt-8">
         <p className="text-lg max-w-screen-sm pr-12">{description}</p>
@@ -120,7 +123,11 @@ function ProductDetail({ productData }) {
           stock={stock}
         />
         <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
-        <ActionButton>BUYNOW</ActionButton>
+        <Link to="/checkout">
+          <ActionButton
+          onClick={addToCart}
+          >CHECKOUT</ActionButton>
+        </Link>
       </div>
     </div>
   );

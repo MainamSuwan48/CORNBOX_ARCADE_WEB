@@ -15,6 +15,7 @@ import UserProfile from "../features/user/components/UserProfile";
 import Addresses from "../features/user/components/Addresses";
 import UserOrderSection from "../features/user/components/UserOrderSection";
 import ProductLayout from "../pages/layouts/ProductLayout";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const ProtectedRoutes = ({ children }) => {
   const token = getToken();
@@ -31,25 +32,27 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/product/", element: <ProductPage /> },
-      { path: "/product/:productId", element: <ProductLayout />},
+      { path: "/product/:productId", element: <ProductLayout /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
-      { path: "/checkout", element: <CheckOutPage /> },
+      ,
       {
         path: "/user/:userId",
         element: (
           <ProtectedRoutes>
             <UserPage />
           </ProtectedRoutes>
-        ),  
+        ),
         children: [
-          { path: "", element: <UserProfile />},
+          { path: "", element: <UserProfile /> },
           { path: "address", element: <Addresses /> },
           { path: "order", element: <UserOrderSection /> },
         ],
       },
     ],
   },
+  { path: "/checkout", element: <CheckOutPage /> },
+  { path: "*", element: <NotFoundPage /> },
 ]);
 
 export default function Router() {
