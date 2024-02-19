@@ -4,8 +4,9 @@ import ActionButton from "../../../components/ui/ActionButton";
 import { useProduct } from "../contexts/ProductContext";
 
 function ShoppingCart({ userData , cartData, productsData}) {
-  const { cart ,deleteCartItem} = useProduct();
+  const { cart , stocks} = useProduct();
   const { username, id } = userData;
+  console.log(stocks,"stock")
 
 
   return (
@@ -20,7 +21,8 @@ function ShoppingCart({ userData , cartData, productsData}) {
             <CartItem
               key={cartItem.id}
               cartItemData={cartItem}
-              productsData={productsData}           
+              productsData={productsData}
+              stock={stocks}           
             />
           );
         })}

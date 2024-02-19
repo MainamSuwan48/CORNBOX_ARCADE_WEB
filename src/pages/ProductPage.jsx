@@ -11,28 +11,11 @@ import { useEffect } from "react";
 import { useProduct } from "../features/products/contexts/ProductContext";
 
 function ProductPage() {
-  const { products, fetchProducts } = useProduct();
-  const [frontProducts, setFrontProducts] = useState([]);
+  const { products } = useProduct();
+  
 
-  const test = () => {
-    console.log(frontProducts);
-  };
-
-  useEffect(() => {
-    const getFrontProducts = async () => {
-      try {
-        const response = await fetchProducts();
-        console.log(response.data);
-        setFrontProducts(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getFrontProducts();
-  }, [products]);
   return (
-    <div
-      onClick={test}
+    <div     
       className="flex mt-20 justify-around h-with_header flex-1 bg-primary"
       style={{
         backgroundImage: `url(${EVOpic})`,
@@ -42,8 +25,8 @@ function ProductPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {frontProducts && frontProducts.length > 0
-        ? frontProducts.map((product) => (
+      {products && products.length > 0
+        ? products.map((product) => (
             <Link key={product.id} to={`/product/${product.id}`}>
               <ProductPreview
                 key={product.id}

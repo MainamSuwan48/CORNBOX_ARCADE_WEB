@@ -6,7 +6,7 @@ const CounterTypeClasses = {
   cart: "scale-75",
 };
 
-function ProductCounter({ type = "normal", quantity = 1, setQuantity }) {
+function ProductCounter({ type = "normal", quantity = 1, setQuantity, stock }) {
   const [count, setCount] = useState(quantity);
 
   useEffect(() => {
@@ -22,10 +22,11 @@ function ProductCounter({ type = "normal", quantity = 1, setQuantity }) {
   };
 
   const increaseProductCount = () => {
-    setCount(count + 1);
-    setQuantity(count + 1);
+    if (count < stock) {
+      setCount(count + 1);
+      setQuantity(count + 1);
+    }
   };
-
 
   // For Cart Item
 
@@ -45,6 +46,9 @@ function ProductCounter({ type = "normal", quantity = 1, setQuantity }) {
         onClick={increaseProductCount}
       >
         +
+      </div>
+      <div>
+        <p className="text-neutral font-bold">Stock: {stock}</p>
       </div>
     </div>
   );

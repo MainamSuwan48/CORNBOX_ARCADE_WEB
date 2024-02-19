@@ -9,6 +9,7 @@ const ProductContext = createContext();
 
 function ProductContextProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [stocks, setStocks] = useState([{ id: 1, quantity: 0 }]);
   const { authUser } = useAuth();
 
   // product handler
@@ -63,13 +64,22 @@ function ProductContextProvider({ children }) {
       const response = await fetchProducts();
       console.log(response.data);
       setProducts(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
   };
+  const getStocks = (productData) => {
+   
+    const stocks = productData.map((product) => {
+      return { id: product.id, stock: product.stock };
+    });
+    console.log(stocks,"stock ********************");
+    return stocks;
+    
+  };
 
   useEffect(() => {
-    getProductsData();
     const getCartData = async () => {
       if (authUser) {
         const res = await getCartByUserId(authUser.id);
@@ -80,6 +90,19 @@ function ProductContextProvider({ children }) {
     };
     getCartData();
   }, [authUser]);
+
+  useEffect(() => {
+    const fetchProductsAndStocks = async () => {
+      try {
+       const productsData = await getProductsData();
+       const stocksData = getStocks(productsData)
+       setStocks(stocksData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProductsAndStocks();
+  }, []);
 
   return (
     <ProductContext.Provider

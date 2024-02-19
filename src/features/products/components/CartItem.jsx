@@ -7,15 +7,16 @@ import { useProduct } from "../contexts/ProductContext";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
-function CartItem({ cartItemData, productsData }) {
+function CartItem({ cartItemData, productsData,stocks }) {
   const [deleted, setDeleted] = useState(false);
   const product = productsData.find(
     (product) => product.id === cartItemData.productItemId
   );
-  const { mainImage, name, price } = product;
+  const { mainImage, name, price ,productId } = product;
   const { id, attribute, quantity } = cartItemData;
   const { updateCartItem, setCart, deleteCartItem } = useProduct();
   const [cartItemQuantity, setCartItemQuantity] = useState(quantity);
+  
 
   const test = () => {
     console.log(id);
@@ -63,6 +64,7 @@ function CartItem({ cartItemData, productsData }) {
         setQuantity={setCartItemQuantity}
         quantity={quantity}
         type="cart"
+        stock={stocks.find((stock) => stock.id === productId).stock}
       />
       <div className="text-neutral font-bold pr-4">{price}</div>
       <>
