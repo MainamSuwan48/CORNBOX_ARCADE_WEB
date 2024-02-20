@@ -11,7 +11,7 @@ function Header() {
   const { authUser } = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const { products, cart, } = useProduct();
+  const { products, cart } = useProduct();
 
   const navigateToUser = async () => {
     if (!authUser) {
@@ -25,17 +25,17 @@ function Header() {
   const [openCart, setOpenCart] = useState(false);
 
   const openCartHandler = async () => {
-    if (!openCart) {
-      setOpenCart(!openCart);
-      return;
-    } else if (!authUser) {
+    if (!authUser) {
       navigate("/login");
+      return;
+    } else if (!openCart) {
+      setOpenCart(!openCart);
       return;
     } else {
       setOpenCart(!openCart);
     }
   };
-  useEffect(() => {  
+  useEffect(() => {
     setCartData(cart);
   }, [cart]);
 

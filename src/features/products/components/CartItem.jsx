@@ -7,20 +7,17 @@ import { useProduct } from "../contexts/ProductContext";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
-function CartItem({ cartItemData, productsData,stocks }) {
+function CartItem({ cartItemData, productsData, stocks }) {
   const [deleted, setDeleted] = useState(false);
   const product = productsData.find(
     (product) => product.id === cartItemData.productItemId
   );
-  const { mainImage, name, price  } = product;  
+  const { mainImage, name, price } = product;
   const { id, attribute, quantity, productItemId } = cartItemData;
   const { updateCartItem, setCart, deleteCartItem } = useProduct();
   const [cartItemQuantity, setCartItemQuantity] = useState(quantity);
 
-  console.log(productItemId,"productId from cartItem")
   const thisStock = stocks.find((stock) => stock.id === productItemId);
-  console.log(thisStock,"stock from cartItem")
-  
 
   const test = () => {
     console.log(id);
