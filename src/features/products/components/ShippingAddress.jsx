@@ -1,23 +1,21 @@
 import React from "react";
-import { EditIcon } from "../../../components/icons";
+import UserProfile from "../../user/components/UserProfile";
 
 function ShippingAddress() {
   return (
-    <div className="bg-slate-400 rounded-lg p-8">
+    <div className="glass rounded-lg p-2 overflow-y-scroll">
       <div className="flex justify-between border-b-2 border-base-100 ">
-        <div className="text-2xl text-base-100 font-bold">Shipping Address</div>
-        <EditIcon />
+        <div className="text-2xl text-white font-bold">Shipping Address</div>
       </div>
-      <div className="flex justify-between items-center pt-2">
-        <div className="text-xl text-base-100">John Manguyboy</div>
-        <div className="text-xl text-base-100">081234567</div>
-      </div>
+      <UserProfile type="checkout" />
       <div>
-        <div className="text-xl text-base-100">
-          This is Address line 1 This is Address line 2
-        </div>
-        <div className="text-xl text-base-100">
-          This is City This is Postalcode
+        <div>
+          <div className="text-xl text-white">
+            This is Address line 1 This is Address line 2
+          </div>
+          <div className="text-xl text-white">
+            This is City This is Postalcode
+          </div>
         </div>
       </div>
     </div>

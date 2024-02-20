@@ -11,7 +11,6 @@ function CheckOutDetail({ userData, cartData, productsData }) {
         userData={userData}
         productsData={productsData}
       />
-
       <ShippingAddress />
     </div>
   );

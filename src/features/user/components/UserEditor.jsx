@@ -6,15 +6,15 @@ import { useUser } from "../contexts/UserContext";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-function UserEditor({ fullName, mobilePhone, setEdit }) {
+function UserEditor({ id,fullName, mobilePhone, setEdit }) {
   const param = useParams();
   const { setAuthUser } = useAuth();
-  const { test, updateUserById } = useUser();
+  const { updateUserById } = useUser();
   const [input, setInput] = useState({
     fullName: fullName,
     mobilePhone: mobilePhone,
   });
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) => { 
     console.log(e.target.value);
     console.log(e.target.name);
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -23,8 +23,8 @@ function UserEditor({ fullName, mobilePhone, setEdit }) {
     e.preventDefault();
     console.log(input);
     try {
-      const response = await updateUserById(param.userId, input);
-      console.log(response);
+      console.log(id)
+      const response = await updateUserById(id, input);   
       setAuthUser(response);
       setEdit(false);
 
@@ -38,11 +38,7 @@ function UserEditor({ fullName, mobilePhone, setEdit }) {
   return (
     <form onSubmit={handleSubmit} className="p-5 rounded bg-black border-2">
       <div className="flex justify-between border-b-2 mx-2 border-neutral py-2">
-        <p
-          onClick={() => {
-            console.log(param.userId);
-            test();
-          }}
+        <p        
           className="text-2xl font-bold text-Neutral drop-shadow-sm "
         >
           Edit Your Profile

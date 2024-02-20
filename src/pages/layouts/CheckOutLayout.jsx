@@ -24,17 +24,20 @@ function CheckOutLayout() {
   console.log(authUser, cart, products, "im here in checkout layout");
   return (
     isLoading ? (
-      <div>
+      <div
+      className="h-screen flex-1"
+      >
+
         <div className="text-6xl font-bold text-center text-red-600 mt-20">Loading...</div>
         <img
           className="w-1/2 mx-auto"
           src="https://media1.tenor.com/m/BAzma6OlbvAAAAAd/dancing-toothless-tothless.gif"
-          alt="Funny Corn"
+          alt="Dancing boi"
         />
       </div>
    
     ) : (
-      <div className="flex mt-6 pt-20 h-with_header flex-1 justify-center items-start p-8 gap-8 backdrop-blur-sm -mb-8">
+      <div className="flex mt-6 pt-20 h-full flex-1 justify-center items-start p-8 gap-8 backdrop-blur-sm -mb-8">
         <CheckOutDetail
           userData={authUser}
           cartData={cart}

@@ -9,6 +9,7 @@ function ProfileMenu() {
   const navigate = useNavigate();
   const { logout, fetchMe, authUser, setAuthUser } = useAuth();
   const { setCart } = useProduct();
+  const [isLoading, setIsLoading] = useState(true);
   const handleLogout = async () => {
     try {
       await logout();
@@ -20,13 +21,18 @@ function ProfileMenu() {
     }
   };
   const param = useParams();
+  useEffect(() => {
+    if (authUser) {
+      setIsLoading(false);
+    }
+  }, [authUser]);
 
-  return (
+  return isLoading ? (
+    "loading"
+  ) : (
     <div className="shrink-0 flex flex-col px-4 w-60 justify-between h-with_header mt-20">
       <div>
-        <p     
-          className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary shrink-0"
-        >
+        <p className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary shrink-0">
           Hi, {authUser.username}
         </p>
         <Link to={`/user/${authUser.id}/Order`}>

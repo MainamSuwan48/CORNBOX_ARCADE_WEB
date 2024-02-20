@@ -15,7 +15,7 @@ function ShoppingCart({
 
   if (type === "checkout") {
     return (
-      <div className="glass w-screen-sm flex-1 p-8 rounded-lg z-50 border-2 border-black overflow-y-scroll max-h-96">
+      <div className="glass flex-1 min-w-96 p-8 rounded-lg z-50 border-2 border-black overflow-y-scroll max-h-96">
         <div className="text-2xl border-b-2 border-primary text-neutral font-bold">
           {username}'s Check Out
         </div>
