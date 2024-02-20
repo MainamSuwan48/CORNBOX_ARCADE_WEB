@@ -21,6 +21,10 @@ function Header() {
     navigate(`/user/${authUser.id}`);
   };
 
+  useEffect(() => {
+        setUser(authUser);
+  }, [authUser]);
+
   const [cartData, setCartData] = useState(cart); // [1]
   const [openCart, setOpenCart] = useState(false);
 

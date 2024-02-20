@@ -11,7 +11,7 @@ import { toast } from "sonner";
 function LoginForm() {
   const [input, setInput] = useState({ usernameOrEmail: "", password: "" });
   const [errors, setErrors] = useState({});
-  const { login, test } = useAuth();
+  const { login, test ,setAuthUser } = useAuth();
 
   const navigate = useNavigate();
 
@@ -28,6 +28,7 @@ function LoginForm() {
     const { usernameOrEmail, password } = input;
     try {
       const res = await login(usernameOrEmail, password);
+      setAuthUser(res.user);
       console.log(res.user.id);
       setErrors({});
       navigate(`/user/${res.user.id}`);

@@ -2,16 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link, useParams } from "react-router-dom";
 import { useAuth } from "../../features/auth/contexts/AuthContext";
 import ProfileMenuLink from "../../features/user/components/ProfileMenuLink";
-import {toast} from 'sonner'
+import { toast } from "sonner";
+import { useProduct } from "../../features/products/contexts/ProductContext";
 
 function ProfileMenu() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({}); // 
-  const { logout, fetchMe ,authUser } = useAuth();
-
+  const [user, setUser] = useState({}); //
+  const { logout, fetchMe, authUser, setAuthUser } = useAuth();
+  const { setCart } = useProduct();
   const handleLogout = async () => {
-    await logout();
-    navigate("/login");
+    try {
+      await logout();
+      navigate("/login");
+      setAuthUser(null);
+      setCart([]);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const param = useParams();
   const test = () => {
@@ -22,7 +29,7 @@ function ProfileMenu() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetchMe();     
+        const response = await fetchMe();
         setUser(response.user);
       } catch (err) {
         console.log(err);

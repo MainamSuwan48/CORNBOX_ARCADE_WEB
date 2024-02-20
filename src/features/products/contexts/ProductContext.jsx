@@ -54,6 +54,12 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
+  const updateCartItemAttribute = async (id, attribute) => {
+    const data = { attribute };
+    const response = await productApi.updateCartItem(id, data);
+    return response;
+  };
+
   const deleteCartItem = async (id) => {
     const response = await productApi.deleteCartItem(id);
     return response;
@@ -121,6 +127,7 @@ function ProductContextProvider({ children }) {
         getStocks,
         stocks,
         setStocks,
+        updateCartItemAttribute,
       }}
     >
       {children}
