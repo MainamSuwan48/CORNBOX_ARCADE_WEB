@@ -76,7 +76,7 @@ function CartItem({ cartItemData, productsData, stocks }) {
   return (
     <div className="flex justify-between items-center mt-4 p-2 relative gap-5">
       <div
-      className="flex-1 flex items-center gap-4 bg-base-100 p-2 rounded shadow-lg backdrop-blur-3xl transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl active:scale-100 active:shadow-lg"
+      className="flex-1 flex items-center gap-4 bg-base-100 p-2 rounded shadow-lg backdrop-blur-3xl transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl active:scale-100 active:shadow-lg h-32"
       >
         <div onClick={test} className="max-w-40 flex-1">
           <Link to={`/product/${productItemId}`}>
