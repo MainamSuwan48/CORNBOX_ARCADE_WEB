@@ -19,7 +19,7 @@ function RegisterForm() {
   });
   const [errors, setErrors] = useState({});
   const { createCart } = useProduct();
-  const { register } = useAuth();
+  const { register ,setAuthUser } = useAuth();
 
   const handleInputChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -35,6 +35,7 @@ function RegisterForm() {
     const { email, username, password, confirmPassword } = input;
     try {
       const res = await register(email, username, password, confirmPassword);
+      setAuthUser(res.user);
       console.log(res.user.id);
       const cartData = {
         userId: res.user.id,
