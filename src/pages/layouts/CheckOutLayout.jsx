@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 function CheckOutLayout() {
   return (
-    <div className="flex pt-20 flex-1 justify-center items-start p-8 gap-8 backdrop-blur-sm -mb-8">
+    <div className="flex mt-6 pt-20 h-with_header flex-1 justify-center items-start p-8 gap-8 backdrop-blur-sm -mb-8">
       <CheckOutDetail />
       <PaymentDetail />
       

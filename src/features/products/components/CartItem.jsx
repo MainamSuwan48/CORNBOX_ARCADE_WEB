@@ -80,7 +80,7 @@ function CartItem({ cartItemData, productsData, stocks }) {
           <img src={mainImage}></img>
         </Link>
       </div>
-      <div className="flex flex-col mr-3 items-start">
+      <div className="flex mr-3 justify-center items-center gap-5">
         <p className="text-neutral font-bold">{name}</p>
         <p className="text-neutral border-2 border-primary p-1 transition-all hover:bg-primary hover:text-base-100 cursor-pointer">
           {isEdit ? (

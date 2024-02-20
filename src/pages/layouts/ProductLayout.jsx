@@ -25,7 +25,7 @@ function ProductLayout() {
   }, [productId]);
 
   return (
-    <div className="flex h-with_header mt-20 flex-1 justify-between">
+    <div className="flex h-with_header mt-20 flex-1 justify-around">
       <ProductImage src={product.mainImage} />
       <ProductDetail productData={product} />
     </div>

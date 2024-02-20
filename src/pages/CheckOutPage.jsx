@@ -16,7 +16,7 @@ function CheckOutPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="fixed w-full top-0 z-50 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
+      <div className="fixed w-full top-0 h-20 z-50 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
         <Link to="/">
           <LogoCornbox />
         </Link>
