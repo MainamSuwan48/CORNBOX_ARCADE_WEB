@@ -74,54 +74,59 @@ function CartItem({ cartItemData, productsData, stocks }) {
   };
 
   return (
-    <div className="flex justify-between items-center mt-4 p-2 min-w-full relative">
-      <div onClick={test} className="max-w-40 flex-1">
-        <Link to={`/product/${productItemId}`}>
-          <img src={mainImage}></img>
-        </Link>
+    <div className="flex justify-between items-center mt-4 p-2 relative gap-5">
+      <div
+      className="flex-1 flex items-center gap-4 bg-base-100 p-2 rounded shadow-lg backdrop-blur-3xl transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl active:scale-100 active:shadow-lg"
+      >
+        <div onClick={test} className="max-w-40 flex-1">
+          <Link to={`/product/${productItemId}`}>
+            <img src={mainImage}></img>
+          </Link>
+        </div>
+
+        <div className="flex flex-col mr-3 justify-center items-start gap-2">
+          <p className="text-neutral font-bold">{name}</p>
+          <p className="text-neutral border-2 border-primary p-1 transition-all hover:bg-primary hover:text-base-100 cursor-pointer">
+            {isEdit ? (
+              <div>
+                <input
+                  onChange={handleInputChange}
+                  value={cartItemAttribute}
+                  className="border-2 bg-transparent"
+                ></input>
+                <button
+                  className="border-2 border-primary bg-primary text-base-100 hover:bg-base-100 hover:text-primary transition-all px-2"
+                  onClick={upDateAttribute}
+                >
+                  Update
+                </button>
+              </div>
+            ) : (
+              <>
+                {cartItemAttribute}
+                <button
+                  className="border-2 border-primary bg-primary text-base-100 hover:bg-base-100 hover:text-primary transition-all px-1 ml-1"
+                  onClick={() => setIsEdit(true)}
+                >
+                  Edit
+                </button>
+              </>
+            )}
+          </p>
+        </div>
       </div>
-      <div className="flex mr-3 justify-center items-center gap-5">
-        <p className="text-neutral font-bold">{name}</p>
-        <p className="text-neutral border-2 border-primary p-1 transition-all hover:bg-primary hover:text-base-100 cursor-pointer">
-          {isEdit ? (
-            <div>
-              <input
-                onChange={handleInputChange}
-                value={cartItemAttribute}
-                className="border-2 bg-transparent"
-              ></input>
-              <button
-                className="border-2 border-primary bg-primary text-base-100 hover:bg-base-100 hover:text-primary transition-all px-2"
-                onClick={upDateAttribute}
-              >
-                Update
-              </button>
-            </div>
-          ) : (
-            <>
-              {cartItemAttribute}
-              <button
-                className="border-2 border-primary bg-primary text-base-100 hover:bg-base-100 hover:text-primary transition-all px-1 ml-1"
-                onClick={() => setIsEdit(true)}
-              >
-                Edit
-              </button>
-            </>
-          )}
-        </p>
-      </div>
-      {/* for debugging purposes */}
-      <div className="flex items-center justify-center text-xl text-primary">
-        ID:{id}
-      </div>
-      <ProductCounter
-        setQuantity={setCartItemQuantity}
-        quantity={quantity}
-        type="cart"
-        stock={thisStock.stock}
-      />
-      <div className="text-neutral font-bold pr-4">{price}</div>
-      <>
+      <div className="flex items-center">
+        <div className="flex items-center justify-center text-xl text-primary">
+          ID:{id}
+        </div>
+        <ProductCounter
+          setQuantity={setCartItemQuantity}
+          quantity={quantity}
+          type="cart"
+          stock={thisStock.stock}
+        />
+        <div className="text-neutral font-bold pr-4">{price}</div>
+
         <div
           onClick={onDelete}
           className={`flex items-center justify-center w-8 h-8 border-2 rounded-full border-red-600 text-red-600 hover:bg-red-600 hover:scale-125 hover:text-white transition-all duration-300 ease-in-out active:scale-75`}
@@ -137,7 +142,7 @@ function CartItem({ cartItemData, productsData, stocks }) {
             </div>
           </div>
         ) : null}
-      </>
+      </div>
     </div>
   );
 }

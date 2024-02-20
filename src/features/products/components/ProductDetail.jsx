@@ -166,6 +166,11 @@ function ProductDetail({ productData }) {
           }
         />
       </div>
+      <div
+      className="text-center mt-4 text-lg text-primary font-bold border-2 border-primary p-4 rounded-lg bg-primary bg-opacity-10 grow-0"
+      >
+        You can add any more comment in your cart!  
+      </div>
       {status === "AVAILABLE" ? (
         <div className="flex items-baseline gap-8 align-bottom">
           <ProductCounter
