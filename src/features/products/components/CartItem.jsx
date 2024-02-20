@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useProduct } from "../contexts/ProductContext";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function CartItem({ cartItemData, productsData, stocks }) {
   const [deleted, setDeleted] = useState(false);
@@ -51,11 +52,12 @@ function CartItem({ cartItemData, productsData, stocks }) {
   return (
     <div className="flex justify-between items-center mt-4 p-2 min-w-full relative">
       <div onClick={test} className="max-w-40 flex-1">
-        <img src={mainImage}></img>
+      <Link to={`/product/${productItemId}`}><img src={mainImage}></img></Link>        
       </div>
       <div className="flex-1">
         <p className="text-neutral font-bold">{name}</p>
-        <p className="text-neutral">{attribute}</p>
+        <p className="text-neutral">{attribute}</p>   
+
       </div>
       {/* for debugging purposes */}
       <div className="flex items-center justify-center text-xl text-primary">
