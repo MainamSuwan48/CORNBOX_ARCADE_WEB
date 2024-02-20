@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { data } from "autoprefixer";
+import { exist } from "joi";
 
 function ProductDetail({ productData }) {
   const { id, name, price, description, status, stock } = productData;
@@ -44,12 +45,15 @@ function ProductDetail({ productData }) {
       quantity: quantity,
       attribute: color.attribute,
     };
-    //check if there is existing item in cart 
-    const existingItem = cart.find(
-      (item) => item.productItemId === id && item.attribute === color.attribute
-    );
+    //check if there is existing item in cart
+    const existingItem = cart.find((item) => item.productItemId === id);
     console.log(existingItem);
+
     if (existingItem) {
+      if (existingItem.attribute != color.attribute) {
+        toast.error("You can't add different color buttons to the same item");
+        return;
+      }
       const newQuantity = existingItem.quantity + quantity;
       console.log(newQuantity, "newQuantity");
       if (newQuantity > stock) {
@@ -74,15 +78,16 @@ function ProductDetail({ productData }) {
 
     console.log(data);
     ///if there is no existing item in cart
-    try {   
-
+    try {
       const result = await addItemToCart(data);
       setQuantity(1);
       console.log(result.data);
       setCart((prevCart) => {
         return [...prevCart, result.data];
       });
-      toast.success(`You have added ${color.attribute} buttons ${quantity} ${name} to your cart`);
+      toast.success(
+        `You have added ${quantity} ${color.attribute} buttons  ${name} to your cart`
+      );
     } catch (error) {
       console.log(error);
       toast.error("Please Login before adding to cart");
@@ -161,18 +166,20 @@ function ProductDetail({ productData }) {
           }
         />
       </div>
-      {status === "AVAILABLE"?(<div className="flex items-baseline gap-8 align-bottom">
-        <ProductCounter
-          type="normal"
-          quantity={quantity}
-          setQuantity={setQuantity}
-          stock={stock}
-        />
-        <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
-        <Link to="/checkout">
-          <ActionButton onClick={addToCart}>CHECKOUT</ActionButton>
-        </Link>
-      </div>):null}
+      {status === "AVAILABLE" ? (
+        <div className="flex items-baseline gap-8 align-bottom">
+          <ProductCounter
+            type="normal"
+            quantity={quantity}
+            setQuantity={setQuantity}
+            stock={stock}
+          />
+          <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
+          <Link to="/checkout">
+            <ActionButton onClick={addToCart}>CHECKOUT</ActionButton>
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }
