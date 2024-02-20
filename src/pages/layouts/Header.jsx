@@ -39,6 +39,7 @@ function Header() {
       setOpenCart(!openCart);
     }
   };
+
   useEffect(() => {
     setCartData(cart);
   }, [cart]);
@@ -71,7 +72,7 @@ function Header() {
       </div>
       {openCart ? (
         <ShoppingCart
-          cartData={cartData}
+          cartData={cart}
           userData={authUser}
           productsData={products}
         />

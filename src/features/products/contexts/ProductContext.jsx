@@ -83,15 +83,15 @@ function ProductContextProvider({ children }) {
     return stocks;
   };
 
+  const getCartData = async () => {
+    if (authUser) {
+      const res = await getCartByUserId(authUser.id);
+      console.log(res.data);
+      console.log(res.data.shoppingCartItem);
+      setCart(res.data.shoppingCartItem);
+    }
+  };
   useEffect(() => {
-    const getCartData = async () => {
-      if (authUser) {
-        const res = await getCartByUserId(authUser.id);
-        console.log(res.data);
-        console.log(res.data.shoppingCartItem);
-        setCart(res.data.shoppingCartItem);
-      }
-    };
     getCartData();
   }, [authUser]);
 
@@ -128,6 +128,7 @@ function ProductContextProvider({ children }) {
         stocks,
         setStocks,
         updateCartItemAttribute,
+        getCartData
       }}
     >
       {children}

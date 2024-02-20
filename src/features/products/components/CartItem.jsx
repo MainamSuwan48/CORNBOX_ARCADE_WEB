@@ -10,16 +10,21 @@ import { Link } from "react-router-dom";
 
 function CartItem({ cartItemData, productsData, stocks }) {
   const [deleted, setDeleted] = useState(false);
-  const [editAttribute, setEditAttribute] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const product = productsData.find(
     (product) => product.id === cartItemData.productItemId
   );
   const { mainImage, name, price } = product;
   const { id, attribute, quantity, productItemId } = cartItemData;
-  const { updateCartItem, setCart, deleteCartItem, updateCartItemAttribute } =
-    useProduct();
+  const {
+    updateCartItem,
+    setCart,
+    deleteCartItem,
+    updateCartItemAttribute,
+    getCartData,
+  } = useProduct();
   const [cartItemQuantity, setCartItemQuantity] = useState(quantity);
-  const [cartItemAttribute, setCartItemAttribute] = useState("HEEEEE");
+  const [cartItemAttribute, setCartItemAttribute] = useState(attribute);
 
   const thisStock = stocks.find((stock) => stock.id === productItemId);
 
@@ -53,10 +58,19 @@ function CartItem({ cartItemData, productsData, stocks }) {
     }, 2000);
   };
 
+  const handleInputChange = (e) => {
+    setCartItemAttribute(e.target.value);
+  };
+
   const upDateAttribute = async () => {
-    console.log(cartItemAttribute)
-    const response = await updateCartItemAttribute(id, cartItemAttribute);
-    toast.success("Attribute updated");
+    try {
+      const response = await updateCartItemAttribute(id, cartItemAttribute);
+      setIsEdit(false);
+      await getCartData();
+      toast.success("Attribute updated");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -68,10 +82,32 @@ function CartItem({ cartItemData, productsData, stocks }) {
       </div>
       <div className="flex flex-col mr-3 items-start">
         <p className="text-neutral font-bold">{name}</p>
-        <p 
-        className="text-neutral border-2 border-primary p-1 transition-all hover:bg-primary hover:text-base-100 cursor-pointer"
-       >
-          {attribute}
+        <p className="text-neutral border-2 border-primary p-1 transition-all hover:bg-primary hover:text-base-100 cursor-pointer">
+          {isEdit ? (
+            <div>
+              <input
+                onChange={handleInputChange}
+                value={cartItemAttribute}
+                className="border-2 bg-transparent"
+              ></input>
+              <button
+                className="border-2 border-primary bg-primary text-base-100 hover:bg-base-100 hover:text-primary transition-all px-2"
+                onClick={upDateAttribute}
+              >
+                Update
+              </button>
+            </div>
+          ) : (
+            <>
+              {cartItemAttribute}
+              <button
+                className="border-2 border-primary bg-primary text-base-100 hover:bg-base-100 hover:text-primary transition-all px-1 ml-1"
+                onClick={() => setIsEdit(true)}
+              >
+                Edit
+              </button>
+            </>
+          )}
         </p>
       </div>
       {/* for debugging purposes */}
