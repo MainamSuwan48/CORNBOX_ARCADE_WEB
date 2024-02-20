@@ -176,7 +176,7 @@ function ProductDetail({ productData }) {
           />
           <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
           <Link to="/checkout">
-            <ActionButton onClick={addToCart}>CHECKOUT</ActionButton>
+            <ActionButton onClick={checkOut}>BUYNOW</ActionButton>
           </Link>
         </div>
       ) : null}
