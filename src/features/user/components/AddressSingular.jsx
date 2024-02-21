@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
-function AddressSingular({ address}) {
+function AddressSingular({ address, type }) {
   const param = useParams();
   const [isEdit, setIsEdit] = useState();
   const { deleteAddressById, setAddresses } = useUser();
@@ -22,7 +22,7 @@ function AddressSingular({ address}) {
       console.log(response);
       setAddresses((prevAddresses) =>
         prevAddresses.filter((address) => address.id !== id)
-      );     
+      );
       toast.success("Address Deleted");
     } catch (err) {
       console.log(err);
@@ -35,6 +35,36 @@ function AddressSingular({ address}) {
       setLoading(false);
     }
   }, [address]);
+
+  if (type === "shipping") {
+    return (
+      <div className="flex items-center relative bg-transparent border-2 rounded min-w-80 scroll-mt-4 p-5">
+        <div className="flex justify-between border-b-2 mx-2 border-accent py-2">
+          <p className="text-2xl font-bold text-primary drop-shadow-sm ">
+            Adresses ID :{id}
+          </p>
+        </div>
+        <div className="text-lg">
+          <span className="text-primary font-bold mx-2">
+            Line 1: 
+          </span> 
+          {addressLine1} 
+          <span className="text-primary font-bold mx-2">
+            Line 2: 
+          </span>  
+          {addressLine2} 
+          <span className="text-primary font-bold mx-2">
+            City: 
+          </span> 
+          {city} 
+          <span className="text-primary font-bold mx-2">
+            Postal Code: 
+          </span> 
+          {postalCode}
+        </div> 
+      </div>
+    );
+  }
 
   return loading ? (
     <div>Loading...</div>

@@ -7,7 +7,7 @@ import AddressCreator from "./AddressCreator";
 
 function Addresses() {
   const [isLoading, setIsLoading] = useState(true);
-  const { getAddressesByUserId, addresses } = useUser();
+  const { getAddressesByUserId, addresses, shippingAddress } = useUser();
   const param = useParams();
   const [watch, setWatch] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -19,7 +19,9 @@ function Addresses() {
 
   useEffect(() => {
     if (addresses) {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   }, [addresses]);
   return loading ? (
@@ -45,10 +47,16 @@ function Addresses() {
         )}
       </div>
 
+      <div>
+        <div className="flex flex-col justify-start items-start">
+          <div className="text-3xl">Your Shipping Address</div>
+          <AddressSingular address={shippingAddress} type={"shipping"}/>
+        </div>
+      </div>
+
+      <div className="text-3xl">Your Shipping Address</div>
       <div className="flex gap-2 flex-wrap justify-start">
-        {isCreating ? (
-          <AddressCreator onClose={onClose} watch={watch} setWatch={setWatch} />
-        ) : null}
+        {isCreating ? <AddressCreator onClose={onClose} /> : null}
         {addresses && addresses.length > 0 ? (
           addresses
             .sort((a, b) => b.id - a.id)

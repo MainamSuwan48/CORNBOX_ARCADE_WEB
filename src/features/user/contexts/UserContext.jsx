@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
   const { authUser } = useAuth();
   const [user, setUser] = useState(authUser);
   const [addresses, setAddresses] = useState([]);
+  const [shippingAddress, setShippingAddress] = useState({});
 
   const updateUserById = async (id, data) => {
     const response = await UserApi.upDateUserById(id, data);
@@ -38,13 +39,16 @@ export const UserProvider = ({ children }) => {
   const fetchAddresses = async () => {
     const response = await getAddressesByUserId(authUser.id);
     console.log(response, "addresses in fetchAddresses")
+    const lastAddress = response[response.length - 1];
+    console.log(lastAddress, "last address in fetchAddresses") 
     setAddresses(response);
+    setShippingAddress(lastAddress);
   };
 
   useEffect(() => {
     if (authUser) {
       setUser(authUser);
-      fetchAddresses();
+      fetchAddresses();      
     }
   }, [authUser]);
 
@@ -65,6 +69,8 @@ export const UserProvider = ({ children }) => {
         setAddresses,
         updateAddressById,
         deleteAddressById,
+        shippingAddress,
+        setShippingAddress,
       }}
     >
       {children}

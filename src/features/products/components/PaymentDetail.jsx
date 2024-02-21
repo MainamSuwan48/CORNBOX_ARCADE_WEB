@@ -53,6 +53,10 @@ function PaymentDetail() {
   const shippingAddressId = 3;
 
   const handleCheckout = async () => {
+    if (!cart.length) {
+      toast.error("Cart is Empty Why don't you add some products first?");
+      return;
+    }
     try {
       const order = await createOrder(authUser.id, shippingAddressId, cartId);
       console.log(order, "order in payment detail");
