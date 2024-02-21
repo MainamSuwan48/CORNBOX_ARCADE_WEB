@@ -6,11 +6,13 @@ import { useProduct } from "../contexts/ProductContext";
 import { useUser } from "../../user/contexts/UserContext";
 import { toast } from "sonner";
 import { useOrder } from "../contexts/OrderContext";
+import { useNavigate } from "react-router-dom";
 
 function PaymentDetail() {
+  const navigate = useNavigate(); 
   const { authUser } = useAuth();
   const { addresses } = useUser();
-  const { cartId, cart, stocks, updateStock } = useProduct();
+  const { cartId, cart, stocks, updateStock, deleteCart } = useProduct();
   const { createOrder, createOrderItems } = useOrder();
 
   const newStock = (cart, stocks) => {
@@ -59,7 +61,9 @@ function PaymentDetail() {
       console.log(orderItem, "orderItem in payment detail");
       console.log(cart, "cart in payment detail");
       const newStocks = newStock(cart, stocks);
+      await deleteCart(cartId);
       await upDateStocks(newStocks);
+      navigate(`/user/${authUser.id}/order`);
       toast.success("Order Created Successfully");
     } catch (error) {
       toast.error(error.message);

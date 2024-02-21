@@ -73,6 +73,12 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
+  const deleteCart = async (cartId) => {
+    const response = await productApi.deleteCart(cartId);
+    setCart([]);
+    return response;
+  };
+
   const getProductsData = async () => {
     try {
       const response = await fetchProducts();
@@ -94,7 +100,7 @@ function ProductContextProvider({ children }) {
   const getCartData = async () => {
     if (authUser) {
       const res = await getCartByUserId(authUser.id);
-      setCartId(res.data.id);     
+      setCartId(res.data.id);
       setCart(res.data.shoppingCartItem);
     }
   };
@@ -138,7 +144,7 @@ function ProductContextProvider({ children }) {
         getCartData,
         updateStock,
         cartId,
-        
+        deleteCart,
       }}
     >
       {children}

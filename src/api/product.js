@@ -9,5 +9,6 @@ export const addItemToCart = (data) => axios.post("/product/cart/add", data);
 export const updateCartItem = (id, data) =>
   axios.put(`/product/cart/item/${id}`, data);
 export const deleteCartItem = (id) => axios.delete(`/product/cart/item/${id}`);
+export const deleteCart = (id) => axios.delete(`/product/cart/${id}`);
 export const updateStock = (id, data) =>
   axios.put(`/product/${id}`, data);
