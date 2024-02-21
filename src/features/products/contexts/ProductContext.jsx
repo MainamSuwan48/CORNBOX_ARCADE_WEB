@@ -32,6 +32,7 @@ function ProductContextProvider({ children }) {
 
   //cart handler
   const [cart, setCart] = useState([]);
+  const [cartId, setCartId] = useState(null);
   const createCart = async (data) => {
     const response = await productApi.createCart(data);
     return response;
@@ -93,8 +94,7 @@ function ProductContextProvider({ children }) {
   const getCartData = async () => {
     if (authUser) {
       const res = await getCartByUserId(authUser.id);
-      // console.log(res.data);
-      // console.log(res.data.shoppingCartItem);
+      setCartId(res.data.id);     
       setCart(res.data.shoppingCartItem);
     }
   };
@@ -137,6 +137,8 @@ function ProductContextProvider({ children }) {
         updateCartItemAttribute,
         getCartData,
         updateStock,
+        cartId,
+        
       }}
     >
       {children}

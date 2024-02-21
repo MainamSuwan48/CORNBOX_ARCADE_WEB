@@ -10,9 +10,8 @@ import { useOrder } from "../contexts/OrderContext";
 function PaymentDetail() {
   const { authUser } = useAuth();
   const { addresses } = useUser();
-  const { cart, stocks, updateStock } = useProduct();
-  const {createOrder, createOrderItems} = useOrder();
-
+  const { cartId, cart, stocks, updateStock } = useProduct();
+  const { createOrder, createOrderItems } = useOrder();
 
   const newStock = (cart, stocks) => {
     const newStock = stocks.map((stock) => {
@@ -49,24 +48,19 @@ function PaymentDetail() {
     return response;
   };
 
-  const shippingAddressId = 1;
+  const shippingAddressId = 3;
 
   const handleCheckout = async () => {
-        try {
-      const order = await createOrder(authUser.id, shippingAddressId);
-      const orderItems = cart.map((item) => {
-        return {
-          productId: item.productItemId,
-          quantity: item.quantity,
-          price: item.price,
-        };
-      });
+    try {
+      const order = await createOrder(authUser.id, shippingAddressId, cartId);
+      console.log(order, "order in payment detail");
+      const orderId = order.data.id;
+      const orderItem = await createOrderItems(orderId, cartId);
+      console.log(orderItem, "orderItem in payment detail");
+      console.log(cart, "cart in payment detail");
       const newStocks = newStock(cart, stocks);
       await upDateStocks(newStocks);
-      console.log(newStocks, "newStocks in payment detail");
-      console.log(shippingAddressId, "shippingAddressId in payment detail");
-      console.log(cart, "cart in payment detail");
-      toast.success("Checkout success");
+      toast.success("Order Created Successfully");
     } catch (error) {
       toast.error(error.message);
     }

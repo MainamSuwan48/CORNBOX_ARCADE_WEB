@@ -4,8 +4,8 @@ export const createOrder = (id, shippingAddressId) => {
   return axios.post(`/order/create/${id}`, shippingAddressId);
 };
 
-export const createOrderItems = (orderId, data) => {
-  return axios.post(`/order/createItems/${orderId}`, data);
+export const createOrderItems = (id, data) => {
+  return axios.post(`/order/createItems/${id}`, data);
 };
 
 export const getOrderByUserId = (id) => {
