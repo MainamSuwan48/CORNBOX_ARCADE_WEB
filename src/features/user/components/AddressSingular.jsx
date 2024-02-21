@@ -36,32 +36,71 @@ function AddressSingular({ address, type }) {
     }
   }, [address]);
 
-  if (type === "shipping") {
+  if (type === "billing") {
     return (
-      <div 
-      className="flex items-start relative bg-black border-2 rounded min-w-80 scroll-mt-4 p-5 gap-4"
-      style={{backgroundImage: "url('https://img.freepik.com/free-photo/cardboard-wallpaper-template_1194-6785.jpg?w=1380&t=st=1708528323~exp=1708528923~hmac=f7b28358d03702ac41b60cec7a1d1a6c81dc304c0758df1a8a60f97de16bf7bb')"}}
+      <div
+        className="flex items-center border-2 rounded min-w-80 scroll-mt-4 p-5 gap-4"
+        style={{
+          backgroundImage:
+            "url('https://img.freepik.com/free-photo/cardboard-wallpaper-template_1194-6785.jpg?w=1380&t=st=1708528323~exp=1708528923~hmac=f7b28358d03702ac41b60cec7a1d1a6c81dc304c0758df1a8a60f97de16bf7bb')",
+        }}
       >
         <div className="w-full h-full">
-          <div className="flex flex-col justify-center items-center border-2 mx-2 border-accent py-2 p-2 glass text-black">
-          <span className="text-primary font-bold ">Line 1:</span>
-          {addressLine1}
-          <span className="text-primary font-bold ">Line 2:</span>
-          {addressLine2}
-          <span className="text-primary font-bold ">City:</span>
-          {city}
-          <span className="text-primary font-bold ">Postal Code:</span>
-          {postalCode}
+          <div
+            className="flex justify-start gap-4 items-center mx-2 py-2 p-2 backdrop-blur-lg  text-black border-2
+          border-black"
+          >
+            <span className="text-red-600 font-bold ">Line 1:</span>
+            {addressLine1}
+            <span className="text-red-600 font-bold ">Line 2:</span>
+            {addressLine2}
+            <span className="text-red-600 font-bold ">City:</span>
+            {city}
+            <span className="text-red-600 font-bold ">Postal Code:</span>
+            {postalCode}
           </div>
         </div>
         <div className="text-lg flex flex-col">
-        <p className="text-2xl font-bold text-primary drop-shadow-sm border text-nowrap py-2 px-1 bg-slate-800">
-              Adresses ID
-            </p>
-            <p className="text-5xl font-bold text-red-600 drop-shadow-sm text-center">
-              {id}
-            </p>
-          
+          <p className="text-2xl font-bold text-primary drop-shadow-sm border text-nowrap py-2 px-1 bg-slate-800">
+            Adresses ID {id}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "shipping") {
+    return (
+      <div
+        className="flex items-start relative bg-black border-2 rounded min-w-80 scroll-mt-4 p-5 gap-4"
+        style={{
+          backgroundImage:
+            "url('https://img.freepik.com/free-photo/cardboard-wallpaper-template_1194-6785.jpg?w=1380&t=st=1708528323~exp=1708528923~hmac=f7b28358d03702ac41b60cec7a1d1a6c81dc304c0758df1a8a60f97de16bf7bb')",
+        }}
+      >
+        <div className="w-full h-full">
+          <div className="flex justify-center gap-4 items-center border-2 mx-2 border-accent py-2 p-2 glass text-black">
+            <div className="flex flex-col">
+              <span className="text-primary font-bold ">Line 1:</span>
+              {addressLine1}
+              <span className="text-primary font-bold ">Line 2:</span>
+              {addressLine2}
+            </div>
+            <div className="flex flex-col">
+              <span className="text-primary font-bold ">City:</span>
+              {city}
+              <span className="text-primary font-bold ">Postal Code:</span>
+              {postalCode}
+            </div>
+          </div>
+        </div>
+        <div className="text-lg flex flex-col">
+          <p className="text-2xl font-bold text-primary drop-shadow-sm border text-nowrap py-2 px-1 bg-slate-800">
+            Adresses ID
+          </p>
+          <p className="text-5xl font-bold text-red-600 drop-shadow-sm text-center">
+            {id}
+          </p>
         </div>
       </div>
     );

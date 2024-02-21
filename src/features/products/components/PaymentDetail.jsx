@@ -73,7 +73,7 @@ function PaymentDetail() {
   };
   return (
     <>
-      <div className="flex flex-col p-8 bg-black w-96 rounded-none rounded-xl justify-center items-center gap-2">
+      <div className="sticky -top-36 flex flex-col p-8 bg-black w-96 rounded-xl justify-center items-center gap-2 z-50">
         <div>
           <img src={QrPic}></img>
         </div>

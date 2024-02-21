@@ -1,19 +1,61 @@
 import { useState } from "react";
 
 import OrderItemList from "./OrderItemList";
+import { useEffect } from "react";
+import { useOrder } from "../contexts/OrderContext";
+import { useUser } from "../../user/contexts/UserContext";
+import AddressSingular from "../../user/components/AddressSingular";
 
-function UserOrder({ status }) {
+function UserOrder({ order }) {
   const [isShow, setIsShow] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { addresses } = useUser();
+  const { orders } = useOrder();
+
+  const {
+    id,
+    orderItems,
+    userId,
+    shippingAddressId,
+    paymentStatus,
+    status,
+    updatedAt,
+  } = order;
   const handleShow = () => {
     setIsShow(!isShow);
   };
+  const dateOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Asia/Bangkok",
+  };
+  const dateOrdered = new Date(updatedAt);
+  console.log(dateOrdered, "updated at in user order");
+  const formattedDate = dateOrdered.toLocaleDateString("en-US", dateOptions);
+
+  const shippedAddress = addresses.find(
+    (address) => address.id === order.shippingAddressId
+  );
+  console.log(shippedAddress, "shipped address in user order");
+
+  useEffect(() => {
+    if (order) {
+      setLoading(false);
+    }
+  }, [orders]);
+
   return (
     <div className="transition-all flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
           <div>
-            <h1 className="text-lg font-bold">Order ID: 123456</h1>
-            <p>Order Date: 2021-10-10</p>
+            <h1 className="text-lg font-bold">Order ID: {id}</h1>
+            <h1 className="text-lg font-bold">User ID: {userId}</h1>
+            <p>Ordered At: {formattedDate} </p>
           </div>
         </div>
         <div className="flex justify-between max-w-4/12 gap-4">
@@ -23,12 +65,20 @@ function UserOrder({ status }) {
           >
             View Order
           </button>
-          <p className="flex justify-center items-center transition-all p-4 w-36 border-2 border-primary font-black hover:text-base-300 hover:bg-primary">
+          <p className="flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
+            {paymentStatus}
+          </p>
+          <p className="flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
             {status}
           </p>
         </div>
       </div>
-      <div className={`transition-all duration-500 ${isShow ? "h-auto opacity-100" : "h-0 opacity-0"} overflow-hidden`}>
+      <div
+        className={`transition-all duration-500 ${
+          isShow ? "h-auto opacity-100" : "h-0 opacity-0"
+        } overflow-hidden`}
+      >
+        <AddressSingular address={shippedAddress} type="billing" />
         <OrderItemList />
       </div>
     </div>

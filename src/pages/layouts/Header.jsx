@@ -60,7 +60,7 @@ function Header() {
 
   return (
     <div ref={cartDropDown}>
-      <div className="fixed w-full h-20 top-0 z-50 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
+      <div className="fixed w-full h-20 top-0 z-40 drop-shadow-lg backdrop-blur-2xl flex justify-between items-center px-4 py-2">
         <Link to="/">
           <LogoCornbox />
         </Link>
