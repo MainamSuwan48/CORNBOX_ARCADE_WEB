@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function PaymentDetail() {
   const navigate = useNavigate(); 
   const { authUser } = useAuth();
-  const { addresses } = useUser();
+  const { shippingAddress} = useUser();
   const { cartId, cart, stocks, updateStock, deleteCart } = useProduct();
   const { createOrder, createOrderItems } = useOrder();
 
@@ -50,15 +50,20 @@ function PaymentDetail() {
     return response;
   };
 
-  const shippingAddressId = 3;
+
 
   const handleCheckout = async () => {
     if (!cart.length) {
       toast.error("Cart is Empty Why don't you add some products first?");
       return;
     }
+    if (!shippingAddress) {
+      toast.error("You don't have any address");
+      return;
+    }
     try {
-      const order = await createOrder(authUser.id, shippingAddressId, cartId);
+
+      const order = await createOrder(authUser.id, shippingAddress.id, cartId);
       console.log(order, "order in payment detail");
       const orderId = order.data.id;
       const orderItem = await createOrderItems(orderId, cartId);
