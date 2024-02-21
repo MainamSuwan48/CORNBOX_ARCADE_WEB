@@ -5,11 +5,14 @@ import { useAuth } from "../../auth/contexts/AuthContext";
 import { useProduct } from "../contexts/ProductContext";
 import { useUser } from "../../user/contexts/UserContext";
 import { toast } from "sonner";
+import { useOrder } from "../contexts/OrderContext";
 
 function PaymentDetail() {
   const { authUser } = useAuth();
   const { addresses } = useUser();
   const { cart, stocks, updateStock } = useProduct();
+  const {createOrder, createOrderItems} = useOrder();
+
 
   const newStock = (cart, stocks) => {
     const newStock = stocks.map((stock) => {
@@ -31,16 +34,33 @@ function PaymentDetail() {
 
   const upDateStocks = async (newStocks) => {
     newStocks.forEach(async (stock) => {
-      console.log(stock.id, stock.newStock, "stock id and new stock in payment detail")
-      // const response = await updateStock(stock.id, stock.newStock);
-      // return response;
+      console.log(
+        stock.id,
+        stock.newStock,
+        "stock id and new stock in payment detail"
+      );
+      const response = await updateStock(stock.id, stock.newStock);
+      return response;
     });
+  };
+
+  const upDateStock = async (id, newStock) => {
+    const response = await updateStock(id, newStock);
+    return response;
   };
 
   const shippingAddressId = 1;
 
   const handleCheckout = async () => {
-    try {
+        try {
+      const order = await createOrder(authUser.id, shippingAddressId);
+      const orderItems = cart.map((item) => {
+        return {
+          productId: item.productItemId,
+          quantity: item.quantity,
+          price: item.price,
+        };
+      });
       const newStocks = newStock(cart, stocks);
       await upDateStocks(newStocks);
       console.log(newStocks, "newStocks in payment detail");

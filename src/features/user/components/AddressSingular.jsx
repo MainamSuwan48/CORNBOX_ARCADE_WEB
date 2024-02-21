@@ -5,12 +5,14 @@ import AddressEditor from "./AddressEditor";
 import { useUser } from "../contexts/UserContext";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
-function AddressSingular({ address, setWatch, watch }) {
+function AddressSingular({ address}) {
   const param = useParams();
   const [isEdit, setIsEdit] = useState();
   const { deleteAddressById, setAddresses } = useUser();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
+  const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -20,8 +22,7 @@ function AddressSingular({ address, setWatch, watch }) {
       console.log(response);
       setAddresses((prevAddresses) =>
         prevAddresses.filter((address) => address.id !== id)
-      );
-      setWatch(!watch);
+      );     
       toast.success("Address Deleted");
     } catch (err) {
       console.log(err);
@@ -29,7 +30,15 @@ function AddressSingular({ address, setWatch, watch }) {
     }
   };
 
-  return (
+  useEffect(() => {
+    if (address) {
+      setLoading(false);
+    }
+  }, [address]);
+
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <div className="relative bg-transparent border-2 rounded min-w-80 scroll-mt-4 p-5 min-h-60">
       <div
         onClick={handleDelete}

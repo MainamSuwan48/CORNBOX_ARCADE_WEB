@@ -4,7 +4,7 @@ import { useUser } from "../contexts/UserContext";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
 
-function AddressEditor({ address, setIsEdit, setWatch, watch }) {
+function AddressEditor({ address, setIsEdit,}) {
   const param = useParams();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
   const { updateAddressById, setAddresses } = useUser();
@@ -35,8 +35,7 @@ function AddressEditor({ address, setIsEdit, setWatch, watch }) {
       );
 
       setIsEdit(false);
-      toast.success("Address Updated");
-      setWatch(!watch);
+      toast.success("Address Updated");     
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.error);

@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import * as orderApi from "../../../api/order";
 import { useState } from "react";
+import { useContext } from "react";
 
 const OrderContext = createContext();
 
@@ -32,6 +33,9 @@ function OrderContextProvider({ children }) {
       value={{
         orders,
         setOrders,
+        createOrder,
+        createOrderItems,
+        getOrderByUserId,        
       }}
     >
       {children}

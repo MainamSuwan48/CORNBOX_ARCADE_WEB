@@ -24,9 +24,9 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
-  const updateStock = async (id, newStock) => {
-    data = { newStock: newStock };
-    const response = await productApi.updateStock(id, data);
+  const updateStock = async (id, stock) => {
+    const newStock = { newStock: stock };
+    const response = await productApi.updateStock(id, newStock);
     return response;
   };
 

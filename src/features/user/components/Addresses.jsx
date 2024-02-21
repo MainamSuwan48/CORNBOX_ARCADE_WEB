@@ -11,19 +11,21 @@ function Addresses() {
   const param = useParams();
   const [watch, setWatch] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-
-
+  const [loading, setLoading] = useState(true);
 
   const onClose = () => {
     setIsCreating(false);
   };
 
   useEffect(() => {
-   
-  }, [addresses, watch]);
-  return (
+    if (addresses) {
+      setLoading(false);
+    }
+  }, [addresses]);
+  return loading ? (
+    <div>loading...</div>
+  ) : (
     <div className="flex flex-col gap-4">
-    
       <div className="flex justify-start gap-10">
         <div className="text-3xl">Create Address</div>
         {isCreating ? (
@@ -51,12 +53,7 @@ function Addresses() {
           addresses
             .sort((a, b) => b.id - a.id)
             .map((address, index) => (
-              <AddressSingular
-                key={index}
-                address={address}
-                setWatch={setWatch}
-                watch={watch}
-              />
+              <AddressSingular key={index} address={address} />
             ))
         ) : (
           <p>loading...</p>

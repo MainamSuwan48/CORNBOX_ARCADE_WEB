@@ -12,7 +12,7 @@ function AddressCreator({ watch, setWatch, onClose }) {
     city: "",
     postalCode: "",
   });
-  const { createAddressByUserId } = useUser();
+  const { createAddressByUserId, setAddresses } = useUser();
   const handleInputChange = (e) => {
     setNewAddress({ ...newAddress, [e.target.name]: e.target.value });
   };
@@ -21,7 +21,9 @@ function AddressCreator({ watch, setWatch, onClose }) {
     e.preventDefault();
     try {
       const response = await createAddressByUserId(param.userId, newAddress);
+      setAddresses((prevAddresses) => [...prevAddresses, response]);
       console.log(response);
+
       toast.success("Address Created");
       onClose();
 
