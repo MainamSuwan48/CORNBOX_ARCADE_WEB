@@ -78,7 +78,7 @@ function UserOrder({ order }) {
           isShow ? "h-auto opacity-100" : "h-0 opacity-0"
         } overflow-hidden`}
       >
-        <AddressSingular address={shippedAddress} type="billing" />
+        {/* <AddressSingular address={shippedAddress} type="billing" /> */}
         <OrderItemList orderItems={orderItem} />
       </div>
     </div>

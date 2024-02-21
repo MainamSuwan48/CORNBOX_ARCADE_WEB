@@ -67,9 +67,12 @@ function PaymentDetail() {
       await deleteCart(cartId);
       await upDateStocks(newStocks);
       const newOrder = await getOrderByUserId(authUser.id);
-      setOrders(newOrder);
-      navigate(`/user/${authUser.id}/order`);
-      toast.success("Order Created Successfully");
+      console.log(newOrder.data, "new order in payment detail");
+      setOrders(newOrder.data);
+      setTimeout(() => {
+        navigate(`/user/${authUser.id}/order`);
+      }, 2000);
+      toast.success("Order Created Successfully Redirecting to Orders Page");
     } catch (error) {
       toast.error(error.message);
     }

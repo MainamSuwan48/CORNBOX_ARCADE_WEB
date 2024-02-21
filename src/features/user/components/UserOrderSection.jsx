@@ -9,9 +9,6 @@ function UserOrderSection() {
   const { orders } = useOrder();
 
   useEffect(() => {
-    if (!orders) {
-      setLoading(true);
-    }
     if (orders) {
       setLoading(false);
     }

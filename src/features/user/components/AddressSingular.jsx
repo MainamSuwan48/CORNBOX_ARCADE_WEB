@@ -36,7 +36,7 @@ function AddressSingular({ address, type }) {
     if (address) {
       setLoading(false);
     }
-  }, [address,orders]);
+  }, [address]);
 
   if (type === "billing") {
     return loading ? null : (
