@@ -48,8 +48,7 @@ function Header() {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (cartDropDown.current && !cartDropDown.current.contains(e.target)) {
-        console.log(cartDropDown.current);
+      if (cartDropDown.current && !cartDropDown.current.contains(e.target)) {    
         setOpenCart(false);
       }
     };

@@ -9,7 +9,7 @@ import { toast } from "sonner";
 function AddressSingular({ address, setWatch, watch }) {
   const param = useParams();
   const [isEdit, setIsEdit] = useState();
-  const { deleteAddressById } = useUser();
+  const { deleteAddressById, setAddresses } = useUser();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
 
   const handleDelete = async () => {
@@ -18,9 +18,11 @@ function AddressSingular({ address, setWatch, watch }) {
       console.log(param.id);
       const response = await deleteAddressById(param.userId, id);
       console.log(response);
+      setAddresses((prevAddresses) =>
+        prevAddresses.filter((address) => address.id !== id)
+      );
       setWatch(!watch);
       toast.success("Address Deleted");
-      
     } catch (err) {
       console.log(err);
       toast.error("Address Not Deleted");

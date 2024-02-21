@@ -15,17 +15,17 @@ function CheckOutLayout() {
 
   useEffect(() => {
     if (authUser) {
-      setTimeout(() => {
+      // setTimeout(() => {
         setIsLoading(false);
-      }, 1000);    
+      // }, 1000);    
     }
   }, [authUser]);
 
-  console.log(authUser, cart, products, "im here in checkout layout");
+  // console.log(authUser, cart, products, "im here in checkout layout");
   return (
     isLoading ? (
       <div
-      className="h-screen flex-1"
+      className="min-h-screen flex-1"
       >
 
         <div className="text-6xl font-bold text-center text-red-600 mt-20">Loading...</div>
@@ -37,7 +37,7 @@ function CheckOutLayout() {
       </div>
    
     ) : (
-      <div className="flex mt-6 pt-20 h-full flex-1 justify-center items-start p-8 gap-8 backdrop-blur-sm -mb-8">
+      <div className="flex mt-6 pt-20 h-with_header flex-1 justify-center items-start p-8 gap-8 backdrop-blur-sm -mb-8">
         <CheckOutDetail
           userData={authUser}
           cartData={cart}

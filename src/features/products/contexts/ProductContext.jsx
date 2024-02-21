@@ -68,7 +68,7 @@ function ProductContextProvider({ children }) {
   const getProductsData = async () => {
     try {
       const response = await fetchProducts();
-      console.log(response.data);
+      // console.log(response.data);
       setProducts(response.data);
       return response.data;
     } catch (error) {
@@ -79,15 +79,15 @@ function ProductContextProvider({ children }) {
     const stocks = productData.map((product) => {
       return { id: product.id, stock: product.stock };
     });
-    console.log(stocks, "stock ********************");
+    // console.log(stocks, "stock ********************");
     return stocks;
   };
 
   const getCartData = async () => {
     if (authUser) {
       const res = await getCartByUserId(authUser.id);
-      console.log(res.data);
-      console.log(res.data.shoppingCartItem);
+      // console.log(res.data);
+      // console.log(res.data.shoppingCartItem);
       setCart(res.data.shoppingCartItem);
     }
   };
@@ -100,7 +100,7 @@ function ProductContextProvider({ children }) {
       try {
         const productsData = await getProductsData();
         const stocksData = getStocks(productsData);
-        console.log(stocksData, "stocksData");
+        // console.log(stocksData, "stocksData");
         setStocks(stocksData);
       } catch (error) {
         console.log(error);

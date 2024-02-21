@@ -6,29 +6,20 @@ import AddressSingular from "./AddressSingular";
 import AddressCreator from "./AddressCreator";
 
 function Addresses() {
-  const [frontAddress, setFrontAddress] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const { getAddressesByUserId, addresses } = useUser();
   const param = useParams();
   const [watch, setWatch] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
-  const fetchAddresses = async () => {
-    console.log(param);
-    try {
-      const response = await getAddressesByUserId(param.userId);
-      console.log(response);
-      setFrontAddress(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
   const onClose = () => {
     setIsCreating(false);
   };
 
   useEffect(() => {
-    fetchAddresses();
+   
   }, [addresses, watch]);
   return (
     <div className="flex flex-col gap-4">
@@ -56,8 +47,8 @@ function Addresses() {
         {isCreating ? (
           <AddressCreator onClose={onClose} watch={watch} setWatch={setWatch} />
         ) : null}
-        {frontAddress && frontAddress.length > 0 ? (
-          frontAddress
+        {addresses && addresses.length > 0 ? (
+          addresses
             .sort((a, b) => b.id - a.id)
             .map((address, index) => (
               <AddressSingular

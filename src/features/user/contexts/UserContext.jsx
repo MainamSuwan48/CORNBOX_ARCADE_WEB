@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import * as UserApi from "../../../api/user";
+import { useAuth } from "../../auth/contexts/AuthContext";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const { authUser } = useAuth();
+  const [user, setUser] = useState(authUser);
   const [addresses, setAddresses] = useState([]);
 
   const updateUserById = async (id, data) => {
@@ -33,6 +35,18 @@ export const UserProvider = ({ children }) => {
     const response = await UserApi.deleteAddressById(userId, idData);
     return response;
   };
+  const fetchAddresses = async () => {
+    const response = await getAddressesByUserId(authUser.id);
+    console.log(response, "addresses in fetchAddresses")
+    setAddresses(response);
+  };
+
+  useEffect(() => {
+    if (authUser) {
+      setUser(authUser);
+      fetchAddresses();
+    }
+  }, [authUser]);
 
 
   const test = () => {

@@ -4,10 +4,10 @@ import { useUser } from "../contexts/UserContext";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
 
-function AddressEditor({ address, setIsEdit ,setWatch,watch}) {
+function AddressEditor({ address, setIsEdit, setWatch, watch }) {
   const param = useParams();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
-  const { updateAddressById } = useUser();
+  const { updateAddressById, setAddresses } = useUser();
   const [input, setInput] = useState({
     id: id,
     addressLine1: addressLine1,
@@ -25,10 +25,18 @@ function AddressEditor({ address, setIsEdit ,setWatch,watch}) {
     try {
       const response = await updateAddressById(param.userId, input);
       console.log(response);
+      setAddresses((prevAddresses) =>
+        prevAddresses.map((address) => {
+          if (address.id === input.id) {
+            return { ...address, ...input };
+          }
+          return address;
+        })
+      );
+
       setIsEdit(false);
       toast.success("Address Updated");
       setWatch(!watch);
-
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.error);
