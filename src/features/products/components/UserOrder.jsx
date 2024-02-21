@@ -14,7 +14,7 @@ function UserOrder({ order }) {
 
   const {
     id,
-    orderItems,
+    orderItem,
     userId,
     shippingAddressId,
     paymentStatus,
@@ -40,7 +40,7 @@ function UserOrder({ order }) {
   const shippedAddress = addresses.find(
     (address) => address.id === order.shippingAddressId
   );
-  console.log(shippedAddress, "shipped address in user order");
+
 
   useEffect(() => {
     if (order) {
@@ -48,7 +48,7 @@ function UserOrder({ order }) {
     }
   }, [orders]);
 
-  return (
+  return loading ? null : (
     <div className="transition-all flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
@@ -79,7 +79,7 @@ function UserOrder({ order }) {
         } overflow-hidden`}
       >
         <AddressSingular address={shippedAddress} type="billing" />
-        <OrderItemList />
+        <OrderItemList orderItems={orderItem} />
       </div>
     </div>
   );

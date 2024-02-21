@@ -6,11 +6,13 @@ import { useUser } from "../contexts/UserContext";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { useOrder } from "../../products/contexts/OrderContext";
 
 function AddressSingular({ address, type }) {
   const param = useParams();
   const [isEdit, setIsEdit] = useState();
   const { deleteAddressById, setAddresses } = useUser();
+  const { orders } = useOrder();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
   const [loading, setLoading] = useState(false);
 
@@ -34,10 +36,10 @@ function AddressSingular({ address, type }) {
     if (address) {
       setLoading(false);
     }
-  }, [address]);
+  }, [address,orders]);
 
   if (type === "billing") {
-    return (
+    return loading ? null : (
       <div
         className="flex items-center border-2 rounded min-w-80 scroll-mt-4 p-5 gap-4"
         style={{
@@ -70,7 +72,7 @@ function AddressSingular({ address, type }) {
   }
 
   if (type === "shipping") {
-    return (
+    return loading ? null : (
       <div
         className="flex items-start relative bg-black border-2 rounded min-w-80 scroll-mt-4 p-5 gap-4"
         style={{

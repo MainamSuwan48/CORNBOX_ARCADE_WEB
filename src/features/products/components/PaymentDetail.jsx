@@ -13,7 +13,8 @@ function PaymentDetail() {
   const { authUser } = useAuth();
   const { shippingAddress } = useUser();
   const { cartId, cart, stocks, updateStock, deleteCart } = useProduct();
-  const { createOrder, createOrderItems } = useOrder();
+  const { createOrder, createOrderItems, getOrderByUserId, setOrders } =
+    useOrder();
 
   const newStock = (cart, stocks) => {
     const newStock = stocks.map((stock) => {
@@ -65,6 +66,8 @@ function PaymentDetail() {
       console.log(newStocks, "newStocks in payment detail");
       await deleteCart(cartId);
       await upDateStocks(newStocks);
+      const newOrder = await getOrderByUserId(authUser.id);
+      setOrders(newOrder);
       navigate(`/user/${authUser.id}/order`);
       toast.success("Order Created Successfully");
     } catch (error) {

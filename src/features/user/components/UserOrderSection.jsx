@@ -7,15 +7,17 @@ import { useState } from "react";
 function UserOrderSection() {
   const [loading, setLoading] = useState(true);
   const { orders } = useOrder();
-  console.log(orders, "orders in user order section");
 
   useEffect(() => {
+    if (!orders) {
+      setLoading(true);
+    }
     if (orders) {
       setLoading(false);
     }
   }, [orders]);
 
-  return (
+  return loading? null : (orders ? (
     <div className="w-full bg-base-300 p-8">
       <OrderButtons />
       <div className="flex flex-col gap-4">
@@ -24,7 +26,7 @@ function UserOrderSection() {
         })}
       </div>
     </div>
-  );
+  ) : null);
 }
 
 export default UserOrderSection;
