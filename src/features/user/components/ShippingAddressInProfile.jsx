@@ -3,10 +3,12 @@ import { useUser } from "../contexts/UserContext";
 import { useState } from "react";
 import { useEffect } from "react";
 import AddressSingular from "./AddressSingular";
+import { EditIcon } from "../../../components/icons";
+import ShippingAddressSelector from "./ShippingAddressSelector";
 
 function ShippingAddressInProfile() {
   const [isLoading, setIsLoading] = useState(true);
-  const { shippingAddress ,address } = useUser();
+  const { shippingAddress, address } = useUser();
 
   useEffect(() => {
     if (shippingAddress) {
@@ -17,15 +19,13 @@ function ShippingAddressInProfile() {
   return isLoading ? (
     <div>loading...</div>
   ) : (
-    <div>
-      <div className="flex flex-col justify-start items-start">
-        <div className="flex flex-col">
-          <div className="text-2xl text-white font-bold">
-            Your Shipping Address
-          </div>
-        </div>
-        <AddressSingular address={shippingAddress} type={"shipping"} />
+    <div className="flex justify-start items-start m-2 gap-2">
+      <div className="flex flex-col justify-between gap-2 items-start text-2xl">
+        <p className="text-2xl text-white ml-2">Your Shipping Address</p>
+        <ShippingAddressSelector />
       </div>
+
+      <AddressSingular address={shippingAddress} type={"shipping"} />
     </div>
   );
 }

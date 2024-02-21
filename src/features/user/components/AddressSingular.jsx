@@ -43,7 +43,7 @@ function AddressSingular({ address, type }) {
       style={{backgroundImage: "url('https://img.freepik.com/free-photo/cardboard-wallpaper-template_1194-6785.jpg?w=1380&t=st=1708528323~exp=1708528923~hmac=f7b28358d03702ac41b60cec7a1d1a6c81dc304c0758df1a8a60f97de16bf7bb')"}}
       >
         <div className="w-full h-full">
-          <div className="flex flex-col justify-center items-center border-2 mx-2 border-accent py-2 p-2 backdrop-blur-3xl">
+          <div className="flex flex-col justify-center items-center border-2 mx-2 border-accent py-2 p-2 glass text-black">
           <span className="text-primary font-bold ">Line 1:</span>
           {addressLine1}
           <span className="text-primary font-bold ">Line 2:</span>
@@ -55,7 +55,7 @@ function AddressSingular({ address, type }) {
           </div>
         </div>
         <div className="text-lg flex flex-col">
-        <p className="text-2xl font-bold text-primary drop-shadow-sm border text-nowrap py-2 px-1">
+        <p className="text-2xl font-bold text-primary drop-shadow-sm border text-nowrap py-2 px-1 bg-slate-800">
               Adresses ID
             </p>
             <p className="text-5xl font-bold text-red-600 drop-shadow-sm text-center">

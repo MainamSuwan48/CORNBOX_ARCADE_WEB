@@ -31,7 +31,7 @@ function UserProfile({ type = "profile" }) {
   if (type === "checkout") {
     return (
       <>
-        <div className="bg-neutral rounded">
+        <div className="glass rounded">
           <div className="flex justify-between mx-2 border-accent py-2">
             <div>
               <p className="text-base-100 font-medium">Full name: {fullName}</p>
