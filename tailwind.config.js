@@ -34,6 +34,10 @@ export default {
       height: {
         with_header: "calc(100vh - 100px)",
       },
+      minHeight: {
+        with_header: "calc(100vh - 100px)",
+        with_header_2: "calc(100vh - 160px)",
+      },
     },
   },
   plugins: [require("daisyui")],

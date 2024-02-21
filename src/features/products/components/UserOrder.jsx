@@ -34,20 +34,14 @@ function UserOrder({ order }) {
     timeZone: "Asia/Bangkok",
   };
   const dateOrdered = new Date(updatedAt);
-  console.log(dateOrdered, "updated at in user order");
   const formattedDate = dateOrdered.toLocaleDateString("en-US", dateOptions);
 
   const shippedAddress = addresses.find(
     (address) => address.id === order.shippingAddressId
   );
 
-  console.log(shippedAddress, "shipped address in user order");
 
-  // useEffect(() => {
-  //   if (order) {
-  //     setLoading(false);
-  //   }
-  // }, [orders]);
+
 
   useEffect(() => {
     if (order && addresses.length > 0) {

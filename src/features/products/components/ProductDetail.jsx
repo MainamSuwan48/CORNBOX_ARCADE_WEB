@@ -8,12 +8,12 @@ import { useAuth } from "../../auth/contexts/AuthContext";
 import { useState } from "react";
 import ColorDisplay from "./ColorDisplay";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { data } from "autoprefixer";
-import { exist } from "joi";
+import { useNavigate } from "react-router-dom";
+
 
 function ProductDetail({ productData }) {
+  const navigate = useNavigate();
   const { id, name, price, description, status, stock } = productData;
   const { authUser } = useAuth();
   const { addItemToCart, getCartByUserId, setCart, cart, updateCartItem } =
@@ -51,14 +51,15 @@ function ProductDetail({ productData }) {
 
     if (existingItem) {
       if (existingItem.attribute != color.attribute) {
-        toast.error("You can't add different color buttons to the same item");
-        return;
+        toast.error("You can't add same item with different attribute to the same cart");
+        throw new Error("You can't add same item with different attribute to the same cart");       
+       
       }
       const newQuantity = existingItem.quantity + quantity;
       console.log(newQuantity, "newQuantity");
       if (newQuantity > stock) {
         toast.error(`You can't add more than ${stock} items`);
-        return;
+        throw new Error(`You can't add more than ${stock} items`);
       }
       const result = await updateCartItem(existingItem.id, newQuantity);
       console.log(result.data);
@@ -94,9 +95,10 @@ function ProductDetail({ productData }) {
     }
   };
 
-  const checkOut = () => {
+  const checkOut = async () => {
     try {
-      addToCart();
+      await addToCart();
+      navigate("/checkout");
     } catch (error) {
       console.log(error);
     }
@@ -166,10 +168,8 @@ function ProductDetail({ productData }) {
           }
         />
       </div>
-      <div
-      className="text-center mt-4 text-lg text-primary font-bold border-2 border-primary p-4 rounded-lg bg-primary bg-opacity-10 grow-0"
-      >
-        You can add any additional comment in your cart!  
+      <div className="text-center mt-4 text-lg text-primary font-bold border-2 border-primary p-4 rounded-lg bg-primary bg-opacity-10 grow-0">
+        You can add any additional comment in your cart!
       </div>
       {status === "AVAILABLE" ? (
         <div className="flex items-baseline gap-8 align-bottom">
@@ -180,9 +180,8 @@ function ProductDetail({ productData }) {
             stock={stock}
           />
           <ActionButton onClick={addToCart}>ADD TO CART</ActionButton>
-          <Link to="/checkout">
-            <ActionButton onClick={checkOut}>BUYNOW</ActionButton>
-          </Link>
+
+          <ActionButton onClick={checkOut}>BUYNOW</ActionButton>
         </div>
       ) : null}
     </div>

@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 function UserPage() {
   return (
     <>
-      <div className="relative min-h-screen h-full">
+      <div className="">
         <ProfileContainer>
           <Outlet />
         </ProfileContainer>

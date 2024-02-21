@@ -30,7 +30,7 @@ function ProfileMenu() {
   return isLoading ? (
     "loading"
   ) : (
-    <div className="shrink-0 flex flex-col px-4 w-60 justify-between h-with_header mt-20">
+    <div className="shrink-0 flex flex-col px-4 w-60 justify-between h-100 mt-20 min-h-with_header_2">
       <div>
         <p className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary shrink-0">
           Hi, {authUser.username}
@@ -50,7 +50,7 @@ function ProfileMenu() {
       </div>
       <button
         onClick={handleLogout}
-        className="transition-all px-4 py-2 border-2 border-primary text-primary font-bold active:btn-secondary hover:bg-primary hover:text-base-100 hover:shadow-lg active:translate-x-2 active:translate-y-2 active:shadow-none"
+        className="transition-all px-4 py-2 mb-4 border-2 border-primary text-primary font-bold active:btn-secondary hover:bg-primary hover:text-base-100 hover:shadow-lg active:translate-x-2 active:translate-y-2 active:shadow-none"
       >
         LOG OUT
       </button>

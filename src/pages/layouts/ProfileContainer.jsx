@@ -6,9 +6,9 @@ import UserOrderSection from "../../features/user/components/UserOrderSection";
 
 function ProfileContainer({ children}) {
   return (
-    <div className="relative flex justify-between min-h-screen ">
+    <div className="relative flex justify-between">
       <ProfileMenu />
-      <div className="w-full h-with_header flex mt-24 justify-start items-start gap-3 flex-wrap">
+      <div className="w-full flex mt-24 justify-start items-start gap-3 flex-wrap">
         {children}
       </div>
     </div>
