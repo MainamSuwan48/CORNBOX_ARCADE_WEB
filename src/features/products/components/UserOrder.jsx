@@ -41,12 +41,19 @@ function UserOrder({ order }) {
     (address) => address.id === order.shippingAddressId
   );
 
+  console.log(shippedAddress, "shipped address in user order");
+
+  // useEffect(() => {
+  //   if (order) {
+  //     setLoading(false);
+  //   }
+  // }, [orders]);
 
   useEffect(() => {
-    if (order) {
+    if (order && addresses.length > 0) {
       setLoading(false);
     }
-  }, [orders]);
+  }, [orders, addresses]);
 
   return loading ? null : (
     <div className="transition-all flex flex-col gap-4">
@@ -78,7 +85,11 @@ function UserOrder({ order }) {
           isShow ? "h-auto opacity-100" : "h-0 opacity-0"
         } overflow-hidden`}
       >
-        {/* <AddressSingular address={shippedAddress} type="billing" /> */}
+        {shippedAddress ? (
+          <AddressSingular address={shippedAddress} type="billing" />
+        ) : (
+          <p>Loading address...</p>
+        )}
         <OrderItemList orderItems={orderItem} />
       </div>
     </div>

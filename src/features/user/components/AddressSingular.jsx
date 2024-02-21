@@ -11,7 +11,7 @@ import { useOrder } from "../../products/contexts/OrderContext";
 function AddressSingular({ address, type }) {
   const param = useParams();
   const [isEdit, setIsEdit] = useState();
-  const { deleteAddressById, setAddresses } = useUser();
+  const { deleteAddressById, setAddresses ,addresses} = useUser();
   const { orders } = useOrder();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ function AddressSingular({ address, type }) {
     if (address) {
       setLoading(false);
     }
-  }, [address]);
+  }, [addresses]);
 
   if (type === "billing") {
     return loading ? null : (
