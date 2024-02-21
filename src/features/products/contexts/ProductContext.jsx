@@ -3,6 +3,7 @@ import * as productApi from "../../../api/product";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useAuth } from "../../auth/contexts/AuthContext";
+import { data } from "autoprefixer";
 
 // Create an empty context
 const ProductContext = createContext();
@@ -20,6 +21,12 @@ function ProductContextProvider({ children }) {
 
   const getProductById = async (id) => {
     const response = await productApi.getProductById(id);
+    return response;
+  };
+
+  const updateStock = async (id, newStock) => {
+    data = { newStock: newStock };
+    const response = await productApi.updateStock(id, data);
     return response;
   };
 
@@ -128,7 +135,8 @@ function ProductContextProvider({ children }) {
         stocks,
         setStocks,
         updateCartItemAttribute,
-        getCartData
+        getCartData,
+        updateStock,
       }}
     >
       {children}

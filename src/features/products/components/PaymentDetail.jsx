@@ -9,7 +9,7 @@ import { toast } from "sonner";
 function PaymentDetail() {
   const { authUser } = useAuth();
   const { addresses } = useUser();
-  const { cart, stocks } = useProduct();
+  const { cart, stocks, updateStock } = useProduct();
 
   const newStock = (cart, stocks) => {
     const newStock = stocks.map((stock) => {
@@ -17,7 +17,7 @@ function PaymentDetail() {
       if (cartItem) {
         const newStock = {
           ...stock,
-          quantity: stock.stock - cartItem.quantity,
+          newStock: stock.stock - cartItem.quantity,
         };
         if (newStock.quantity < 0) {
           throw new Error("Out of stock Please Update Your Cart And Refresh");
@@ -29,19 +29,27 @@ function PaymentDetail() {
     return newStock;
   };
 
+  const upDateStocks = async (newStocks) => {
+    newStocks.forEach(async (stock) => {
+      console.log(stock.id, stock.newStock, "stock id and new stock in payment detail")
+      // const response = await updateStock(stock.id, stock.newStock);
+      // return response;
+    });
+  };
+
   const shippingAddressId = 1;
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     try {
       const newStocks = newStock(cart, stocks);
+      await upDateStocks(newStocks);
       console.log(newStocks, "newStocks in payment detail");
-      console.log(shippingAddressId, "shippingAddressId in payment detail")
-      console.log(cart, "cart in payment detail")
+      console.log(shippingAddressId, "shippingAddressId in payment detail");
+      console.log(cart, "cart in payment detail");
       toast.success("Checkout success");
     } catch (error) {
       toast.error(error.message);
     }
-
   };
   return (
     <>
