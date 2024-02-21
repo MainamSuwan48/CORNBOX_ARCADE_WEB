@@ -9,9 +9,9 @@ import { useOrder } from "../contexts/OrderContext";
 import { useNavigate } from "react-router-dom";
 
 function PaymentDetail() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { authUser } = useAuth();
-  const { shippingAddress} = useUser();
+  const { shippingAddress } = useUser();
   const { cartId, cart, stocks, updateStock, deleteCart } = useProduct();
   const { createOrder, createOrderItems } = useOrder();
 
@@ -21,7 +21,7 @@ function PaymentDetail() {
       if (cartItem) {
         const newStock = {
           ...stock,
-          newStock: stock.stock - cartItem.quantity,
+          stock: stock.stock - cartItem.quantity,
         };
         if (newStock.quantity < 0) {
           throw new Error("Out of stock Please Update Your Cart And Refresh");
@@ -40,17 +40,10 @@ function PaymentDetail() {
         stock.newStock,
         "stock id and new stock in payment detail"
       );
-      const response = await updateStock(stock.id, stock.newStock);
+      const response = await updateStock(stock.id, stock.stock);
       return response;
     });
   };
-
-  const upDateStock = async (id, newStock) => {
-    const response = await updateStock(id, newStock);
-    return response;
-  };
-
-
 
   const handleCheckout = async () => {
     if (!cart.length) {
@@ -62,7 +55,6 @@ function PaymentDetail() {
       return;
     }
     try {
-
       const order = await createOrder(authUser.id, shippingAddress.id, cartId);
       console.log(order, "order in payment detail");
       const orderId = order.data.id;
@@ -70,6 +62,7 @@ function PaymentDetail() {
       console.log(orderItem, "orderItem in payment detail");
       console.log(cart, "cart in payment detail");
       const newStocks = newStock(cart, stocks);
+      console.log(newStocks, "newStocks in payment detail");
       await deleteCart(cartId);
       await upDateStocks(newStocks);
       navigate(`/user/${authUser.id}/order`);
