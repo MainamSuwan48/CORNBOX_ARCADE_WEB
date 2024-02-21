@@ -38,30 +38,31 @@ function AddressSingular({ address, type }) {
 
   if (type === "shipping") {
     return (
-      <div className="flex items-center relative bg-transparent border-2 rounded min-w-80 scroll-mt-4 p-5">
-        <div className="flex justify-between border-b-2 mx-2 border-accent py-2">
-          <p className="text-2xl font-bold text-primary drop-shadow-sm ">
-            Adresses ID :{id}
-          </p>
-        </div>
-        <div className="text-lg">
-          <span className="text-primary font-bold mx-2">
-            Line 1: 
-          </span> 
-          {addressLine1} 
-          <span className="text-primary font-bold mx-2">
-            Line 2: 
-          </span>  
-          {addressLine2} 
-          <span className="text-primary font-bold mx-2">
-            City: 
-          </span> 
-          {city} 
-          <span className="text-primary font-bold mx-2">
-            Postal Code: 
-          </span> 
+      <div 
+      className="flex items-start relative bg-black border-2 rounded min-w-80 scroll-mt-4 p-5 gap-4"
+      style={{backgroundImage: "url('https://img.freepik.com/free-photo/cardboard-wallpaper-template_1194-6785.jpg?w=1380&t=st=1708528323~exp=1708528923~hmac=f7b28358d03702ac41b60cec7a1d1a6c81dc304c0758df1a8a60f97de16bf7bb')"}}
+      >
+        <div className="w-full h-full">
+          <div className="flex flex-col justify-center items-center border-2 mx-2 border-accent py-2 p-2 backdrop-blur-3xl">
+          <span className="text-primary font-bold ">Line 1:</span>
+          {addressLine1}
+          <span className="text-primary font-bold ">Line 2:</span>
+          {addressLine2}
+          <span className="text-primary font-bold ">City:</span>
+          {city}
+          <span className="text-primary font-bold ">Postal Code:</span>
           {postalCode}
-        </div> 
+          </div>
+        </div>
+        <div className="text-lg flex flex-col">
+        <p className="text-2xl font-bold text-primary drop-shadow-sm border text-nowrap py-2 px-1">
+              Adresses ID
+            </p>
+            <p className="text-5xl font-bold text-red-600 drop-shadow-sm text-center">
+              {id}
+            </p>
+          
+        </div>
       </div>
     );
   }
@@ -94,12 +95,7 @@ function AddressSingular({ address, type }) {
         </div>
       </div>
       {isEdit ? (
-        <AddressEditor
-          address={address}
-          setIsEdit={setIsEdit}
-          setWatch={setWatch}
-          watch={watch}
-        />
+        <AddressEditor address={address} setIsEdit={setIsEdit} />
       ) : (
         <div className="flex flex-col px-2">
           <p className="text-neutral text-lg">Line 1: {addressLine1}</p>

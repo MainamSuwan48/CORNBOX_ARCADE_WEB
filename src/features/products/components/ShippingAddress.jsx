@@ -1,21 +1,30 @@
-import React from "react";
 import UserProfile from "../../user/components/UserProfile";
+import ShippingAddressInProfile from "../../user/components/ShippingAddressInProfile";
+import { useEffect } from "react";
+import { useUser } from "../../user/contexts/UserContext";
+import { useState } from "react";
 
 function ShippingAddress() {
-  return (
-    <div className="glass rounded-lg p-2 overflow-y-scroll">
+  const [isLoading, setIsLoading] = useState(true);
+  const { shippingAddress } = useUser();
+
+  useEffect(() => {
+    if (shippingAddress) {
+      console.log(shippingAddress.id, "shippingAddress");
+      setIsLoading(false);
+    }
+  }, [shippingAddress]);
+  return isLoading ? (
+    <div>loading...</div>
+  ) : (
+    <div className="glass rounded-lg p-2 ">
       <div className="flex justify-between border-b-2 border-base-100 ">
         <div className="text-2xl text-white font-bold">Shipping Address</div>
       </div>
       <UserProfile type="checkout" />
       <div>
         <div>
-          <div className="text-xl text-white">
-            This is Address line 1 This is Address line 2
-          </div>
-          <div className="text-xl text-white">
-            This is City This is Postalcode
-          </div>
+          <ShippingAddressInProfile />
         </div>
       </div>
     </div>

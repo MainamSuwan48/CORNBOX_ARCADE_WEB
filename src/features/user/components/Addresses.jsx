@@ -19,9 +19,7 @@ function Addresses() {
 
   useEffect(() => {
     if (addresses) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
+      setLoading(false);
     }
   }, [addresses]);
   return loading ? (
@@ -47,14 +45,9 @@ function Addresses() {
         )}
       </div>
 
-      <div>
-        <div className="flex flex-col justify-start items-start">
-          <div className="text-3xl">Your Shipping Address</div>
-          <AddressSingular address={shippingAddress} type={"shipping"}/>
-        </div>
-      </div>
+    
 
-      <div className="text-3xl">Your Shipping Address</div>
+      <div className="text-3xl">Your Addresses</div>
       <div className="flex gap-2 flex-wrap justify-start">
         {isCreating ? <AddressCreator onClose={onClose} /> : null}
         {addresses && addresses.length > 0 ? (

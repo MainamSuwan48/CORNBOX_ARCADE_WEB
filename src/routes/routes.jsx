@@ -16,6 +16,8 @@ import Addresses from "../features/user/components/Addresses";
 import UserOrderSection from "../features/user/components/UserOrderSection";
 import ProductLayout from "../pages/layouts/ProductLayout";
 import NotFoundPage from "../pages/NotFoundPage";
+import ShippingAddress from "../features/products/components/ShippingAddress";
+import ShippingAddressInProfile from "../features/user/components/ShippingAddressInProfile";
 
 const ProtectedRoutes = ({ children }) => {
   const token = getToken();
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
           { path: "", element: <UserProfile /> },
           { path: "address", element: <Addresses /> },
           { path: "order", element: <UserOrderSection /> },
+          {path: "shipping-address", element: <ShippingAddressInProfile />}
         ],
       },
     ],

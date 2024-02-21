@@ -44,6 +44,9 @@ function ProfileMenu() {
         <Link to={`/user/${authUser.id}/address`}>
           <ProfileMenuLink>Addresses</ProfileMenuLink>
         </Link>
+        <Link to={`/user/${authUser.id}/shipping-address`}>
+          <ProfileMenuLink>Shipping Addresses</ProfileMenuLink>
+        </Link>
       </div>
       <button
         onClick={handleLogout}
