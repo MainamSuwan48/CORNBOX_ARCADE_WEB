@@ -4,18 +4,44 @@ import QrPic from "../../../assets/QR.png";
 import { useAuth } from "../../auth/contexts/AuthContext";
 import { useProduct } from "../contexts/ProductContext";
 import { useUser } from "../../user/contexts/UserContext";
+import { toast } from "sonner";
 
 function PaymentDetail() {
   const { authUser } = useAuth();
-  const { address } = useUser();
-  const { cart, products, stocks } = useProduct();
+  const { addresses } = useUser();
+  const { cart, stocks } = useProduct();
+
+  const newStock = (cart, stocks) => {
+    const newStock = stocks.map((stock) => {
+      const cartItem = cart.find((item) => item.productItemId === stock.id);
+      if (cartItem) {
+        const newStock = {
+          ...stock,
+          quantity: stock.stock - cartItem.quantity,
+        };
+        if (newStock.quantity < 0) {
+          throw new Error("Out of stock Please Update Your Cart And Refresh");
+        }
+        return newStock;
+      }
+      return stock;
+    });
+    return newStock;
+  };
+
+  const shippingAddressId = 1;
 
   const handleCheckout = () => {
-    console.log(authUser, "authUser in payment detail");
-    console.log(address, "address in payment detail");
-    console.log(cart, "cart in payment detail");
-    console.log(products, "products in payment detail");
-    console.log(stocks, "stocks in payment detail");
+    try {
+      const newStocks = newStock(cart, stocks);
+      console.log(newStocks, "newStocks in payment detail");
+      console.log(shippingAddressId, "shippingAddressId in payment detail")
+      console.log(cart, "cart in payment detail")
+      toast.success("Checkout success");
+    } catch (error) {
+      toast.error(error.message);
+    }
+
   };
   return (
     <>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../config/axios"
 //product
 export const getAllProducts = () => axios.get("/product");
 export const getProductById = (id) => axios.get(`/product/${id}`);
