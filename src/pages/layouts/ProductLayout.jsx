@@ -39,7 +39,10 @@ function ProductLayout() {
         <ProductDetail productData={product} />
       </div>
       {loading ? null : (
-        <div>
+        <div
+          className="flex justify-around items-center flex-wrap mt-10"
+          style={{ width: "100%" }}
+        >
           {productsImages.map((productImage) => {
             if (productImage.productId === product.id) {
               return (
