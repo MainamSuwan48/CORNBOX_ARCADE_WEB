@@ -40,9 +40,6 @@ function UserOrder({ order }) {
     (address) => address.id === order.shippingAddressId
   );
 
-
-
-
   useEffect(() => {
     if (order && addresses.length > 0) {
       setLoading(false);

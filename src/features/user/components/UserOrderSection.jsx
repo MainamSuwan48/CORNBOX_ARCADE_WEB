@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function UserOrderSection() {
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState("ALL");
   const { orders } = useOrder();
 
   useEffect(() => {
@@ -14,16 +15,18 @@ function UserOrderSection() {
     }
   }, [orders]);
 
-  return loading? null : (orders ? (
+  return loading ? null : orders ? (
     <div className="w-full bg-base-300 p-8">
-      <OrderButtons />
+      <OrderButtons setView={setView} view={view} />
       <div className="flex flex-col gap-4">
-        {orders.map((order) => {
-          return <UserOrder key={order.id} order={order} />;
-        })}
+        {orders
+          .filter((order) => view === "ALL" || order.status === view)
+          .map((order) => {
+            return <UserOrder key={order.id} order={order} />;
+          })}
       </div>
     </div>
-  ) : null);
+  ) : null;
 }
 
 export default UserOrderSection;
