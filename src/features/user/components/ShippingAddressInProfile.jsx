@@ -17,8 +17,12 @@ function ShippingAddressInProfile() {
   }, [shippingAddress, addresses]);
 
   return isLoading ? (
-    <div>loading...</div>
-  ) : addresses.length === 0 ? "create some address first": (
+    <p className="animate-pulse text-2xl text-primary font-bold">
+      Please Create Your Address
+    </p>
+  ) : addresses.length === 0 ? (
+    "create some address first"
+  ) : (
     <div className="flex justify-start items-start m-2 gap-2">
       <div className="flex flex-col justify-between gap-2 items-start text-2xl">
         <p className="text-2xl text-white ml-2">Your Shipping Address</p>

@@ -57,7 +57,9 @@ function Addresses() {
               <AddressSingular key={index} address={address} />
             ))
         ) : (
-          <p>loading...</p>
+          <p
+          className="animate-pulse text-2xl text-primary font-bold"
+          >Please Create Your Address</p>
         )}
       </div>
     </div>

@@ -38,20 +38,31 @@ export const UserProvider = ({ children }) => {
   };
   const fetchAddresses = async () => {
     const response = await getAddressesByUserId(authUser.id);
-    console.log(response, "addresses in fetchAddresses")
+    console.log(response, "addresses in fetchAddresses");
     const lastAddress = response[response.length - 1];
-    console.log(lastAddress, "last address in fetchAddresses") 
+    console.log(lastAddress, "last address in fetchAddresses");
     setAddresses(response);
+    setShippingAddress(lastAddress);
+  };
+
+  const fetchShippingAddress = async () => {
+    const response = await getAddressesByUserId(authUser.id);
+    const lastAddress = response[response.length - 1];
     setShippingAddress(lastAddress);
   };
 
   useEffect(() => {
     if (authUser) {
       setUser(authUser);
-      fetchAddresses();      
+      fetchAddresses();
     }
   }, [authUser]);
 
+  useEffect(() => {
+    if (addresses.length > 0) {
+      fetchShippingAddress();
+    }
+  }, [addresses]);
 
   const test = () => {
     console.log("I'm from user context");
