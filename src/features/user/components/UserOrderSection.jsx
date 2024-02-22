@@ -20,6 +20,7 @@ function UserOrderSection() {
       <OrderButtons setView={setView} view={view} />
       <div className="flex flex-col gap-4">
         {orders
+          .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
           .filter((order) => view === "ALL" || order.status === view)
           .map((order) => {
             return <UserOrder key={order.id} order={order} />;

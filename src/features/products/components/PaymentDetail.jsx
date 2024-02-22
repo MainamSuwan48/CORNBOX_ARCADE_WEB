@@ -47,6 +47,10 @@ function PaymentDetail() {
   };
 
   const handleCheckout = async () => {
+    if (!cartId) {
+      toast.error("Cart Is not Found Please Refresh the Page and Try Again");
+      return;
+    }
     if (!cart.length) {
       toast.error("Cart is Empty Why don't you add some products first?");
       return;

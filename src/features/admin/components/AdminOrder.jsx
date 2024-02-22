@@ -43,7 +43,6 @@ function AdminOrder({ order }) {
 
   useEffect(() => {
     if (order && allAddresses.length > 0) {
-        console.log("allAddresses from admin order+++++++++++++++++++++++++", allAddresses);
       setLoading(false);
     }
   }, [orders, allAddresses]);

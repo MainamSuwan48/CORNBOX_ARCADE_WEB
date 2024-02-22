@@ -25,6 +25,7 @@ function AdminPage() {
       <OrderButtons setView={setView} view={view} />
       <div className="flex flex-col gap-4">
         {allOrders
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
           .filter((order) => view === "ALL" || order.status === view)
           .map((order) => {
             return <AdminOrder key={order.id} order={order} />;

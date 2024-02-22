@@ -15,13 +15,11 @@ function AdminContextProvider({ children }) {
 
   const getAllOrders = async () => {
     const response = await adminApi.getAllOrders();
-    console.log(response, "response from admin context ********************");
     return response;
   };
 
   const getAllAddresses = async () => {
     const response = await adminApi.getAllAddresses();
-    console.log(response, "response from admin context ********************");
     return response;
   };
 
