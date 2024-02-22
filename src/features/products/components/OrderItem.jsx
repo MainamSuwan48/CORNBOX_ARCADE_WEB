@@ -1,15 +1,21 @@
 import React from "react";
 import stickPic from "../../../assets/stick.png";
+import { Link } from "react-router-dom";
 
 function OrderItem({ orderItem, product }) {
   console.log(orderItem, "order item in order item");
   console.log(product, "product in order item");
-  const { quantity, attribute,} = orderItem;
+  const { quantity, attribute } = orderItem;
   const { mainImage, name, price } = product;
   return (
     <div className="flex justify-between items-center mt-4 glass p-2 min-w-full">
       <div className="max-w-40 flex-1">
-        <img src={mainImage}></img>
+        <Link to={`/product/${product.id}`}>
+          <img
+            className="transition-all hover:scale-110 active:scale-90"
+            src={mainImage}
+          ></img>
+        </Link>
       </div>
       <div className="flex-1">
         <p className="text-base-100 font-bold">

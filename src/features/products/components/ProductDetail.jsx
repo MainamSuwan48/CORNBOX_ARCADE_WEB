@@ -11,13 +11,13 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 function ProductDetail({ productData }) {
   const navigate = useNavigate();
   const { id, name, price, description, status, stock } = productData;
   const { authUser } = useAuth();
   const { addItemToCart, getCartByUserId, setCart, cart, updateCartItem } =
     useProduct();
+  const [productStatus, setProductStatus] = useState(status);
   const [cartId, setCartId] = useState(null);
   const [color, setColor] = useState({
     attribute: "CLEAR",
@@ -51,9 +51,12 @@ function ProductDetail({ productData }) {
 
     if (existingItem) {
       if (existingItem.attribute != color.attribute) {
-        toast.error("You can't add same item with different attribute to the same cart");
-        throw new Error("You can't add same item with different attribute to the same cart");       
-       
+        toast.error(
+          "You can't add same item with different attribute to the same cart"
+        );
+        throw new Error(
+          "You can't add same item with different attribute to the same cart"
+        );
       }
       const newQuantity = existingItem.quantity + quantity;
       console.log(newQuantity, "newQuantity");
@@ -104,13 +107,22 @@ function ProductDetail({ productData }) {
     }
   };
 
+  useEffect(() => {
+    if (stock <= 0) {
+      setProductStatus("OUT OF STOCK");
+    }
+    if (stock > 0) {
+      setProductStatus("AVAILABLE");
+    }
+  }, [stock]);
+
   return (
     <div className="my-8 flex flex-col min-h-screen">
       <Title>{name}</Title>
       <div className="mt-8">
         <p className="text-2xl font-bold">{price} THB</p>
         <p className="text-lg text-primary">
-          {status} {stock} in Stock
+          {productStatus} {stock} in Stock
         </p>
       </div>
       <div className="mt-8">
@@ -171,7 +183,7 @@ function ProductDetail({ productData }) {
       <div className="text-center mt-4 text-lg text-primary font-bold border-2 border-primary p-4 rounded-lg bg-primary bg-opacity-10 grow-0">
         You can add any additional comment in your cart!
       </div>
-      {status === "AVAILABLE" ? (
+      {productStatus === "AVAILABLE" ? (
         <div className="flex items-baseline gap-8 align-bottom">
           <ProductCounter
             type="normal"
