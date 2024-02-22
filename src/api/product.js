@@ -12,3 +12,5 @@ export const deleteCartItem = (id) => axios.delete(`/product/cart/item/${id}`);
 export const deleteCart = (id) => axios.delete(`/product/cart/${id}`);
 export const updateStock = (id, data) =>
   axios.put(`/product/${id}`, data);
+export const getAllProductsImages = () => axios.get("/product/image/get");
+export const uploadProductImage = (id,data) => axios.post(`/product/upload/${id}`,data);

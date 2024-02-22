@@ -11,6 +11,7 @@ const ProductContext = createContext();
 function ProductContextProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [stocks, setStocks] = useState([]);
+  const [productsImages, setProductsImages] = useState([]);
   const { authUser } = useAuth();
 
   // product handler
@@ -92,7 +93,7 @@ function ProductContextProvider({ children }) {
   const getStocks = (productData) => {
     const stocks = productData.map((product) => {
       return { id: product.id, stock: product.stock };
-    });   ;
+    });
     return stocks;
   };
 
@@ -103,6 +104,14 @@ function ProductContextProvider({ children }) {
       setCart(res.data.shoppingCartItem);
     }
   };
+
+  const getAllProductsImages = async () => {
+    const response = await productApi.getAllProductsImages();
+    setProductsImages(response.data);
+    console.log(response.data, "products images in product context");
+    return response;
+  };
+
   useEffect(() => {
     getCartData();
   }, [authUser]);
@@ -110,8 +119,9 @@ function ProductContextProvider({ children }) {
   useEffect(() => {
     const fetchProductsAndStocks = async () => {
       try {
+        const productsImages = await getAllProductsImages();
         const productsData = await getProductsData();
-        const stocksData = getStocks(productsData);  
+        const stocksData = getStocks(productsData);
         setStocks(stocksData);
       } catch (error) {
         console.log(error);
@@ -143,6 +153,7 @@ function ProductContextProvider({ children }) {
         updateStock,
         cartId,
         deleteCart,
+        productsImages,
       }}
     >
       {children}
