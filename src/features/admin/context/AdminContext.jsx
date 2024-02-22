@@ -15,24 +15,27 @@ function AdminContextProvider({ children }) {
 
   const getAllOrders = async () => {
     const response = await adminApi.getAllOrders();
+    setAllOrders(response.data);
     return response;
   };
 
   const getAllAddresses = async () => {
     const response = await adminApi.getAllAddresses();
+    setAllAddresses(response.data);
+    return response;
+  };
+
+  const updateOrder = async (id, order) => {
+    const response = await adminApi.updateOrderStatus(id, order);
     return response;
   };
 
   useEffect(() => {
-    getAllOrders().then((response) => {
-      setAllOrders(response.data);
-    });
+    getAllOrders();
   }, [orders]);
 
   useEffect(() => {
-    getAllAddresses().then((response) => {
-      setAllAddresses(response.data);
-    });
+    getAllAddresses();
   }, [addresses]);
 
   return (
@@ -42,6 +45,8 @@ function AdminContextProvider({ children }) {
         setAllOrders,
         allAddresses,
         setAllAddresses,
+        updateOrder,
+        getAllOrders
       }}
     >
       {children}

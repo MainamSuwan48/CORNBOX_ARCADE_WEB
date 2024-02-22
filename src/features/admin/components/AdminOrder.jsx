@@ -6,12 +6,12 @@ import { useOrder } from "../../products/contexts/OrderContext";
 import AddressSingular from "../../user/components/AddressSingular";
 import OrderItemList from "../../products/components/OrderItemList";
 import { useAdmin } from "../context/AdminContext";
+import { toast } from "sonner";
 
 function AdminOrder({ order }) {
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { allAddresses } = useAdmin();
-  const { orders } = useOrder();
+  const { allAddresses, updateOrder, getAllOrders, allOrders } = useAdmin();
 
   const {
     id,
@@ -45,7 +45,28 @@ function AdminOrder({ order }) {
     if (order && allAddresses.length > 0) {
       setLoading(false);
     }
-  }, [orders, allAddresses]);
+  }, [allOrders, allAddresses]);
+
+  const [paymentStatusChange, setPaymentStatusChange] = useState(paymentStatus);
+  const [statusChange, setStatusChange] = useState(status);
+
+  const handlePaymentStatusChange = async (event) => {
+    updateOrder(id, { paymentStatus: event.target.value });
+    setPaymentStatusChange(event.target.value);
+    getAllOrders();
+    toast.success(
+      "Payment Status Updated please refresh the page to see changes"
+    );
+  };
+
+  const handleStatusChange = async (event) => {
+    updateOrder(id, { status: event.target.value });
+    setStatusChange(event.target.value);
+    getAllOrders();
+    toast.success(
+      "Order Status Updated please refresh the page to see changes"
+    );
+  };
 
   return loading ? null : (
     <div className="transition-all flex flex-col gap-4">
@@ -65,10 +86,28 @@ function AdminOrder({ order }) {
             View Order
           </button>
           <p className="flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
-            {paymentStatus}
+            <select
+              className="transition-all glass text-primary border-2 border-primary hover:text-base-300 hover:bg-primary"
+              value={paymentStatusChange}
+              onChange={handlePaymentStatusChange}
+            >
+              <option value="NOT_PAID">NOT_PAID</option>
+              <option value="DEPOSITED">DEPOSITED</option>
+              <option value="PAID">PAID</option>
+            </select>
           </p>
           <p className="flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
-            {status}
+            <select
+              className="transition-all glass text-primary border-2 border-primary hover:text-base-300 hover:bg-primary"
+              value={statusChange}
+              onChange={handleStatusChange}
+            >
+              <option value="DEPOSITED">DEPOSITED</option>
+              <option value="PROCESSING">PROCESSING</option>
+              <option value="SHIPPED">SHIPPED</option>
+              <option value="COMPLETED">COMPLETED</option>
+              <option value="CANCELED">CANCELED</option>
+            </select>
           </p>
         </div>
       </div>

@@ -10,7 +10,6 @@ import AdminOrder from "../features/admin/components/AdminOrder";
 function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState("ALL");
-  const { products } = useProduct();
   const { orders } = useOrder();
   const { allOrders } = useAdmin();
 
@@ -18,14 +17,14 @@ function AdminPage() {
     if (allOrders) {
       setLoading(false);
     }
-  }, [orders]);
+  }, [allOrders, orders]);
 
   return loading ? null : allOrders ? (
     <div className="w-full bg-base-300 p-8">
       <OrderButtons setView={setView} view={view} />
       <div className="flex flex-col gap-4">
         {allOrders
-        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+          .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
           .filter((order) => view === "ALL" || order.status === view)
           .map((order) => {
             return <AdminOrder key={order.id} order={order} />;
