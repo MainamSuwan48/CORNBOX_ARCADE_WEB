@@ -5,6 +5,7 @@ import OrderButtons from "../features/products/components/OrderButtons";
 import UserOrder from "../features/products/components/UserOrder";
 import { useProduct } from "../features/products/contexts/ProductContext";
 import { useAdmin } from "../features/admin/context/AdminContext";
+import AdminOrder from "../features/admin/components/AdminOrder";
 
 function AdminPage() {
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ function AdminPage() {
         {allOrders
           .filter((order) => view === "ALL" || order.status === view)
           .map((order) => {
-            return <UserOrder key={order.id} order={order} />;
+            return <AdminOrder key={order.id} order={order} />;
           })}
       </div>
     </div>

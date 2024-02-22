@@ -1,5 +1,9 @@
 import axios from "../config/axios";
 
+export const getAllAddresses = () => {
+  return axios.get("/user/addressAll");
+};
+
 export const getAllOrders = () => {
   return axios.get("/order/getAll");
 };
