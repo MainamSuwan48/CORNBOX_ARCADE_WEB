@@ -18,6 +18,9 @@ import ProductLayout from "../pages/layouts/ProductLayout";
 import NotFoundPage from "../pages/NotFoundPage";
 import ShippingAddress from "../features/products/components/ShippingAddress";
 import ShippingAddressInProfile from "../features/user/components/ShippingAddressInProfile";
+import { useAuth } from "../features/auth/contexts/AuthContext";
+import AdminPage from "../pages/AdminPage";
+import { useEffect } from "react";
 
 const ProtectedRoutes = ({ children }) => {
   const token = getToken();
@@ -49,7 +52,8 @@ const router = createBrowserRouter([
           { path: "", element: <UserProfile /> },
           { path: "address", element: <Addresses /> },
           { path: "order", element: <UserOrderSection /> },
-          {path: "shipping-address", element: <ShippingAddressInProfile />}
+          { path: "shipping-address", element: <ShippingAddressInProfile /> },
+          { path: "admin", element: <AdminPage /> },
         ],
       },
     ],
@@ -62,6 +66,7 @@ const router = createBrowserRouter([
       </ProtectedRoutes>
     ),
   },
+
   { path: "*", element: <NotFoundPage /> },
 ]);
 

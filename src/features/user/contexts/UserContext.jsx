@@ -38,9 +38,7 @@ export const UserProvider = ({ children }) => {
   };
   const fetchAddresses = async () => {
     const response = await getAddressesByUserId(authUser.id);
-    console.log(response, "addresses in fetchAddresses");
     const lastAddress = response[response.length - 1];
-    console.log(lastAddress, "last address in fetchAddresses");
     setAddresses(response);
     setShippingAddress(lastAddress);
   };

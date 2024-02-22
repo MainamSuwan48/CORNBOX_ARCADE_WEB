@@ -35,6 +35,9 @@ function ProfileMenu() {
         <p className="flex mt-4 mb-6 px-2 justify-center items-center py-1 transition-all text-xl font-medium hover:text-primary border-2 border-primary shrink-0">
           Hi, {authUser.username}
         </p>
+        {authUser.isAdmin?<Link to={`/user/${authUser.id}/admin`}>
+          <ProfileMenuLink type="admin">Admin</ProfileMenuLink>
+        </Link>:null}
         <Link to={`/user/${authUser.id}/Order`}>
           <ProfileMenuLink>Order</ProfileMenuLink>
         </Link>
