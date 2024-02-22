@@ -33,6 +33,7 @@ export default {
       },
       height: {
         with_header: "calc(100vh - 100px)",
+        receipt: "80vh"
       },
       minHeight: {
         with_header: "calc(100vh - 100px)",

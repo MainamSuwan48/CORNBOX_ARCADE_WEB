@@ -11,6 +11,7 @@ import { toast } from "sonner";
 function AdminOrder({ order }) {
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [viewFull, setViewFull] = useState(false);
   const { allAddresses, updateOrder, getAllOrders, allOrders } = useAdmin();
 
   const {
@@ -78,7 +79,13 @@ function AdminOrder({ order }) {
             <p>Ordered At: {formattedDate} </p>
           </div>
         </div>
-        <div className="flex justify-between max-w-4/12 gap-4">
+        <div className="relative flex justify-between max-w-4/12 gap-4">
+          <img
+            src="https://i.imgur.com/kyFqnuH.png"
+            alt="shipping"
+            onClick={() => {setViewFull(!viewFull)}}
+            className={viewFull?`absolute h-receipt z-50 -left-64`:"h-14"}
+          />
           <button
             onClick={handleShow}
             className="transition-all p-4 border-2 border-primary hover:bg-primary hover:font-black hover:text-base-300 active:scale-90"
@@ -112,8 +119,8 @@ function AdminOrder({ order }) {
         </div>
       </div>
       <div
-        className={`transition-all duration-500 ${
-          isShow ? "h-auto opacity-100" : "h-0 opacity-0"
+        className={`transition-all duration-1000 ${
+          isShow ? "h-auto " : "h-0 opacity-0 scale-0"
         } overflow-hidden`}
       >
         {shippedAddress ? (
@@ -121,6 +128,7 @@ function AdminOrder({ order }) {
         ) : (
           <p>Loading address...</p>
         )}
+
         <OrderItemList orderItems={orderItem} />
       </div>
     </div>
