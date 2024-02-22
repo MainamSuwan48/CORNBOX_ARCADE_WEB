@@ -55,12 +55,16 @@ function AdminOrder({ order, receipt }) {
   const [statusChange, setStatusChange] = useState(status);
 
   const handlePaymentStatusChange = async (event) => {
-    updateOrder(id, { paymentStatus: event.target.value });
-    setPaymentStatusChange(event.target.value);
-    getAllOrders();
-    toast.success(
-      "Payment Status Updated please refresh the page to see changes"
-    );
+    try {
+      updateOrder(id, { paymentStatus: event.target.value });
+      await setPaymentStatusChange(event.target.value);
+      getAllOrders();
+      toast.success(
+        "Payment Status Updated please refresh the page to see changes"
+      );
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const handleStatusChange = async (event) => {

@@ -16,7 +16,7 @@ function ProductPage() {
 
   return (
     <div     
-      className="flex mt-20 justify-around items-center h-with_header flex-1 bg-primary"
+      className="flex mt-20 justify-around items-center min-h-with_header_2 flex-1 bg-primary"
       style={{
         backgroundImage: `url(${EVOpic})`,
         backgroundSize: "cover",

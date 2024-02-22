@@ -15,7 +15,9 @@ function ShippingAddress() {
     }
   }, [shippingAddress]);
   return isLoading ? (
-    <div>loading...</div>
+    <p
+    className="animate-pulse text-2xl text-primary font-bold"
+    >Please Create Your Address</p>
   ) : (
     <div className="glass rounded-lg p-2 ">
       <div className="flex justify-between border-b-2 border-base-100 ">

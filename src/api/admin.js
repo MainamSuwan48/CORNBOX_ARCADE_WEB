@@ -7,6 +7,7 @@ export const getAllOrders = () => {
   return axios.get("/order/getAll");
 };
 export const updateOrderStatus = (orderId, data) => {
+  console.log(data, "data in admin api +++++++++++++++++++++++++++++");
   return axios.patch(`/order/update/${orderId}`, data);
 };
 export const getAllReceipts = () => {

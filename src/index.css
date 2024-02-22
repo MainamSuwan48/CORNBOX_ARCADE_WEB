@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Rest of your CSS code goes here */
+
 @keyframes ping-once {
     0% {
       transform: scale(1);
