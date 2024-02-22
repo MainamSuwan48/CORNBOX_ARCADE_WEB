@@ -12,6 +12,7 @@ function AdminContextProvider({ children }) {
   const { addresses } = useUser();
   const [allOrders, setAllOrders] = useState([]);
   const [allAddresses, setAllAddresses] = useState([]);
+  const [receipts, setReceipts] = useState([]);
 
   const getAllOrders = async () => {
     const response = await adminApi.getAllOrders();
@@ -30,6 +31,17 @@ function AdminContextProvider({ children }) {
     return response;
   };
 
+  const getAllReceipts = async () => {
+    const response = await adminApi.getAllReceipts();
+    console.log(response.data, "receipts in admin context");
+    setReceipts(response.data);
+    return response;
+  };
+
+  useEffect(() => {
+    getAllReceipts();
+  }, [orders]);
+
   useEffect(() => {
     getAllOrders();
   }, [orders]);
@@ -46,7 +58,8 @@ function AdminContextProvider({ children }) {
         allAddresses,
         setAllAddresses,
         updateOrder,
-        getAllOrders
+        getAllOrders,
+        receipts,
       }}
     >
       {children}

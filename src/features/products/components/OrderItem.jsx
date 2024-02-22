@@ -3,8 +3,6 @@ import stickPic from "../../../assets/stick.png";
 import { Link } from "react-router-dom";
 
 function OrderItem({ orderItem, product }) {
-  console.log(orderItem, "order item in order item");
-  console.log(product, "product in order item");
   const { quantity, attribute } = orderItem;
   const { mainImage, name, price } = product;
   return (

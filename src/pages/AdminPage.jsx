@@ -11,10 +11,11 @@ function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState("ALL");
   const { orders } = useOrder();
-  const { allOrders } = useAdmin();
+  const { allOrders ,receipts} = useAdmin();
 
   useEffect(() => {
     if (allOrders) {
+      console.log(receipts, "receipts in admin page");
       setLoading(false);
     }
   }, [allOrders, orders]);
@@ -27,7 +28,7 @@ function AdminPage() {
           .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
           .filter((order) => view === "ALL" || order.status === view)
           .map((order) => {
-            return <AdminOrder key={order.id} order={order} />;
+            return <AdminOrder key={order.id} order={order} receipt={receipts}/>;
           })}
       </div>
     </div>

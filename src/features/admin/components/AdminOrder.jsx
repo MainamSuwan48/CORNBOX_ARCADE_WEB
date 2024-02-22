@@ -8,7 +8,7 @@ import OrderItemList from "../../products/components/OrderItemList";
 import { useAdmin } from "../context/AdminContext";
 import { toast } from "sonner";
 
-function AdminOrder({ order }) {
+function AdminOrder({ order, receipt }) {
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [viewFull, setViewFull] = useState(false);
@@ -42,8 +42,11 @@ function AdminOrder({ order }) {
     (address) => address.id === order.shippingAddressId
   );
 
+  const thisReceipts = receipt.find((rec) => rec.orderId === id);
+  const shippedReceipt = thisReceipts?.src;
+
   useEffect(() => {
-    if (order && allAddresses.length > 0) {
+    if (order && receipt && allAddresses.length > 0) {
       setLoading(false);
     }
   }, [allOrders, allAddresses]);
@@ -81,18 +84,22 @@ function AdminOrder({ order }) {
         </div>
         <div className="relative flex justify-between max-w-4/12 gap-4">
           <img
-            src="https://i.imgur.com/kyFqnuH.png"
+            src={shippedReceipt || `https://i.imgur.com/kyFqnuH.png`}
             alt="shipping"
-            onClick={() => {setViewFull(!viewFull)}}
-            className={viewFull?`absolute h-receipt z-50 -left-64`:"h-14"}
+            onClick={() => {
+              setViewFull(!viewFull);
+            }}
+            className={`${
+              viewFull ? `h-receipt z-50` : "h-14"
+            } transition-all hover:scale-125 active:scale-95`}
           />
           <button
             onClick={handleShow}
-            className="transition-all p-4 border-2 border-primary hover:bg-primary hover:font-black hover:text-base-300 active:scale-90"
+            className="h-12 flex items-center transition-all p-4 border-2 border-primary hover:bg-primary hover:font-black hover:text-base-300 active:scale-90"
           >
             View Order
           </button>
-          <p className="flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
+          <p className="h-12 flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
             <select
               className="transition-all glass text-primary border-2 border-primary hover:text-base-300 hover:bg-primary"
               value={paymentStatusChange}
@@ -103,7 +110,7 @@ function AdminOrder({ order }) {
               <option value="PAID">PAID</option>
             </select>
           </p>
-          <p className="flex justify-center items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
+          <p className="flex justify-center h-12 items-center transition-all p-2 w-32 border-2 border-primary font-bold hover:text-base-300 hover:bg-primary">
             <select
               className="transition-all glass text-primary border-2 border-primary hover:text-base-300 hover:bg-primary"
               value={statusChange}
@@ -119,8 +126,8 @@ function AdminOrder({ order }) {
         </div>
       </div>
       <div
-        className={`transition-all duration-1000 ${
-          isShow ? "h-auto " : "h-0 opacity-0 scale-0"
+        className={`transition-all duration-500 ${
+          isShow ? "h-auto " : "h-0 opacity-0 scale-y-0"
         } overflow-hidden`}
       >
         {shippedAddress ? (

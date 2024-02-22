@@ -46,6 +46,13 @@ function PaymentDetail() {
     });
   };
 
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+  
+  };
+
   const handleCheckout = async () => {
     if (!cartId) {
       toast.error("Cart Is not Found Please Refresh the Page and Try Again");
@@ -64,14 +71,10 @@ function PaymentDetail() {
       console.log(order, "order in payment detail");
       const orderId = order.data.id;
       const orderItem = await createOrderItems(orderId, cartId);
-      console.log(orderItem, "orderItem in payment detail");
-      console.log(cart, "cart in payment detail");
       const newStocks = newStock(cart, stocks);
-      console.log(newStocks, "newStocks in payment detail");
       await deleteCart(cartId);
       await upDateStocks(newStocks);
-      const newOrder = await getOrderByUserId(authUser.id);
-      console.log(newOrder.data, "new order in payment detail");
+      const newOrder = await getOrderByUserId(authUser.id);     
       setOrders(newOrder.data);
       setTimeout(() => {
         navigate(`/user/${authUser.id}/order`);

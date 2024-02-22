@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const OrderContext = createContext();
 
 function OrderContextProvider({ children }) {
-  const {authUser} = useAuth();
+  const { authUser } = useAuth();
   const [orders, setOrders] = useState([]);
 
   const createOrder = async (id, shippingAddressId, shoppingCartId) => {
@@ -32,6 +32,8 @@ function OrderContextProvider({ children }) {
     const response = await orderApi.getOrderByUserId(id);
     return response;
   };
+
+
 
   useEffect(() => {
     if (authUser) {

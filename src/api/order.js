@@ -15,3 +15,9 @@ export const getOrderByUserId = (id) => {
 export const updateOrderStatus = (orderId, data) => {
   return axios.patch(`/order/update/${orderId}`, data);
 };
+
+export const uploadReceipt = (orderId, data) => {
+  return axios.post(`/order/uploadReceipt/${orderId}`, data);
+};
+
+
