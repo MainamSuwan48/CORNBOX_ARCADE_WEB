@@ -7,14 +7,23 @@ import { useUser } from "../../user/contexts/UserContext";
 import { toast } from "sonner";
 import { useOrder } from "../contexts/OrderContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function PaymentDetail() {
   const navigate = useNavigate();
   const { authUser } = useAuth();
   const { shippingAddress } = useUser();
   const { cartId, cart, stocks, updateStock, deleteCart } = useProduct();
-  const { createOrder, createOrderItems, getOrderByUserId, setOrders } =
-    useOrder();
+  const {
+    createOrder,
+    createOrderItems,
+    getOrderByUserId,
+    setOrders,
+    uploadReceipt,
+  } = useOrder();
+
+  const [receipt, setReceipt] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const newStock = (cart, stocks) => {
     const newStock = stocks.map((stock) => {
@@ -48,12 +57,20 @@ function PaymentDetail() {
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-  
+    setReceipt(file);
   };
 
-  const handleCheckout = async () => {
+  const handleFormData = () => {
+    if (!receipt) {
+      toast.error("Please Upload Receipt");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("image", receipt);
+    return formData;
+  };
+
+  const handleCheckout = async () => {   
     if (!cartId) {
       toast.error("Cart Is not Found Please Refresh the Page and Try Again");
       return;
@@ -66,15 +83,21 @@ function PaymentDetail() {
       toast.error("You don't have any address");
       return;
     }
+    if (!receipt) {
+      toast.error("Please Upload Receipt");
+      return;
+    }
+    setIsSubmitting(true);
     try {
       const order = await createOrder(authUser.id, shippingAddress.id, cartId);
-      console.log(order, "order in payment detail");
       const orderId = order.data.id;
+      const formData = handleFormData();
+      const receiptRes = await uploadReceipt(orderId, formData);
       const orderItem = await createOrderItems(orderId, cartId);
       const newStocks = newStock(cart, stocks);
       await deleteCart(cartId);
       await upDateStocks(newStocks);
-      const newOrder = await getOrderByUserId(authUser.id);     
+      const newOrder = await getOrderByUserId(authUser.id);
       setOrders(newOrder.data);
       setTimeout(() => {
         navigate(`/user/${authUser.id}/order`);
@@ -97,10 +120,20 @@ function PaymentDetail() {
           <p>Please Deposit : 1500 THB</p>
         </div>
         <input
+          onChange={handleFileUpload}
           className="bg-transparent  border border-input border-primary bg-primary rounded-lg p-2 w-60"
           type="file"
         ></input>
-        <ActionButton onClick={handleCheckout}>CHECKOUT</ActionButton>
+        {isSubmitting ? (
+          <div>
+            <span className="loading loading-ball loading-xs text-secondary"></span>
+            <span className="loading loading-ball loading-sm text-primary"></span>
+            <span className="loading loading-ball loading-md text-secondary"></span>
+            <span className="loading loading-ball loading-lg text-primary"></span>
+          </div>
+        ) : (
+          <ActionButton onClick={handleCheckout}>CHECKOUT</ActionButton>
+        )}
       </div>
     </>
   );

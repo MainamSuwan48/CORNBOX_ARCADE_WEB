@@ -84,7 +84,10 @@ function AdminOrder({ order, receipt }) {
         </div>
         <div className="relative flex justify-between max-w-4/12 gap-4">
           <img
-            src={shippedReceipt || `https://i.imgur.com/kyFqnuH.png`}
+            src={
+              shippedReceipt ||
+              `https://as1.ftcdn.net/v2/jpg/02/99/61/74/1000_F_299617487_fPJ8v9Onthhzwnp4ftILrtSGKs1JCrbh.jpg`
+            }
             alt="shipping"
             onClick={() => {
               setViewFull(!viewFull);

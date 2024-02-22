@@ -33,7 +33,10 @@ function OrderContextProvider({ children }) {
     return response;
   };
 
-
+  const uploadReceipt = async (orderId, data) => {
+    const response = await orderApi.uploadReceipt(orderId, data);
+    return response;
+  };
 
   useEffect(() => {
     if (authUser) {
@@ -52,6 +55,7 @@ function OrderContextProvider({ children }) {
         createOrder,
         createOrderItems,
         getOrderByUserId,
+        uploadReceipt,
       }}
     >
       {children}
