@@ -3,9 +3,6 @@ import stickPic from "../../../assets/stick.png";
 import { Link } from "react-router-dom";
 
 function OrderItem({ orderItem, product }) {
-  if (orderItem && product) {
-    return <div>Loading...</div>;
-  }
 
   const { quantity, attribute } = orderItem;
   const { mainImage, name, price } = product;

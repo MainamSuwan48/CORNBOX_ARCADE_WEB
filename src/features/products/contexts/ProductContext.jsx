@@ -121,6 +121,7 @@ function ProductContextProvider({ children }) {
       try {
         const productsImages = await getAllProductsImages();
         const productsData = await getProductsData();
+        console.log(productsData, "products data in product context");
         const stocksData = getStocks(productsData);
         setStocks(stocksData);
       } catch (error) {
