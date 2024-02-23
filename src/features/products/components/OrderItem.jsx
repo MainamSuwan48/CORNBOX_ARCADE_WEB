@@ -3,8 +3,13 @@ import stickPic from "../../../assets/stick.png";
 import { Link } from "react-router-dom";
 
 function OrderItem({ orderItem, product }) {
+  if (orderItem && product) {
+    return <div>Loading...</div>;
+  }
+
   const { quantity, attribute } = orderItem;
   const { mainImage, name, price } = product;
+
   return (
     <div className="flex justify-between items-center mt-4 glass p-2 min-w-full">
       <div className="max-w-40 flex-1">
