@@ -71,6 +71,15 @@ function PaymentDetail() {
   };
 
   const handleCheckout = async () => {   
+    if (!authUser.fullName) {
+      toast.error("Please Update Your name First");
+      return;
+    }
+    if (!authUser.mobilePhone) {
+      toast.error("Please Update Your Mobile Phone Number First");
+      return;
+    }
+    // if (!authUser.trim() ==="" ) {
     if (!cartId) {
       toast.error("Cart Is not Found Please Refresh the Page and Try Again");
       return;
