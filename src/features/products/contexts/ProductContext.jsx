@@ -31,6 +31,11 @@ function ProductContextProvider({ children }) {
     return response;
   };
 
+  const uploadProductImage = async (productId, data) => {
+    const response = await productApi.uploadProductImage(productId, data);
+    return response;
+  };
+
   //cart handler
   const [cart, setCart] = useState([]);
   const [cartId, setCartId] = useState(null);
@@ -155,6 +160,8 @@ function ProductContextProvider({ children }) {
         cartId,
         deleteCart,
         productsImages,
+        setProductsImages,
+        uploadProductImage,
       }}
     >
       {children}

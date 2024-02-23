@@ -4,7 +4,7 @@ import { useOrder } from "../features/products/contexts/OrderContext";
 import OrderButtons from "../features/products/components/OrderButtons";
 import { useAdmin } from "../features/admin/context/AdminContext";
 import AdminOrder from "../features/admin/components/AdminOrder";
-
+import AdminProducts from "../features/admin/components/AdminProducts";
 
 function AdminPage() {
   const [loading, setLoading] = useState(true);
@@ -14,14 +14,13 @@ function AdminPage() {
 
   useEffect(() => {
     if (allOrders) {
-      console.log(receipts, "receipts in admin page");
       setLoading(false);
     }
   }, [allOrders, orders]);
 
   return loading ? null : allOrders ? (
     <div className="w-full bg-base-300 p-8">
-      {/* <AdminProducts /> */}
+      <AdminProducts />
       <OrderButtons setView={setView} view={view} />
       <div className="flex flex-col gap-4">
         {allOrders
