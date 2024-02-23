@@ -103,7 +103,7 @@ function HomePage() {
         >
           <source src="https://res.cloudinary.com/dhm6pitfd/video/upload/v1708674126/TEKKEN_8_-_OFFICIAL_LAUNCH_TRAILER_n91xk4.webm" />
         </video>
-        <div className="mt-4 font-black text-8xl text-primary border-2 p-4 border-primary">BUYNOW</div>
+        <div className="mt-4 font-black text-8xl text-primary border-2 p-4 border-primary -mb-24">BUYNOW</div>
         <ProductPage type="home" />
       </div>
       
