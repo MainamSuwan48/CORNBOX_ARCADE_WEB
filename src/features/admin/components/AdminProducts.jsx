@@ -44,6 +44,7 @@ function AdminProducts() {
       console.log(response, "response from admin products component");
       setUploading(false);
       toast.success("Image uploaded successfully");
+      setFile(null);
     } catch (error) {
       setUploading(false);
       console.log(error, "error from admin products component");
