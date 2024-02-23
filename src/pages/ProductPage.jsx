@@ -10,8 +10,32 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useProduct } from "../features/products/contexts/ProductContext";
 
-function ProductPage() {
+function ProductPage({type}) {
   const { products } = useProduct();
+
+  if (type === "home") {
+
+    return (
+      <div     
+        className="flex justify-around items-center min-h-with_header_2 flex-1 "
+     
+      >
+        {products && products.length > 0
+          ? products.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <ProductPreview
+                  key={product.id}
+                  img={product.mainImage}
+                  name={product.name}                
+                  stock={product.stock}
+                />
+              </Link>
+            ))
+          : null}
+      </div>
+    );
+  }
+
   
 
   return (
