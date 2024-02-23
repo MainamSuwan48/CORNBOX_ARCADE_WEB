@@ -4,7 +4,7 @@ import { useUser } from "../contexts/UserContext";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
 
-function AddressEditor({ address, setIsEdit,}) {
+function AddressEditor({ address, setIsEdit }) {
   const param = useParams();
   const { id, addressLine1, addressLine2, city, postalCode } = address;
   const { updateAddressById, setAddresses } = useUser();
@@ -22,6 +22,13 @@ function AddressEditor({ address, setIsEdit,}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      input.addressLine1 === "" ||
+      input.city === "" ||
+      input.postalCode === ""
+    ) {
+      return toast.error("Please fill out all the fields");
+    }
     try {
       const response = await updateAddressById(param.userId, input);
       console.log(response);
@@ -35,7 +42,7 @@ function AddressEditor({ address, setIsEdit,}) {
       );
 
       setIsEdit(false);
-      toast.success("Address Updated");     
+      toast.success("Address Updated");
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.error);

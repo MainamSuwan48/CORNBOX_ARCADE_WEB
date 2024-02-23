@@ -19,6 +19,14 @@ function AddressCreator({ watch, setWatch, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      newAddress.addressLine1 === "" ||
+      newAddress.city === "" ||
+      newAddress.postalCode === ""
+    ) {
+      return toast.error("Please fill out all the fields");
+    }
     try {
       const response = await createAddressByUserId(param.userId, newAddress);
       setAddresses((prevAddresses) => [...prevAddresses, response]);
